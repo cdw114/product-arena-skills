@@ -1,12 +1,13 @@
 # Product Arena Skills
 
-本仓库收录我在 [Bohrium Playground](https://play.bohrium.com) 产品竞技场各题目中提交的 Skill 作品。
+本仓库收录我在 [Bohrium Playground](https://play.bohrium.com) 产品竞技场各题目中提交的 Skill 作品，共 10 道题。
 每个子目录是一道题的完整提交内容：`SKILL.md`（入口）、`scripts/`、`references/`、`examples/` 等。
 
 ## 作品索引
 
 | 题目 | Skill | 中文名 | 做什么 |
 |-|-|-|-|
+| `阅读01` | [`weekly-skill`](./weekly-skill) | 文献文档解析 | 阅读01｜文献文档解析 — 把科学 PDF（论文/试题/中文报告，含扫描件）解析为带页码与坐标定位的结构化结果。 |
 | `写作02` | [`academic-polishing`](./academic-polishing) | 学术语言润色 | Polish academic text (Chinese or English; journal paper, thesis, grant application, reviewer respons |
 | `阅读03` | [`papertrans`](./papertrans) | 文献翻译 | Translate a scientific paper PDF into a paragraph-aligned bilingual document with enforced terminolo |
 | `写作04` | [`refmgr-citations`](./refmgr-citations) | 参考文献与引用管理 | 参考文献与引用管理 Skill——对一份真实稿件 + 一份真实文献库做"挂得对 / 编得顺 / 收得净 / 对得上"四件事：识别需来源支撑的论断句并给出引用插入位置； |
@@ -16,8 +17,6 @@
 | `写作13` | [`latex-build-doctor`](./latex-build-doctor) | LaTeX 写作与编译 | LaTeX 编译诊断与修复闭环——把「编不过」拆成可验证的根因与最小补丁：递归识别主文件/子文件/宏包/参考文献后端，选对引擎（pdfLaTeX / XeLaTeX / LuaLaTeX / late |
 | `阅读14` | [`nanopublication`](./nanopublication) | Nanopublication | Extract atomic scientific claims (nanopublications) from a paper passage. |
 | `阅读15` | [`literature-kg`](./literature-kg) | 文献知识图谱构建 | Build an evidence-backed literature knowledge graph from one or more paper corpora (JATS paragraph t |
-
-另有一道题的 Skill 位于独立仓库：[`weekly-skill`](https://github.com/cdw114/weekly-skill)（阅读01 文献文档解析）。
 
 ## 怎么用这些 Skill
 
@@ -44,6 +43,7 @@ cp -r product-arena-skills/<skill> ~/.claude/skills/
 - `SKILL.md` —— Skill 入口，YAML frontmatter + 执行流程 + 输出契约 + 失败处理
 - `GITHUB_URL.txt` —— 指回本目录的公开链接
 - `scripts/` / `references/` / `examples/` / `tests/` / `templates/` —— 该 Skill 实际依赖的资源
+- 其中 `weekly-skill` 另有 `execution/`，是它本地自测的运行记录
 
 ## 说明
 
