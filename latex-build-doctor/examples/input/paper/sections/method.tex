@@ -1,0 +1,43 @@
+\section{Method}
+\label{sec:method}
+
+Samples were grown by sputtering and measured in a steady-state configuration.
+
+\subsection{Measured parameters}
+
+\begin{table}[t]
+\centering
+\caption{Measured parameters of the three samples.}
+\label{tab:params}
+\begin{tabular}{lccc}
+\toprule
+Sample & Thickness & Conductivity & Substrate \\
+\midrule
+A & 40 & 12.5 & Si \\
+B & 60 & 18.2 & Si & extra \\
+C & 80 & 24.9 & Al2O3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Model}
+
+The steady-state energy balance is
+\begin{equation}
+\frac{\partial u}{\partial t} = \alpha \nabla^2 u + q,
+\label{eq:balance}
+\end{equation}
+with the boundary condition
+\begin{equation}
+\left( \kappa \frac{\partial T}{\partial x} \right)_{x=0} = h (T - T_\infty)
+\label{eq:bc}
+\end{equation}
+and a stored energy of $E = 3.2 J$ measured calorimetrically.
+
+\subsection{Calibration}
+
+The calibration curve is not monotonic
+\begin{align}
+y = a x^2 + b x + c
+\end{align}
+in the range we probed.

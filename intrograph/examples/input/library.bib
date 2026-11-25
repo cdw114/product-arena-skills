@@ -1,0 +1,109 @@
+@inproceedings{kipf2017gcn,
+  title = {Semi-supervised classification with graph convolutional networks},
+  author = {Kipf, Thomas N and Welling, Max},
+  booktitle = {International Conference on Learning Representations},
+  year = {2017},
+  doi = {10.48550/arXiv.1609.02907},
+  abstract = {We present a scalable approach for semi-supervised learning on graph-structured data that is based on an efficient variant of convolutional neural networks which operate directly on graphs. Our approach scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes. The propagation rule is a first-order approximation of a localized spectral filter, so global spectral information beyond one hop is only reached by stacking many layers.}
+}
+
+@inproceedings{gilmer2017mpnn,
+  title = {Neural message passing for quantum chemistry},
+  author = {Gilmer, Justin and Schoenholz, Samuel S and Riley, Patrick F and Vinyals, Oriol and Dahl, George E},
+  booktitle = {International Conference on Machine Learning},
+  year = {2017},
+  pages = {1263--1272},
+  doi = {10.48550/arXiv.1704.01212},
+  abstract = {Supervised learning on molecules has incredible potential to be useful in chemistry, drug discovery, and materials science. We reformulate existing models into a single common framework we call Message Passing Neural Networks. Within this framework we explore novel variations and obtain state of the art results on the QM9 dataset. All models in this family operate on a fixed neighbourhood radius, and a single message passing step cannot see beyond that radius.}
+}
+
+@inproceedings{hu2020pretrain,
+  title = {Strategies for pre-training graph neural networks},
+  author = {Hu, Weihua and Liu, Bowen and Gomes, Joseph and Zitnik, Marinka and Liang, Percy and Poczos, Barnabas and Leskovec, Jure},
+  booktitle = {International Conference on Learning Representations},
+  year = {2020},
+  doi = {10.48550/arXiv.1905.12265},
+  abstract = {Many applications of machine learning on graphs benefit from pre-training. We systematically study pre-training strategies for graph neural networks and find that naive pre-training can hurt performance. Node-level and graph-level pre-training objectives must be combined, and the pre-training corpus should be carefully chosen. The corpus in all their experiments is a single fixed unlabelled pool taken as a whole, and the cost of pretraining on that pool is not modelled.}
+}
+
+@article{wang2022molclr,
+  title = {MolCLR: molecular contrastive learning of representations via graph neural networks},
+  author = {Wang, Yuyang and Wang, Jianren and Cao, Zhiming and Barati Farimani, Amir},
+  journal = {Nature Machine Intelligence},
+  year = {2022},
+  volume = {4},
+  number = {3},
+  pages = {279--287},
+  doi = {10.1038/s42256-022-00457-9},
+  abstract = {We introduce MolCLR, a contrastive learning framework for molecular graphs that builds positive pairs by atom masking, bond deletion and subgraph removal. MolCLR improves performance on multiple molecular property benchmarks over supervised baselines. Contrastive pretraining scans the full unlabelled pool, so the number of forward passes grows linearly with pool size and dominates the compute budget.}
+}
+
+@misc{wang2022molclr_arxiv,
+  title = {MolCLR: molecular contrastive learning of representations via graph neural networks},
+  author = {Wang, Yuyang and Wang, Jianren and Cao, Zhiming and Barati Farimani, Amir},
+  year = {2022},
+  eprint = {2102.10056},
+  archivePrefix = {arXiv},
+  doi = {10.48550/arXiv.2102.10056},
+  abstract = {Contrastive learning of molecular graph representations with atom masking, bond deletion and subgraph positives.}
+}
+
+@inproceedings{sun2020infograph,
+  title = {InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization},
+  author = {Sun, Fan-Yun and Hoffmann, Jordan and Verma, Vikas and Tang, Jian},
+  booktitle = {International Conference on Learning Representations},
+  year = {2020},
+  doi = {10.48550/arXiv.1908.01000},
+  abstract = {We study learning of graph-level representations in an unsupervised or semi-supervised manner by maximizing mutual information between graph-level and substructure-level representations. The method is evaluated on eight benchmarks and outperforms several unsupervised baselines. The objective is agnostic to which unlabelled graphs are used, so redundant corpora waste compute without improving the objective.}
+}
+
+@inproceedings{rong2020grok,
+  title = {Self-supervised graph transformer on large-scale molecular data},
+  author = {Rong, Yu and Bian, Yatao and Xu, Tingyang and Xie, Weiyang and Wei, Ying and Huang, Wenbing and Huang, Junzhou},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year = {2020},
+  volume = {33},
+  pages = {12559--12571},
+  doi = {10.48550/arXiv.2007.02835},
+  abstract = {We present GROVER, a self-supervised framework on large-scale molecular data that learns rich structural and semantic representations through a graph transformer with two self-supervised tasks at node and edge level. Pretraining on eleven million unlabelled molecules takes substantial GPU time, and no experiment studies whether a smaller corpus would suffice.}
+}
+
+@inproceedings{sener2018coreset,
+  title = {Active learning for convolutional neural networks: a core-set approach},
+  author = {Sener, Ozan and Savarese, Silvio},
+  booktitle = {International Conference on Learning Representations},
+  year = {2018},
+  doi = {10.48550/arXiv.1708.00489},
+  abstract = {Convolutional neural networks require large training sets. We propose to select a subset of the data by solving a k-centre problem on the learned representation, which bounds the error of the selected subset relative to the full set. Experiments cover image classification and image segmentation only, and the coreset guarantee is stated for a fixed feature space and does not transfer to representations that are themselves learned.}
+}
+
+@inproceedings{schutt2017schnet,
+  title = {SchNet: a continuous-filter convolutional neural network for modeling quantum interactions},
+  author = {Sch{\"u}tt, Kristof T and Kindermans, Pieter-Jan and Sauceda, Huziel E and Chmiela, Stefan and Tkatchenko, Alexandre and M{\"u}ller, Klaus-Robert},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year = {2017},
+  pages = {991--1001},
+  doi = {10.48550/arXiv.1706.08566},
+  abstract = {We propose the continuous-filter convolutional layer as the building block of SchNet, a deep learning architecture that models atoms and molecules by rotations, translations and permutations invariant representations. SchNet reaches state of the art on the QM9 benchmark. The model is trained from scratch on each task and no pretraining is considered.}
+}
+
+@article{liu2024molcoreset,
+  title = {Label-scarce coreset selection for molecular pretraining},
+  author = {Liu, Hongyu and Ma, Xue and Zhao, Yu},
+  journal = {Briefings in Bioinformatics},
+  year = {2024},
+  volume = {25},
+  number = {2},
+  pages = {bbae051},
+  doi = {10.1093/bib/bbae051},
+  abstract = {Pretraining on unlabelled molecules has become the default for label-scarce property prediction. We select pretraining examples by estimating how informative each molecule would be for the downstream label budget, and report gains of up to 8.6% over random pretraining. Their selection is guided by label scarcity alone and ignores the cost of the pretraining corpus itself, which dominates the budget at scale.}
+}
+
+@inproceedings{chen2025scaling,
+  title = {Scaling laws for unlabelled molecular pretraining corpora},
+  author = {Chen, Lei and Novak, Ana and Park, Jiho},
+  booktitle = {International Conference on Machine Learning},
+  year = {2025},
+  doi = {10.48550/arXiv.2501.01234},
+  abstract = {We study how pretraining corpus size affects downstream molecular property prediction across three model families and eighteen tasks. Downstream error decreases as a power law in corpus size until roughly one million molecules, after which returns flatten. The power law is fitted on a fixed, uncurated corpus, so the study cannot say whether a smaller curated corpus would reach the same plateau with less compute.}
+}

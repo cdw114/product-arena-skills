@@ -1,0 +1,62 @@
+[
+  {
+    "cid": "C001",
+    "ref_id": "R003",
+    "verdict": "supports",
+    "basis": "LeCun 2015 Nature 综述系统梳理深度学习在各领域的突破，与句中综述性论断一致"
+  },
+  {
+    "cid": "C002",
+    "ref_id": "R001",
+    "verdict": "supports",
+    "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致"
+  },
+  {
+    "cid": "C003",
+    "ref_id": "R002",
+    "verdict": "supports",
+    "basis": "BERT 是对 Transformer 的预训练扩展，属'后续工作扩展'之一"
+  },
+  {
+    "cid": "C003",
+    "ref_id": "R004",
+    "verdict": "supports",
+    "basis": "GPT-3 是大规模预训练语言模型，与'大规模预训练模型'论断一致"
+  },
+  {
+    "cid": "C004",
+    "ref_id": "R001",
+    "verdict": "supports",
+    "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致"
+  },
+  {
+    "cid": "C005",
+    "ref_id": "R002",
+    "verdict": "supports",
+    "basis": "BERT 是对 Transformer 的预训练扩展，属'后续工作扩展'之一"
+  },
+  {
+    "cid": "C006",
+    "ref_id": "R001",
+    "verdict": "supports",
+    "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致"
+  },
+  {
+    "cid": "C007",
+    "ref_id": "R001",
+    "verdict": "supports",
+    "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致"
+  },
+  {
+    "cid": "C008",
+    "ref_id": "R005",
+    "verdict": "supports",
+    "basis": "该文研究基于注意力机制的中文文本分类，与'中文文献亦有相关报道'一致"
+  },
+  {
+    "cid": "C009",
+    "ref_id": "U007",
+    "verdict": "not_in_library",
+    "basis": "引用指向库中不存在的条目，无法核验"
+  }
+]

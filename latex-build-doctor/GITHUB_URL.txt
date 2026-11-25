@@ -1,0 +1,2 @@
+https://github.com/cdw114/product-arena-skills/tree/main/latex-build-doctor
+SKILL.md

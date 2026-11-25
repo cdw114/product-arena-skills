@@ -1,0 +1,39 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./main.aux)
+(./sections/intro.tex
+(./sections/background.tex)
+! Missing $ inserted.
+<inserted text> 
+                $
+l.33 the dielectric constant \epsilon_r is 3.9
+ 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+)
+LaTeX Warning: Reference `fig:results' on page 1 undefined on input line 58.
+
+LaTeX Warning: Citation `wang2021' on page 1 undefined on input line 61.
+
+Overfull \hbox (37.22868pt too wide) in paragraph at lines 61--63
+[]\OT1/cmr/m/n/10 A long line that will not break and pushes past the 
+Overfull \hbox (12.5pt too wide) in alignment at lines 70--88
+ [] [] [] [] 
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd)
+Missing character: There is no ^^L in font cmr10!
+[1] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+(see the transcript file for additional information)
+Output written on main.pdf (1 page, 19824 bytes).
+Transcript written on main.log.

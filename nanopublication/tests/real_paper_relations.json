@@ -1,0 +1,6 @@
+[
+ {"id": "R1", "subject": "A4", "predicate": "supports", "object": "A3", "confidence": "high",
+  "evidence": {"quote": "the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."}},
+ {"id": "R2", "subject": "A5", "predicate": "supports", "object": "A3", "confidence": "high",
+  "evidence": {"quote": "Experiments on two machine translation tasks show these models to be superior in quality"}}
+]

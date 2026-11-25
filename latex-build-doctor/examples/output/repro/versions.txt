@@ -1,0 +1,18 @@
+{
+  "generated_by": "latex-build-doctor 1.0.0",
+  "generated_at": "2026-11-26T00:54:57+08:00",
+  "engine_chosen": {
+    "engine": "pdflatex",
+    "reason": "default for Latin-script documents",
+    "evidence": [
+      "no engine-specific marker found"
+    ],
+    "confidence": "medium"
+  },
+  "bib_backend": {
+    "backend": "bibtex",
+    "reason": "\\bibliography present"
+  },
+  "tool_versions": {},
+  "python": "3.14.6"
+}

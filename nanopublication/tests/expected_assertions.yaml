@@ -1,0 +1,94 @@
+- id: A1
+  text: Compound 3 reduced tumor volume by 48% relative to vehicle.
+  claim_type: result
+  subject: compound 3
+  predicate: reduced
+  object: tumor volume
+  qualifiers: {condition: "5 mg/kg", metric: "tumor volume", comparator: "vehicle", magnitude: 48, unit: "%"}
+  quote: "Treatment with 5 mg/kg compound 3 reduced tumor volume by 48% relative to vehicle (Figure 1A)."
+  relation: direct
+  confidence: high
+  narrative_role: result
+- id: A2
+  text: Tumor growth was measured over 21 days after inoculation.
+  claim_type: method
+  subject: tumor growth
+  predicate: "was measured"
+  object: 21 days
+  qualifiers: {timeframe: "21 days after inoculation"}
+  quote: "Tumor growth was measured over 21 days after inoculation."
+  relation: direct
+  confidence: high
+  narrative_role: method
+- id: A3
+  text: The effect was observed only when p53 was intact.
+  claim_type: observation
+  subject: the effect
+  predicate: "was observed"
+  object: only when p53 was intact
+  quote: "The effect was observed only when p53 was intact."
+  relation: direct
+  confidence: high
+  narrative_role: result
+- id: A4
+  text: Body weight did not differ between treated and vehicle groups (p = 0.41).
+  claim_type: result
+  subject: body weight
+  predicate: "did not differ"
+  object: "between treated and vehicle groups"
+  qualifiers: {negated: true, magnitude: 0.41, metric: "p"}
+  quote: "Body weight did not differ between treated and vehicle groups (p = 0.41)."
+  relation: direct
+  confidence: high
+  narrative_role: result
+- id: A5
+  text: Compound 3 may inhibit MEK signaling in these tumours.
+  claim_type: hypothesis
+  subject: compound 3
+  predicate: "may inhibit"
+  object: MEK signaling
+  qualifiers: {population: "these tumours"}
+  hedge: may
+  quote: "Compound 3 may inhibit MEK signaling in these tumours."
+  relation: direct
+  confidence: medium
+  narrative_role: conclusion
+- id: A6
+  text: Smith et al. reported an IC50 of 3.2 uM for the parental compound.
+  claim_type: result
+  subject: IC50
+  predicate: reported
+  object: 3.2 uM
+  qualifiers: {magnitude: 3.2, unit: "uM", population: "parental compound"}
+  claimed_by: Smith et al.
+  quote: "Smith et al. previously reported IC50 = 3.2 uM for the parental compound."
+  relation: direct
+  confidence: high
+  narrative_role: background
+- id: A7
+  text: The IC50 of compound 3 was 1.1 uM.
+  claim_type: result
+  subject: compound 3
+  predicate: "IC50"
+  object: 1.1 uM
+  qualifiers: {magnitude: 1.1, unit: "uM", metric: "IC50"}
+  quote: "| compound 3 | 1.1 |"
+  relation: direct
+  confidence: high
+  narrative_role: result
+  locator: {table: {id: "Table 1", row: "compound 3", column: "IC50 (uM)"}}
+- id: A8
+  text: The IC50 of compound 3 is about 2.9-fold lower than that of the parental compound reported by Smith et al.
+  claim_type: interpretation
+  subject: IC50
+  predicate: "lower than"
+  object: parental compound
+  qualifiers: {magnitude: 2.9, unit: "fold"}
+  relation: inferred
+  confidence: medium
+  narrative_role: conclusion
+  inference_chain:
+    - from: [A6, A7]
+      to: this
+      rationale: 3.2 uM divided by 1.1 uM gives 2.9.
+  quote: "| compound 3 | 1.1 |"

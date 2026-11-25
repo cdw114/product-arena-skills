@@ -1,0 +1,365 @@
+{
+  "case_id": "gcp-example-001",
+  "gate": "pass",
+  "summary": {
+    "checks_run": 18,
+    "errors": 0,
+    "warnings": 0,
+    "infos": 4,
+    "rules_failed": [],
+    "rules_warned": []
+  },
+  "must_fix": [],
+  "by_question": {
+    "对得上": {
+      "error": 0,
+      "warn": 0,
+      "pass": 7,
+      "checks": [
+        {
+          "id": "R01",
+          "title": "citation_integrity",
+          "status": "pass"
+        },
+        {
+          "id": "R04",
+          "title": "reference_metadata",
+          "status": "pass"
+        },
+        {
+          "id": "R12",
+          "title": "contribution_evidence",
+          "status": "pass"
+        },
+        {
+          "id": "R13",
+          "title": "number_provenance",
+          "status": "pass"
+        },
+        {
+          "id": "R15",
+          "title": "novelty_claim_bounded",
+          "status": "pass"
+        },
+        {
+          "id": "R17",
+          "title": "citation_style_consistency",
+          "status": "pass"
+        },
+        {
+          "id": "R18",
+          "title": "abstract_metric_covered",
+          "status": "pass"
+        }
+      ]
+    },
+    "说得实": {
+      "error": 0,
+      "warn": 0,
+      "pass": 5,
+      "checks": [
+        {
+          "id": "R02",
+          "title": "uncited_claim",
+          "status": "pass"
+        },
+        {
+          "id": "R03",
+          "title": "citation_anchor_drift",
+          "status": "pass"
+        },
+        {
+          "id": "R05",
+          "title": "coverage_of_required_works",
+          "status": "pass"
+        },
+        {
+          "id": "R10",
+          "title": "gap_provenance",
+          "status": "pass"
+        },
+        {
+          "id": "R11",
+          "title": "gap_filled_by_own_work",
+          "status": "pass"
+        }
+      ]
+    },
+    "立得住": {
+      "error": 0,
+      "warn": 0,
+      "pass": 3,
+      "checks": [
+        {
+          "id": "R06",
+          "title": "recent_progress_covered",
+          "status": "pass"
+        },
+        {
+          "id": "R14",
+          "title": "four_part_structure",
+          "status": "pass"
+        },
+        {
+          "id": "R16",
+          "title": "vacuous_background",
+          "status": "pass"
+        }
+      ]
+    },
+    "分得清": {
+      "error": 0,
+      "warn": 0,
+      "pass": 3,
+      "checks": [
+        {
+          "id": "R07",
+          "title": "group_completeness",
+          "status": "pass"
+        },
+        {
+          "id": "R08",
+          "title": "serial_summary_pattern",
+          "status": "pass"
+        },
+        {
+          "id": "R09",
+          "title": "grouping_consistency",
+          "status": "pass"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "R01",
+      "title": "citation_integrity",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 44,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R02",
+      "title": "uncited_claim",
+      "question": "说得实",
+      "status": "pass",
+      "checked": 44,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R03",
+      "title": "citation_anchor_drift",
+      "question": "说得实",
+      "status": "pass",
+      "checked": 14,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R04",
+      "title": "reference_metadata",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 10,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "deduplicated_entry",
+          "severity": "info",
+          "message": "R0004 由 1 条重复记录合并（wang2022molclr）。",
+          "rule": "R04",
+          "ref_id": "R0004"
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "title": "coverage_of_required_works",
+      "question": "说得实",
+      "status": "pass",
+      "checked": 7,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R06",
+      "title": "recent_progress_covered",
+      "question": "立得住",
+      "status": "pass",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "recent_work_cited",
+          "severity": "info",
+          "message": "R0009 属于近三年工作，已引用。",
+          "rule": "R06",
+          "ref_id": "R0009"
+        },
+        {
+          "code": "recent_work_cited",
+          "severity": "info",
+          "message": "R0010 属于近三年工作，已引用。",
+          "rule": "R06",
+          "ref_id": "R0010"
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "title": "group_completeness",
+      "question": "分得清",
+      "status": "pass",
+      "checked": 3,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R08",
+      "title": "serial_summary_pattern",
+      "question": "分得清",
+      "status": "pass",
+      "checked": 3,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R09",
+      "title": "grouping_consistency",
+      "question": "分得清",
+      "status": "pass",
+      "checked": 20,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R10",
+      "title": "gap_provenance",
+      "question": "说得实",
+      "status": "pass",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R11",
+      "title": "gap_filled_by_own_work",
+      "question": "说得实",
+      "status": "pass",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R12",
+      "title": "contribution_evidence",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 4,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R13",
+      "title": "number_provenance",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 44,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R14",
+      "title": "four_part_structure",
+      "question": "立得住",
+      "status": "pass",
+      "checked": 4,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "gap_ids_not_carried",
+          "severity": "info",
+          "message": "空白账本有 2 条，正文只显式提到 0 条编号（正文不必写编号，此项仅提示）。",
+          "rule": "R14"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "title": "novelty_claim_bounded",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 44,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R16",
+      "title": "vacuous_background",
+      "question": "立得住",
+      "status": "pass",
+      "checked": 14,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R17",
+      "title": "citation_style_consistency",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 1,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    },
+    {
+      "id": "R18",
+      "title": "abstract_metric_covered",
+      "question": "对得上",
+      "status": "pass",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": []
+    }
+  ],
+  "draft_chars": 6818,
+  "part_method": "slot"
+}

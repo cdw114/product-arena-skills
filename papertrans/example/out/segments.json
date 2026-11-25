@@ -1,0 +1,325 @@
+{
+ "n_segments": 3,
+ "total_chars": 31725,
+ "role_counts": {
+  "title": 1,
+  "heading": 23,
+  "body": 59,
+  "footnote": 10,
+  "caption": 10,
+  "list": 1,
+  "table": 10
+ },
+ "continued": 14,
+ "split": 6,
+ "segments": [
+  {
+   "id": "S001",
+   "page": 1,
+   "pages": [
+    1
+   ],
+   "bbox": [
+    211.5,
+    148.8,
+    399.9,
+    166.0
+   ],
+   "role": "title",
+   "text": "Attention Is All You Need",
+   "source_blocks": [
+    "P01B02"
+   ],
+   "part": "",
+   "parent": "",
+   "flags": {
+    "math": false,
+    "citations": 0,
+    "digits": 0,
+    "caption_label": false
+   },
+   "glossary_hits": [],
+   "context": ""
+  },
+  {
+   "id": "S002",
+   "page": 1,
+   "pages": [
+    1
+   ],
+   "bbox": [
+    283.8,
+    385.6,
+    328.2,
+    397.6
+   ],
+   "role": "heading",
+   "text": "Abstract",
+   "source_blocks": [
+    "P01B12"
+   ],
+   "part": "",
+   "parent": "",
+   "flags": {
+    "math": false,
+    "citations": 0,
+    "digits": 0,
+    "caption_label": false
+   },
+   "glossary_hits": [],
+   "context": ""
+  },
+  {
+   "id": "S003",
+   "page": 1,
+   "pages": [
+    1
+   ],
+   "bbox": [
+    143.6,
+    413.3,
+    469.8,
+    576.1
+   ],
+   "role": "body",
+   "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+   "source_blocks": [
+    "P01B13"
+   ],
+   "part": "",
+   "parent": "",
+   "flags": {
+    "math": false,
+    "citations": 0,
+    "digits": 6,
+    "caption_label": false
+   },
+   "glossary_hits": [
+    "T013",
+    "T007",
+    "T008",
+    "T001",
+    "T009"
+   ],
+   "context": "Abstract"
+  }
+ ],
+ "excluded_blocks": [],
+ "verbatim_blocks": [
+  {
+   "page": 1,
+   "block": "P01B04",
+   "role": "author",
+   "text": "Ashish Vaswani∗ Google Brain avaswani@google.com"
+  },
+  {
+   "page": 1,
+   "block": "P01B05",
+   "role": "author",
+   "text": "Noam Shazeer∗ Google Brain noam@google.com"
+  },
+  {
+   "page": 1,
+   "block": "P01B06",
+   "role": "author",
+   "text": "Niki Parmar∗ Google Research nikip@google.com"
+  }
+ ],
+ "batches": [],
+ "glossary_hits": {
+  "S001": [],
+  "S002": [],
+  "S003": [
+   "T013",
+   "T007",
+   "T008",
+   "T001",
+   "T009"
+  ],
+  "S004": [
+   "T004",
+   "T002",
+   "T003"
+  ],
+  "S005": [],
+  "S006": [],
+  "S007": [],
+  "S008a": [
+   "T009"
+  ],
+  "S008b": [
+   "T001"
+  ],
+  "S009": [],
+  "S010a": [
+   "T013",
+   "T003",
+   "T001"
+  ],
+  "S010b": [
+   "T001"
+  ],
+  "S011": [],
+  "S012": [
+   "T008"
+  ],
+  "S013": [],
+  "S014": [],
+  "S015": [],
+  "S016": [
+   "T003",
+   "T001"
+  ],
+  "S017": [],
+  "S018": [],
+  "S019": [
+   "T004",
+   "T002",
+   "T003"
+  ],
+  "S020": [
+   "T004",
+   "T002",
+   "T003"
+  ],
+  "S021": [],
+  "S022": [
+   "T004",
+   "T002"
+  ],
+  "S023": [
+   "T004",
+   "T002"
+  ],
+  "S024": [],
+  "S025": [
+   "T002"
+  ],
+  "S026": [
+   "T003"
+  ],
+  "S027": [],
+  "S028": [],
+  "S029": [],
+  "S030": [
+   "T003"
+  ],
+  "S031": [],
+  "S032": [],
+  "S033": [],
+  "S034": [],
+  "S035": [
+   "T003"
+  ],
+  "S036": [
+   "T004",
+   "T002",
+   "T001"
+  ],
+  "S037": [],
+  "S038": [],
+  "S039": [],
+  "S040": [],
+  "S041": [
+   "T008"
+  ],
+  "S042": [],
+  "S043": [],
+  "S044": [
+   "T005"
+  ],
+  "S045": [
+   "T005"
+  ],
+  "S046": [
+   "T005"
+  ],
+  "S047": [],
+  "S048a": [
+   "T008"
+  ],
+  "S048b": [
+   "T009"
+  ],
+  "S049": [],
+  "S050": [],
+  "S051": [],
+  "S052": [],
+  "S053": [],
+  "S054": [],
+  "S055": [],
+  "S056": [],
+  "S057": [],
+  "S058": [],
+  "S059": [],
+  "S060": [],
+  "S061": [],
+  "S062": [],
+  "S063": [],
+  "S064": [],
+  "S065": [
+   "T005"
+  ],
+  "S066": [],
+  "S067": [],
+  "S068": [
+   "T009"
+  ],
+  "S069": [],
+  "S070": [],
+  "S071": [],
+  "S072": [],
+  "S073": [],
+  "S074": [],
+  "S075": [],
+  "S076": [],
+  "S077": [],
+  "S078": [
+   "T005"
+  ],
+  "S079": [
+   "T007"
+  ],
+  "S080": [
+   "T007"
+  ],
+  "S081": [
+   "T007"
+  ],
+  "S082": [],
+  "S083": [],
+  "S084": [
+   "T008",
+   "T001"
+  ],
+  "S085": [],
+  "S086": [],
+  "S087": [],
+  "S088": [],
+  "S089": [],
+  "S090": [],
+  "S091": [
+   "T001"
+  ],
+  "S092": [],
+  "S093": [],
+  "S094": [],
+  "S095": [],
+  "S096": [],
+  "S097": [],
+  "S098": [],
+  "S099": [],
+  "S101": [],
+  "S102": [],
+  "S103": [],
+  "S104": [],
+  "S105": [],
+  "S106": [],
+  "S107": [],
+  "S108": [],
+  "S109": [],
+  "S110": [],
+  "S111": [],
+  "S112": []
+ }
+}

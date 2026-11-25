@@ -1,0 +1,6 @@
+{
+  "case_id": "example-01",
+  "output_contract": ["status", "diagnostics", "build", "fixes", "sources", "uncertainties"],
+  "project": "paper",
+  "note": "This is the bundled HAND-MADE EXAMPLE used by the README. It is not one of the platform's fixed cases and its output is not a case result."
+}

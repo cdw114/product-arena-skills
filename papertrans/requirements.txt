@@ -1,0 +1,2 @@
+﻿pymupdf>=1.23    # recommended; falls back to pypdf / pdftotext if unavailable
+# pypdf>=3.0    # optional fallback backend

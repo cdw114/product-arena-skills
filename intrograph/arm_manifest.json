@@ -1,0 +1,253 @@
+{
+  "arm_version": "1.1",
+  "paper": {
+    "title": "写作08｜引言与相关工作写作 — intrograph skill",
+    "challenge_id": "product-arena-04-4b82ad21",
+    "target_claims": [
+      "The Skill builds four checkable ledgers (citations, grouping, gap, contribution-evidence) before any prose, then audits the draft with 18 deterministic checks.",
+      "On the bundled clean fixture the draft passes all 18 checks with 0 errors and 0 warnings.",
+      "On 21 planted writing defects the audit catches 21/21 across all 18 rules.",
+      "A Chinese manuscript with numeric citations resolves and renders GB/T 7714; an English one renders IEEE, with the bibliography numbered by the draft's own citation numbers."
+    ],
+    "target_figures": [],
+    "target_tables": []
+  },
+  "entrypoint": "src/reproduce.py",
+  "entrypoint_args": [],
+  "environment": {
+    "dependencies": "requirements.txt",
+    "python_version": ">=3.8",
+    "gpu_required": false,
+    "estimated_runtime_minutes": 0.1,
+    "extra_packages": []
+  },
+  "execution": {
+    "log_path": "execution/run.log",
+    "exit_code": 0,
+    "ran_at": "2026-11-25T17:02:42Z",
+    "wall_time_s": 1.8,
+    "ran_by": "agent:deepseek-harness",
+    "artifacts": [
+      {
+        "id": "skill_md",
+        "path": "SKILL.md",
+        "type": "data",
+        "format": "txt"
+      },
+      {
+        "id": "readme",
+        "path": "README.md",
+        "type": "data",
+        "format": "txt"
+      },
+      {
+        "id": "ledger_refs",
+        "path": "examples/ledgers/ledger_refs.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "ledger_groups",
+        "path": "examples/ledgers/ledger_groups.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "ledger_gaps",
+        "path": "examples/ledgers/ledger_gaps.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "ledger_contribs",
+        "path": "examples/ledgers/ledger_contributions.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "clean_result",
+        "path": "execution/results/clean_en/result.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "clean_prose",
+        "path": "execution/results/clean_en/introduction_related_work.md",
+        "type": "data",
+        "format": "txt"
+      },
+      {
+        "id": "clean_audit",
+        "path": "execution/results/clean_en/audit_report.json",
+        "type": "table",
+        "format": "json"
+      },
+      {
+        "id": "defective_audit",
+        "path": "execution/results/defective/audit_report.json",
+        "type": "table",
+        "format": "json"
+      },
+      {
+        "id": "defects_detected",
+        "path": "execution/results/defective/defects_detected.json",
+        "type": "table",
+        "format": "json"
+      },
+      {
+        "id": "defects_spec",
+        "path": "examples/fixtures/defects.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "zh_result",
+        "path": "execution/results/zh/result.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "no_library_result",
+        "path": "execution/results/no_library/result.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "selftest",
+        "path": "execution/results/selftest_summary.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "characterization",
+        "path": "characterization.json",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "trace_jsonl",
+        "path": "trace/trace.jsonl",
+        "type": "data",
+        "format": "json"
+      },
+      {
+        "id": "run_log",
+        "path": "execution/run.log",
+        "type": "log",
+        "format": "txt"
+      }
+    ]
+  },
+  "expected_outputs": [
+    {
+      "name": "Skill entry point and usage contract",
+      "type": "data",
+      "produced_by": [
+        "skill_md",
+        "readme"
+      ]
+    },
+    {
+      "name": "Four ledgers written before the prose",
+      "type": "data",
+      "produced_by": [
+        "ledger_refs",
+        "ledger_groups",
+        "ledger_gaps",
+        "ledger_contribs"
+      ]
+    },
+    {
+      "name": "Manuscript-ready introduction and related work (example run)",
+      "type": "data",
+      "produced_by": [
+        "clean_prose",
+        "clean_result"
+      ]
+    },
+    {
+      "name": "18-rule audit report, clean and defective",
+      "type": "table",
+      "produced_by": [
+        "clean_audit",
+        "defective_audit"
+      ]
+    },
+    {
+      "name": "Planted-defect regression: 21 of 21 caught",
+      "type": "table",
+      "produced_by": [
+        "defects_detected",
+        "defects_spec"
+      ]
+    },
+    {
+      "name": "Chinese case with GB/T 7714 output",
+      "type": "data",
+      "produced_by": [
+        "zh_result"
+      ]
+    },
+    {
+      "name": "Honest degradation with no reference library",
+      "type": "data",
+      "produced_by": [
+        "no_library_result"
+      ]
+    },
+    {
+      "name": "Self-test summary and run log",
+      "type": "data",
+      "produced_by": [
+        "selftest",
+        "run_log"
+      ]
+    },
+    {
+      "name": "Characterization of the local self-test",
+      "type": "data",
+      "produced_by": [
+        "characterization",
+        "clean_result"
+      ]
+    }
+  ],
+  "characterization": {
+    "path": "characterization.json"
+  },
+  "trace": "trace/trace.jsonl",
+  "provenance": {
+    "created_by": "agent",
+    "toolchain": "official DeepSeek Harness; Python 3.14.6 standard library only",
+    "platform": "play.bohrium.com"
+  },
+  "agents_used": [
+    {
+      "agent_id": "deepseek-harness",
+      "role": "design, implementation, self-test, packaging"
+    }
+  ],
+  "skills_used": [
+    {
+      "skill_id": "intrograph",
+      "version": "1.0.0",
+      "parameters": {
+        "stage": "plan|audit|finalize",
+        "lang": "zh|en",
+        "citation_style": "numeric|author-year|key"
+      }
+    }
+  ],
+  "handoff": {
+    "status": "partial",
+    "hypothesis": "If the four ledgers are written before the prose and the 18 deterministic checks are run after it, then the same materials yield fewer invented citations, fewer uncited claims, no paper-by-paper related work, and contributions that resolve to the manuscript's own figures, tables and reported numbers, compared with a base agent writing the same section directly.",
+    "next_suggestion": "The platform runs the three official cases with and without this Skill; run `python3 src/reproduce.py` to reproduce the local evidence (28/28 assertions, 21/21 planted defects, 1.8 s, no network, no third-party package).",
+    "next_owner_hint": "Human reviewer: README.md sections 1-2 for the interface, then execution/results/defective/defects_detected.json for the per-defect evidence table, then references/failure-modes.md for what the checks deliberately do not catch.",
+    "modality_notes": {
+      "execution": "src/reproduce.py is the entry point; it drives scripts/run_case.py through plan/audit/finalize on four fixtures and writes execution/results/.",
+      "skills": "The deliverables under SKILL.md, references/ and scripts/ are the Skill itself; this bundle is the Skill package, not a paper reproduction.",
+      "characterization": "Local self-test only. The 'paper' here is a fictional fixture, so deviations_from_paper measures self-test assertions, not agreement with a published figure.",
+      "trace": "Session trace of the authoring run: reading the challenge, building the engines, running the self-test, fixing the two defects the self-test caught."
+    }
+  }
+}

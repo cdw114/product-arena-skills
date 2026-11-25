@@ -1,0 +1,52 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "EXAMPLE of the contribution ledger. Every locator exists in examples/input/manuscript.md; result evidence repeats a sentence from the manuscript verbatim.",
+  "contributions": [
+    {
+      "contribution_id": "C1",
+      "text": "A selection-before-pretraining pipeline that ranks molecules by coverage in a spectral embedding and pretrains only on the coreset.",
+      "kind": "method",
+      "evidence": [
+        {"locator_type": "section", "locator": "3", "claim_in_source": "A greedy coverage score then selects molecules that maximise the distance to the already-selected set"},
+        {"locator_type": "figure", "locator": "Fig. 1", "claim_in_source": "Figure 1 shows the pipeline."}
+      ],
+      "scope": {"stated_limits": "no theoretical guarantee for the coverage score",
+                "not_claimed": "optimality of the selection rule"}
+    },
+    {
+      "contribution_id": "C2",
+      "text": "At 100 labels per dataset the pipeline improves accuracy by 11.3% over the strongest self-supervised baseline and reduces pretraining cost by 62.4%.",
+      "kind": "experiment",
+      "evidence": [
+        {"locator_type": "table", "locator": "Table 1", "claim_in_source": "GCP reaches 0.742 on ESOL, 0.781 on Tox21 and 0.704 on the kinase panel"},
+        {"locator_type": "result", "locator": "abstract",
+         "claim_in_source": "improves accuracy by 11.3% over the strongest self-supervised baseline and reduces pretraining cost by 62.4%"},
+        {"locator_type": "table", "locator": "Table 3", "claim_in_source": "Pretraining cost falls from 41 GPU-hours to 15.4 GPU-hours"}
+      ],
+      "scope": {"stated_limits": "three datasets only, one of them proprietary",
+                "not_claimed": "generalisation to arbitrary protein families"}
+    },
+    {
+      "contribution_id": "C3",
+      "text": "An attribution of the gain to the coverage score rather than to the self-supervised objective.",
+      "kind": "analysis",
+      "evidence": [
+        {"locator_type": "table", "locator": "Table 2",
+         "claim_in_source": "Removing the coverage score and selecting uniformly drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%"}
+      ],
+      "scope": {"stated_limits": "single ablation study on three datasets",
+                "not_claimed": "a causal decomposition of every design choice"}
+    },
+    {
+      "contribution_id": "C4",
+      "text": "A coreset-budget sweep that locates the regime in which selection stops paying.",
+      "kind": "experiment",
+      "evidence": [
+        {"locator_type": "figure", "locator": "Fig. 2",
+         "claim_in_source": "at a 20% budget the gap narrows to 3.1%"}
+      ],
+      "scope": {"stated_limits": "budgets between 5% and 20% only",
+                "not_claimed": "behaviour beyond the swept budgets"}
+    }
+  ]
+}

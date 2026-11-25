@@ -1,0 +1,231 @@
+[
+  {
+    "cid": "C001",
+    "start": 22,
+    "end": 25,
+    "style": "numeric-bracket",
+    "raw": "[3]",
+    "keys": [
+      "n:3"
+    ],
+    "section": "引言",
+    "paragraph": 2,
+    "sentence_index": 0,
+    "before_text": "# 引言\n\n深度学习方法在诸多领域取得了突破",
+    "after_text": "。Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R003"
+    ],
+    "unresolved": [],
+    "anchor_status": "sentence-end",
+    "claim": "深度学习方法在诸多领域取得了突破[3]。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C002",
+    "start": 47,
+    "end": 50,
+    "style": "numeric-bracket",
+    "raw": "[1]",
+    "keys": [
+      "n:1"
+    ],
+    "section": "引言",
+    "paragraph": 2,
+    "sentence_index": 0,
+    "before_text": "# 引言\n\n深度学习方法在诸多领域取得了突破[3]。Transformer 架构摒弃了循环结构",
+    "after_text": "，并已成为主流骨架。许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R001"
+    ],
+    "unresolved": [],
+    "anchor_status": "mid-sentence",
+    "claim": "Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C003",
+    "start": 73,
+    "end": 78,
+    "style": "numeric-bracket",
+    "raw": "[2,4]",
+    "keys": [
+      "n:2",
+      "n:4"
+    ],
+    "section": "引言",
+    "paragraph": 2,
+    "sentence_index": 0,
+    "before_text": "# 引言\n\n深度学习方法在诸多领域取得了突破[3]。Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。许多后续工作对其进行了扩展",
+    "after_text": "。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R002",
+      "R004"
+    ],
+    "unresolved": [],
+    "anchor_status": "sentence-end",
+    "claim": "许多后续工作对其进行了扩展[2,4]。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C004",
+    "start": 93,
+    "end": 96,
+    "style": "numeric-bracket",
+    "raw": "[5]",
+    "keys": [
+      "n:5"
+    ],
+    "section": "引言",
+    "paragraph": 3,
+    "sentence_index": 0,
+    "before_text": "诸多领域取得了突破[3]。Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型",
+    "after_text": " 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R001"
+    ],
+    "unresolved": [],
+    "anchor_status": "mid-sentence",
+    "claim": "近年来，大规模预训练模型[5] 引起了广泛关注。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C005",
+    "start": 123,
+    "end": 126,
+    "style": "numeric-bracket",
+    "raw": "[2]",
+    "keys": [
+      "n:2"
+    ],
+    "section": "引言",
+    "paragraph": 3,
+    "sentence_index": 0,
+    "before_text": "循环结构[1]，并已成为主流骨架。许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1 所示（数据来源",
+    "after_text": "）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道[6]。此外，一些研究[7] 探讨了效率问题。\n\n## 参考",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R002"
+    ],
+    "unresolved": [],
+    "anchor_status": "mid-sentence",
+    "claim": "图注中的引用如图 1 所示（数据来源[2]）。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C006",
+    "start": 140,
+    "end": 143,
+    "style": "numeric-bracket",
+    "raw": "[1]",
+    "keys": [
+      "n:1"
+    ],
+    "section": "引言",
+    "paragraph": 4,
+    "sentence_index": 0,
+    "before_text": "许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自",
+    "after_text": "）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道[6]。此外，一些研究[7] 探讨了效率问题。\n\n## 参考文献\n\n[1] Vaswani A",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R001"
+    ],
+    "unresolved": [],
+    "anchor_status": "mid-sentence",
+    "claim": "图 1 示意图（引自[1]）",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C007",
+    "start": 162,
+    "end": 165,
+    "style": "numeric-bracket",
+    "raw": "[1]",
+    "keys": [
+      "n:1"
+    ],
+    "section": "方法",
+    "paragraph": 6,
+    "sentence_index": 0,
+    "before_text": "年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制",
+    "after_text": "。中文文献亦有相关报道[6]。此外，一些研究[7] 探讨了效率问题。\n\n## 参考文献\n\n[1] Vaswani A, Shazeer N. Attention",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R001"
+    ],
+    "unresolved": [],
+    "anchor_status": "sentence-end",
+    "claim": "我们采用注意力机制[1]。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C008",
+    "start": 176,
+    "end": 179,
+    "style": "numeric-bracket",
+    "raw": "[6]",
+    "keys": [
+      "n:6"
+    ],
+    "section": "方法",
+    "paragraph": 6,
+    "sentence_index": 0,
+    "before_text": " 引起了广泛关注。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道",
+    "after_text": "。此外，一些研究[7] 探讨了效率问题。\n\n## 参考文献\n\n[1] Vaswani A, Shazeer N. Attention is All you Ne",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "R005"
+    ],
+    "unresolved": [],
+    "anchor_status": "sentence-end",
+    "claim": "中文文献亦有相关报道[6]。",
+    "match_basis": "",
+    "needs_review": []
+  },
+  {
+    "cid": "C009",
+    "start": 187,
+    "end": 190,
+    "style": "numeric-bracket",
+    "raw": "[7]",
+    "keys": [
+      "n:7"
+    ],
+    "section": "方法",
+    "paragraph": 6,
+    "sentence_index": 0,
+    "before_text": "中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道[6]。此外，一些研究",
+    "after_text": " 探讨了效率问题。\n\n## 参考文献\n\n[1] Vaswani A, Shazeer N. Attention is All you Need[C]. Neur",
+    "pre": "",
+    "post": "",
+    "resolved": [
+      "U007"
+    ],
+    "unresolved": [],
+    "anchor_status": "mid-sentence",
+    "claim": "此外，一些研究[7] 探讨了效率问题。",
+    "match_basis": "",
+    "needs_review": [
+      "list item [7] has no library match"
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "DEFECTIVE contribution ledger for the regression suite. C2 points at a table that does not exist, C3 has no evidence at all, C4 points at a figure that does not exist, and none of the four declares a scope.",
+  "contributions": [
+    {
+      "contribution_id": "C1",
+      "text": "A selection-before-pretraining pipeline that ranks molecules by coverage in a spectral embedding.",
+      "kind": "method",
+      "evidence": [
+        {"locator_type": "section", "locator": "3",
+         "claim_in_source": "A greedy coverage score then selects molecules that maximise the distance to the already-selected set"}
+      ],
+      "scope": {}
+    },
+    {
+      "contribution_id": "C2",
+      "text": "Accuracy at a fixed label budget.",
+      "kind": "experiment",
+      "evidence": [
+        {"locator_type": "table", "locator": "Table 9",
+         "claim_in_source": "GCP reaches 0.742 on ESOL"}
+      ],
+      "scope": {}
+    },
+    {
+      "contribution_id": "C3",
+      "text": "An attribution of the gain to the coverage score.",
+      "kind": "analysis",
+      "evidence": [],
+      "scope": {}
+    },
+    {
+      "contribution_id": "C4",
+      "text": "A coreset-budget sweep.",
+      "kind": "experiment",
+      "evidence": [
+        {"locator_type": "figure", "locator": "Fig. 9",
+         "claim_in_source": "at a 20% budget the gap narrows to 3.1%"}
+      ],
+      "scope": {}
+    }
+  ]
+}

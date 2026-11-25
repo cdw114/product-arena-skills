@@ -1,0 +1,28 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "DEFECTIVE gap ledger for the regression suite. PG1 quotes text that is not in R0009's abstract and both gaps derive from works the defective draft never cites.",
+  "gaps": [
+    {
+      "gap_id": "PG1",
+      "statement": "Existing selection rules optimise the label budget and not the cost of pretraining.",
+      "derived_from": [
+        {"ref_id": "R0009", "limitation_kind": "shared_limitation",
+         "evidence": {"kind": "quote",
+                      "text": "selection ignores the total cost of pretraining the corpus"}}
+      ],
+      "how_filled": {"contribution_ids": ["C1", "C2"], "mechanism": "select before pretraining"},
+      "confidence": "high"
+    },
+    {
+      "gap_id": "PG2",
+      "statement": "No experiment tests whether a much smaller curated corpus reaches the same plateau.",
+      "derived_from": [
+        {"ref_id": "R0010", "limitation_kind": "uncovered_scenario",
+         "evidence": {"kind": "quote",
+                      "text": "the study cannot say whether a smaller curated corpus would reach the same plateau with less compute"}}
+      ],
+      "how_filled": {"contribution_ids": ["C4"], "mechanism": "a budget sweep"},
+      "confidence": "medium"
+    }
+  ]
+}

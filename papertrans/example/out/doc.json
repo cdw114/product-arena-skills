@@ -1,0 +1,390 @@
+{
+ "source": "tests\\attention.pdf",
+ "backend": "pymupdf",
+ "backend_errors": {},
+ "n_pages": 1,
+ "body_size": 10.0,
+ "n_blocks": 464,
+ "title": "Attention Is All You Need",
+ "empty_pages": [],
+ "ocr_pages": [],
+ "warnings": [],
+ "pages": [
+  {
+   "page": 1,
+   "width": 612.0,
+   "height": 792.0,
+   "two_column": false,
+   "blocks": [
+    {
+     "id": "P01B01",
+     "page": 1,
+     "bbox": [
+      124.3,
+      72.9,
+      487.9,
+      112.7
+     ],
+     "n_chars": 171,
+     "size": 11.96,
+     "bold": 0.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "pageheader",
+     "text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B02",
+     "page": 1,
+     "bbox": [
+      211.5,
+      148.8,
+      399.9,
+      166.0
+     ],
+     "n_chars": 25,
+     "size": 17.22,
+     "bold": 1.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "title",
+     "text": "Attention Is All You Need",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B03",
+     "page": 1,
+     "bbox": [
+      10.9,
+      213.9,
+      37.6,
+      555.0
+     ],
+     "n_chars": 39,
+     "size": 20.0,
+     "bold": 0.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "pageheader",
+     "text": "arXiv:1706.03762v7 [cs.CL] 2 Aug 2023",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 3,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B04",
+     "page": 1,
+     "bbox": [
+      116.7,
+      233.5,
+      216.1,
+      267.2
+     ],
+     "n_chars": 46,
+     "size": 9.84,
+     "bold": 0.57,
+     "italic": 0.04,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Ashish Vaswani∗ Google Brain avaswani@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B05",
+     "page": 1,
+     "bbox": [
+      230.7,
+      233.5,
+      309.1,
+      267.2
+     ],
+     "n_chars": 40,
+     "size": 9.82,
+     "bold": 0.56,
+     "italic": 0.05,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Noam Shazeer∗ Google Brain noam@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B06",
+     "page": 1,
+     "bbox": [
+      323.8,
+      233.5,
+      407.5,
+      267.2
+     ],
+     "n_chars": 43,
+     "size": 9.89,
+     "bold": 0.26,
+     "italic": 0.02,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Niki Parmar∗ Google Research nikip@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B07",
+     "page": 1,
+     "bbox": [
+      422.1,
+      233.5,
+      497.2,
+      267.2
+     ],
+     "n_chars": 45,
+     "size": 9.9,
+     "bold": 0.33,
+     "italic": 0.02,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Jakob Uszkoreit∗ Google Research usz@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B08",
+     "page": 1,
+     "bbox": [
+      126.9,
+      283.5,
+      210.6,
+      317.2
+     ],
+     "n_chars": 43,
+     "size": 9.89,
+     "bold": 0.26,
+     "italic": 0.02,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Llion Jones∗ Google Research llion@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B09",
+     "page": 1,
+     "bbox": [
+      235.4,
+      283.5,
+      340.0,
+      317.2
+     ],
+     "n_chars": 57,
+     "size": 9.86,
+     "bold": 0.25,
+     "italic": 0.04,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Aidan N. Gomez∗† University of Toronto aidan@cs.toronto.edu",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B10",
+     "page": 1,
+     "bbox": [
+      364.8,
+      283.5,
+      485.1,
+      317.2
+     ],
+     "n_chars": 49,
+     "size": 9.84,
+     "bold": 0.55,
+     "italic": 0.04,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Łukasz Kaiser∗ Google Brain lukaszkaiser@google.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B11",
+     "page": 1,
+     "bbox": [
+      238.0,
+      333.5,
+      374.0,
+      356.3
+     ],
+     "n_chars": 44,
+     "size": 9.83,
+     "bold": 0.36,
+     "italic": 0.05,
+     "mono": 0.0,
+     "role": "author",
+     "text": "Illia Polosukhin∗‡ illia.polosukhin@gmail.com",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B12",
+     "page": 1,
+     "bbox": [
+      283.8,
+      385.6,
+      328.2,
+      397.6
+     ],
+     "n_chars": 8,
+     "size": 11.96,
+     "bold": 1.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "heading",
+     "text": "Abstract",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B13",
+     "page": 1,
+     "bbox": [
+      143.6,
+      413.3,
+      469.8,
+      576.1
+     ],
+     "n_chars": 1126,
+     "size": 10.0,
+     "bold": 0.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "body",
+     "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 6,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B14",
+     "page": 1,
+     "bbox": [
+      108.0,
+      597.3,
+      504.3,
+      687.7
+     ],
+     "n_chars": 897,
+     "size": 8.92,
+     "bold": 0.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "body",
+     "text": "∗Equal contribution. Listing order is random. Jakob proposed replacing RNNs with self-attention and started the effort to evaluate this idea. Ashish, with Illia, designed and implemented the first Transformer models and has been crucially involved in every aspect of this work. Noam proposed scaled dot-product attention, multi-head attention and the parameter-free position representation and became the other person involved in nearly every detail. Niki designed, implemented, tuned and evaluated countless model variants in our original codebase and tensor2tensor. Llion also experimented with novel model variants, was responsible for our initial codebase, and efficient inference and visualizations. Lukasz and Aidan spent countless long days designing various parts of and implementing tensor2tensor, replacing our earlier codebase, greatly improving results and massively accelerating our research.",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B15",
+     "page": 1,
+     "bbox": [
+      120.2,
+      687.9,
+      280.3,
+      709.6
+     ],
+     "n_chars": 79,
+     "size": 8.89,
+     "bold": 0.0,
+     "italic": 0.03,
+     "mono": 0.0,
+     "role": "footnote",
+     "text": "†Work performed while at Google Brain. ‡Work performed while at Google Research.",
+     "flags": {
+      "math": false,
+      "citations": 0,
+      "digits": 0,
+      "caption_label": false
+     }
+    },
+    {
+     "id": "P01B16",
+     "page": 1,
+     "bbox": [
+      108.0,
+      733.1,
+      460.1,
+      742.0
+     ],
+     "n_chars": 90,
+     "size": 8.97,
+     "bold": 0.0,
+     "italic": 0.0,
+     "mono": 0.0,
+     "role": "footnote",
+     "text": "31st Conference on Neural Information Processing Systems (NIPS 2017), Long Beach, CA, USA.",
+     "flags": {
+      "math": false,
+      "citations": 1,
+      "digits": 2,
+      "caption_label": false
+     }
+    }
+   ]
+  }
+ ]
+}

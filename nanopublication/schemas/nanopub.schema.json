@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "nanopub-skill/1.0",
+  "title": "Nanopub extraction result",
+  "type": "object",
+  "required": ["case_id", "status", "nanopub"],
+  "properties": {
+    "case_id": {"type": ["string", "null"]},
+    "status": {"enum": ["success", "partial", "failed"]},
+    "answer": {"type": ["string", "null"]},
+    "sources": {"type": "array", "items": {"type": "object"}},
+    "nanopub": {"$ref": "#/definitions/nanopub"}
+  },
+  "definitions": {
+    "nanopub": {
+      "type": "object",
+      "required": ["schema_version", "document", "assertions", "relations", "unresolved", "quality"],
+      "properties": {
+        "schema_version": {"const": "nanopub-skill/1.0"},
+        "document": {"$ref": "#/definitions/document"},
+        "assertions": {"type": "array", "items": {"$ref": "#/definitions/assertion"}},
+        "relations": {"type": "array", "items": {"$ref": "#/definitions/relation"}},
+        "unresolved": {"type": "array", "items": {"$ref": "#/definitions/unresolved"}},
+        "quality": {"type": "object"}
+      }
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "title": {"type": ["string", "null"]},
+        "authors": {"type": "array", "items": {"type": "string"}},
+        "year": {"type": ["integer", "null"]},
+        "doi": {"type": ["string", "null"]},
+        "venue": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "identifier_type": {"enum": ["doi", null]},
+        "identifier_value": {"type": ["string", "null"]}
+      }
+    },
+    "locator": {
+      "type": "object",
+      "required": ["char_offset"],
+      "properties": {
+        "page": {"type": ["integer", "null"]},
+        "paragraph": {"type": ["integer", "null"]},
+        "sentence": {"type": ["integer", "null"]},
+        "char_offset": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+        "table": {"type": "object"},
+        "figure": {"type": "string"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["quote", "locator", "relation", "quote_verbatim"],
+      "properties": {
+        "quote": {"type": "string"},
+        "locator": {"$ref": "#/definitions/locator"},
+        "relation": {"enum": ["direct", "inferred", "not_reported"]},
+        "quote_verbatim": {"type": "boolean"},
+        "normalization_note": {"type": "string"}
+      }
+    },
+    "relation_evidence": {
+      "type": "object",
+      "required": ["quote", "locator"],
+      "properties": {
+        "quote": {"type": "string"},
+        "locator": {"$ref": "#/definitions/locator"}
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "required": ["id", "text", "claim_type", "subject", "predicate", "object", "evidence", "confidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^A[0-9]+$"},
+        "text": {"type": "string", "minLength": 5},
+        "claim_type": {"enum": ["observation", "definition", "method", "result", "interpretation", "limitation", "hypothesis", "question", "other"]},
+        "subject": {"type": "string"},
+        "predicate": {"type": "string"},
+        "object": {"type": "string"},
+        "qualifiers": {"type": ["object", "null"]},
+        "evidence": {"$ref": "#/definitions/evidence"},
+        "controlling_quote": {"type": "string"},
+        "controlling_quote_scope": {"enum": ["scope_of_whole_claim", "scope_of_part_of_claim"]},
+        "claimed_by": {"type": ["string", "null"]},
+        "hedge": {"type": ["string", "null"]},
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "confidence_reason": {"type": "string"},
+        "narrative_role": {"enum": ["background", "gap", "objective", "method", "result", "conclusion", "limitation", "future_work", "other"]},
+        "inference_chain": {"type": "array", "items": {"$ref": "#/definitions/chain_step"}},
+        "supporting_evidence": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "chain_step": {
+      "type": "object",
+      "required": ["rationale"],
+      "properties": {
+        "from": {"type": "array", "items": {"type": "string"}},
+        "to": {"type": "string"},
+        "rationale": {"type": "string"}
+      }
+    },
+    "relation": {
+      "type": "object",
+      "required": ["id", "subject", "predicate", "object", "evidence", "confidence"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^R[0-9]+$"},
+        "subject": {"type": "string", "pattern": "^A[0-9]+$"},
+        "predicate": {"enum": ["supports", "contradicts", "refines", "qualifies", "depends_on", "same_as", "derived_from", "extends", "part_of", "compared_to"]},
+        "object": {"type": "string", "pattern": "^A[0-9]+$"},
+        "evidence": {"$ref": "#/definitions/relation_evidence"},
+        "confidence": {"enum": ["high", "medium", "low"]}
+      }
+    },
+    "unresolved": {
+      "type": "object",
+      "required": ["item", "reason"],
+      "properties": {
+        "assertion_id": {"type": "string"},
+        "item": {"type": "string"},
+        "reason": {"enum": ["not_reported", "ambiguous", "out_of_scope", "conflicting_evidence", "source_unavailable"]},
+        "detail": {"type": "string"}
+      }
+    }
+  }
+}

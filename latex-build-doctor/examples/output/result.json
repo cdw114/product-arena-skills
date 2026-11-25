@@ -1,0 +1,982 @@
+{
+  "case_id": "example-01",
+  "status": "partial",
+  "status_reason": "没有可用的 TeX 引擎，本次只做了静态诊断与结构审计，未实际编译。 静态检查仍有 6 条 error 级问题（多为无法自动修的引用/表格/字体问题）。",
+  "generated_at": "2026-11-26T00:54:57+08:00",
+  "skill": {
+    "name": "latex-build-doctor",
+    "version": "1.0.0",
+    "scope": "LaTeX 源码诊断—修复—编译验证—可复现构建留档"
+  },
+  "inputs": {
+    "input_dir": "examples/input",
+    "case_json": "examples/input\\case.json",
+    "task_files": [
+      "examples/input\\task.md",
+      "examples/input\\TASK.md"
+    ],
+    "task_excerpt": "任务：这个 LaTeX 工程在模板下编不过，请修好并交付可编译、可继续编辑的源码。\n\n要求：\n1. 定位所有编译错误的根因（不是停在第一条报错），修到能出 PDF。\n2. 公式、表格、交叉引用、参考文献要与原文意图一致；不许靠删内容或缩放表格让它编过。\n3. 交付修好的 .tex 源码、PDF、改动记录，并写清环境版本让别人能复现。\n\n材料：paper/ 目录下的 main.tex、sections/、refs.bib。\n",
+    "notes": []
+  },
+  "project": {
+    "root": "D:\\DSH default\\latex13-skill\\submission\\examples\\input\\paper",
+    "main": "main.tex",
+    "main_candidates": [
+      {
+        "file": "main.tex",
+        "score": 230,
+        "why": "has \\documentclass; has document environment; conventional name main.tex; drives includes"
+      }
+    ],
+    "n_files": 5,
+    "tex_files": [
+      "main.tex",
+      "sections/intro.tex",
+      "sections/method.tex",
+      "sections/results.tex"
+    ],
+    "includes": {
+      "main.tex": [
+        "sections/intro.tex",
+        "sections/method.tex",
+        "sections/results.tex"
+      ],
+      "sections/intro.tex": [],
+      "sections/method.tex": [],
+      "sections/results.tex": []
+    },
+    "missing_includes": [
+      {
+        "from": "main.tex",
+        "requested": "sections/discussion-missing"
+      }
+    ],
+    "documentclass": "article",
+    "documentclass_options": "11pt",
+    "classes": [
+      "article"
+    ],
+    "packages": [
+      {
+        "name": "amsmath",
+        "opts": "",
+        "line": 2,
+        "file": "main.tex"
+      },
+      {
+        "name": "graphicx",
+        "opts": "",
+        "line": 3,
+        "file": "main.tex"
+      },
+      {
+        "name": "booktabs",
+        "opts": "",
+        "line": 4,
+        "file": "main.tex"
+      }
+    ],
+    "bib_files": [
+      "refs.bib"
+    ],
+    "bib_style": "plain",
+    "magic_engine": null,
+    "encodings": {
+      "main.tex": "utf-8-sig",
+      "sections/intro.tex": "utf-8-sig",
+      "sections/method.tex": "utf-8-sig",
+      "sections/results.tex": "utf-8-sig"
+    },
+    "binary_assets": [],
+    "notes": []
+  },
+  "environment": {
+    "engines": {
+      "latexmk": {
+        "available": false
+      },
+      "pdflatex": {
+        "available": false
+      },
+      "xelatex": {
+        "available": false
+      },
+      "lualatex": {
+        "available": false
+      },
+      "tectonic": {
+        "available": false
+      },
+      "latex": {
+        "available": false
+      },
+      "platex": {
+        "available": false
+      },
+      "uplatex": {
+        "available": false
+      },
+      "bibtex": {
+        "available": false
+      },
+      "biber": {
+        "available": false
+      },
+      "kpsewhich": {
+        "available": false
+      }
+    },
+    "resources_yaml": {
+      "present": false,
+      "path": null
+    },
+    "python": "3.14.6"
+  },
+  "build": {
+    "attempted": false,
+    "engine": {
+      "engine": "pdflatex",
+      "reason": "default for Latin-script documents",
+      "evidence": [
+        "no engine-specific marker found"
+      ],
+      "confidence": "medium"
+    },
+    "bib_backend": {
+      "backend": "bibtex",
+      "reason": "\\bibliography present"
+    },
+    "plan_steps": [
+      "pdflatex -interaction=nonstopmode -file-line-error -halt-on-error -synctex=1 main.tex",
+      "bibtex main",
+      "pdflatex -interaction=nonstopmode -file-line-error -halt-on-error -synctex=1 main.tex",
+      "pdflatex -interaction=nonstopmode -file-line-error -halt-on-error -synctex=1 main.tex"
+    ],
+    "iterations": [],
+    "final_stats": {},
+    "success": false,
+    "pages": null,
+    "pdf": null,
+    "pdf_sha256": null,
+    "timed_out": null,
+    "budget_seconds": 420.0,
+    "spent_seconds": 0.0
+  },
+  "diagnostics": {
+    "summary": {
+      "total": 9,
+      "live": 9,
+      "suppressed": 0,
+      "by_severity": {
+        "error": 7,
+        "warning": 2
+      },
+      "fatal_errors": 7,
+      "warnings": 2
+    },
+    "items": [
+      {
+        "id": "D001",
+        "kind": "error",
+        "severity": "error",
+        "message": "1 '{' never closed. TeX reports this at end of file, not here.",
+        "file": "sections/intro.tex",
+        "line": 10,
+        "rule": "S-BRACE-UNCLOSED",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 3,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"brace\", \"file\": \"sections/intro.tex\", \"rule\": \"S-BRACE-UNCLOSED\", \"severity\": \"error\", \"final_depth\": 1, \"unclosed\": [{\"line\": 10, \"snippet\": \"The classical model assumes a continuous medium {and neglects interface scattering\"}], \"explanation\": \"1 '{' never closed. TeX reports this at end "
+        ],
+        "root_cause": {
+          "category": "brace",
+          "explanation": "1 '{' never closed. TeX reports this at end of file, not here.",
+          "confidence": "high",
+          "evidence": [
+            "S-BRACE-UNCLOSED"
+          ]
+        }
+      },
+      {
+        "id": "D002",
+        "kind": "error",
+        "severity": "error",
+        "message": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+        "file": "sections/intro.tex",
+        "line": 8,
+        "rule": "C-CITE-NO-ENTRY",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 2,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"citation\", \"rule\": \"C-CITE-NO-ENTRY\", \"severity\": \"error\", \"key\": \"wang2021\", \"file\": \"sections/intro.tex\", \"line\": 8, \"explanation\": \"\\\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]\", \"auto_fixable\": false}"
+        ],
+        "root_cause": {
+          "category": "citation",
+          "explanation": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+          "confidence": "high",
+          "evidence": [
+            "C-CITE-NO-ENTRY"
+          ]
+        }
+      },
+      {
+        "id": "D003",
+        "kind": "error",
+        "severity": "error",
+        "message": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+        "file": "sections/results.tex",
+        "line": 8,
+        "rule": "G-GRAPHIC-MISSING",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 7,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"graphics\", \"rule\": \"G-GRAPHIC-MISSING\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 8, \"target\": \"figures/conductivity-vs-thickness\", \"searched\": [\"sections\\\\figures/conductivity-vs-thickness\", \"sections\\\\figures/conductivity-vs-thickness.pdf\", \"sections\\\\figures/conductiv"
+        ],
+        "root_cause": {
+          "category": "graphics",
+          "explanation": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+          "confidence": "high",
+          "evidence": [
+            "G-GRAPHIC-MISSING"
+          ]
+        }
+      },
+      {
+        "id": "D004",
+        "kind": "error",
+        "severity": "error",
+        "message": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+        "file": "main.tex",
+        "line": null,
+        "rule": "I-INCLUDE-MISSING",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 1,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"include\", \"rule\": \"I-INCLUDE-MISSING\", \"severity\": \"error\", \"file\": \"main.tex\", \"target\": \"sections/discussion-missing\", \"explanation\": \"\\\\input/\\\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path\", \"auto_fixable\": false}"
+        ],
+        "root_cause": {
+          "category": "include",
+          "explanation": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+          "confidence": "high",
+          "evidence": [
+            "I-INCLUDE-MISSING"
+          ]
+        }
+      },
+      {
+        "id": "D005",
+        "kind": "error",
+        "severity": "error",
+        "message": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+        "file": "sections/method.tex",
+        "line": 17,
+        "rule": "T-CELL-MISMATCH",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 4,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"table\", \"rule\": \"T-CELL-MISMATCH\", \"severity\": \"error\", \"file\": \"sections/method.tex\", \"line\": 17, \"declared_columns\": 4, \"cells_in_row\": 5, \"row_excerpt\": \"B & 60 & 18.2 & Si & extra\", \"explanation\": \"row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later "
+        ],
+        "root_cause": {
+          "category": "table",
+          "explanation": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+          "confidence": "high",
+          "evidence": [
+            "T-CELL-MISMATCH"
+          ]
+        }
+      },
+      {
+        "id": "D006",
+        "kind": "error",
+        "severity": "error",
+        "message": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+        "file": "sections/results.tex",
+        "line": 9,
+        "rule": "X-LABEL-BEFORE-CAPTION",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 8,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"reference\", \"rule\": \"X-LABEL-BEFORE-CAPTION\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 9, \"explanation\": \"\\\\label comes before \\\\caption inside a float, so it captures the enclosing section counter and every \\\\ref to the figure prints the wrong number\", \"auto_fixable\": "
+        ],
+        "root_cause": {
+          "category": "reference",
+          "explanation": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+          "confidence": "high",
+          "evidence": [
+            "X-LABEL-BEFORE-CAPTION"
+          ]
+        }
+      },
+      {
+        "id": "D007",
+        "kind": "error",
+        "severity": "error",
+        "message": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+        "file": "sections/results.tex",
+        "line": 13,
+        "rule": "X-REF-WITHOUT-LABEL",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 9,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"reference\", \"rule\": \"X-REF-WITHOUT-LABEL\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 13, \"key\": \"tab:param\", \"explanation\": \"\\\\ref{tab:param} has no \\\\label{tab:param} anywhere in the project, so the compiled PDF prints '??'\", \"auto_fixable\": false}"
+        ],
+        "root_cause": {
+          "category": "reference",
+          "explanation": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+          "confidence": "high",
+          "evidence": [
+            "X-REF-WITHOUT-LABEL"
+          ]
+        }
+      },
+      {
+        "id": "D008",
+        "kind": "warning",
+        "severity": "warning",
+        "message": "align without '&' produces one right-aligned column instead of aligned relations",
+        "file": "sections/method.tex",
+        "line": 40,
+        "rule": "M-ALIGN-NO-AMP",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 6,
+        "suggestion": null,
+        "context": null,
+        "raw": [
+          "{\"kind\": \"math\", \"rule\": \"M-ALIGN-NO-AMP\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 40, \"explanation\": \"align without '&' produces one right-aligned column instead of aligned relations\", \"auto_fixable\": false}"
+        ],
+        "root_cause": {
+          "category": "math",
+          "explanation": "align without '&' produces one right-aligned column instead of aligned relations",
+          "confidence": "medium",
+          "evidence": [
+            "M-ALIGN-NO-AMP"
+          ]
+        }
+      },
+      {
+        "id": "D009",
+        "kind": "warning",
+        "severity": "warning",
+        "message": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+        "file": "sections/method.tex",
+        "line": 35,
+        "rule": "M-UNIT-ITALIC",
+        "confidence": "medium",
+        "source": "static",
+        "cascade_parent": null,
+        "fix_order": 5,
+        "suggestion": "\\SI{3.2}{J} (siunitx) or 3.2\\,\\mathrm{J}",
+        "context": null,
+        "raw": [
+          "{\"kind\": \"math\", \"rule\": \"M-UNIT-ITALIC\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 35, \"excerpt\": \"E = 3.2 J\", \"explanation\": \"a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong\", \"suggestion\": \"\\\\SI{3.2}{J} (siunitx)"
+        ],
+        "root_cause": {
+          "category": "math",
+          "explanation": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+          "confidence": "medium",
+          "evidence": [
+            "M-UNIT-ITALIC"
+          ]
+        }
+      }
+    ],
+    "structural": {
+      "before": [
+        {
+          "kind": "brace",
+          "file": "sections/intro.tex",
+          "rule": "S-BRACE-UNCLOSED",
+          "severity": "error",
+          "final_depth": 1,
+          "unclosed": [
+            {
+              "line": 10,
+              "snippet": "The classical model assumes a continuous medium {and neglects interface scattering"
+            }
+          ],
+          "explanation": "1 '{' never closed. TeX reports this at end of file, not here."
+        }
+      ],
+      "after": [
+        {
+          "kind": "brace",
+          "file": "sections/intro.tex",
+          "rule": "S-BRACE-UNCLOSED",
+          "severity": "error",
+          "final_depth": 1,
+          "unclosed": [
+            {
+              "line": 10,
+              "snippet": "The classical model assumes a continuous medium {and neglects interface scattering"
+            }
+          ],
+          "explanation": "1 '{' never closed. TeX reports this at end of file, not here."
+        }
+      ]
+    }
+  },
+  "static_checks": {
+    "before": {
+      "total": 13,
+      "errors": 6,
+      "warnings": 2,
+      "info": 5,
+      "by_rule": {
+        "C-CITE-NO-ENTRY": 1,
+        "G-GRAPHIC-MISSING": 1,
+        "I-INCLUDE-MISSING": 1,
+        "T-CELL-MISMATCH": 1,
+        "X-LABEL-BEFORE-CAPTION": 1,
+        "X-REF-WITHOUT-LABEL": 1,
+        "M-ALIGN-NO-AMP": 1,
+        "M-UNIT-ITALIC": 1,
+        "X-LABEL-UNUSED": 5
+      }
+    },
+    "after": {
+      "total": 13,
+      "errors": 6,
+      "warnings": 2,
+      "info": 5,
+      "by_rule": {
+        "C-CITE-NO-ENTRY": 1,
+        "G-GRAPHIC-MISSING": 1,
+        "I-INCLUDE-MISSING": 1,
+        "T-CELL-MISMATCH": 1,
+        "X-LABEL-BEFORE-CAPTION": 1,
+        "X-REF-WITHOUT-LABEL": 1,
+        "M-ALIGN-NO-AMP": 1,
+        "M-UNIT-ITALIC": 1,
+        "X-LABEL-UNUSED": 5
+      }
+    },
+    "findings": [
+      {
+        "kind": "citation",
+        "rule": "C-CITE-NO-ENTRY",
+        "severity": "error",
+        "key": "wang2021",
+        "file": "sections/intro.tex",
+        "line": 8,
+        "explanation": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+        "auto_fixable": false
+      },
+      {
+        "kind": "graphics",
+        "rule": "G-GRAPHIC-MISSING",
+        "severity": "error",
+        "file": "sections/results.tex",
+        "line": 8,
+        "target": "figures/conductivity-vs-thickness",
+        "searched": [
+          "sections\\figures/conductivity-vs-thickness",
+          "sections\\figures/conductivity-vs-thickness.pdf",
+          "sections\\figures/conductivity-vs-thickness.png",
+          "sections\\figures/conductivity-vs-thickness.jpg",
+          "sections\\figures/conductivity-vs-thickness.jpeg",
+          "sections\\figures/conductivity-vs-thickness.eps"
+        ],
+        "explanation": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+        "auto_fixable": false
+      },
+      {
+        "kind": "include",
+        "rule": "I-INCLUDE-MISSING",
+        "severity": "error",
+        "file": "main.tex",
+        "target": "sections/discussion-missing",
+        "explanation": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+        "auto_fixable": false
+      },
+      {
+        "kind": "table",
+        "rule": "T-CELL-MISMATCH",
+        "severity": "error",
+        "file": "sections/method.tex",
+        "line": 17,
+        "declared_columns": 4,
+        "cells_in_row": 5,
+        "row_excerpt": "B & 60 & 18.2 & Si & extra",
+        "explanation": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-BEFORE-CAPTION",
+        "severity": "error",
+        "file": "sections/results.tex",
+        "line": 9,
+        "explanation": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+        "auto_fixable": true,
+        "fix": "move \\label after \\caption"
+      },
+      {
+        "kind": "reference",
+        "rule": "X-REF-WITHOUT-LABEL",
+        "severity": "error",
+        "file": "sections/results.tex",
+        "line": 13,
+        "key": "tab:param",
+        "explanation": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+        "auto_fixable": false
+      },
+      {
+        "kind": "math",
+        "rule": "M-ALIGN-NO-AMP",
+        "severity": "warning",
+        "file": "sections/method.tex",
+        "line": 40,
+        "explanation": "align without '&' produces one right-aligned column instead of aligned relations",
+        "auto_fixable": false
+      },
+      {
+        "kind": "math",
+        "rule": "M-UNIT-ITALIC",
+        "severity": "warning",
+        "file": "sections/method.tex",
+        "line": 35,
+        "excerpt": "E = 3.2 J",
+        "explanation": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+        "suggestion": "\\SI{3.2}{J} (siunitx) or 3.2\\,\\mathrm{J}",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-UNUSED",
+        "severity": "info",
+        "file": "sections/intro.tex",
+        "line": 2,
+        "key": "sec:intro",
+        "explanation": "label is defined but never referenced",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-UNUSED",
+        "severity": "info",
+        "file": "sections/method.tex",
+        "line": 2,
+        "key": "sec:method",
+        "explanation": "label is defined but never referenced",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-UNUSED",
+        "severity": "info",
+        "file": "sections/method.tex",
+        "line": 11,
+        "key": "tab:params",
+        "explanation": "label is defined but never referenced",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-UNUSED",
+        "severity": "info",
+        "file": "sections/method.tex",
+        "line": 33,
+        "key": "eq:bc",
+        "explanation": "label is defined but never referenced",
+        "auto_fixable": false
+      },
+      {
+        "kind": "reference",
+        "rule": "X-LABEL-UNUSED",
+        "severity": "info",
+        "file": "sections/results.tex",
+        "line": 2,
+        "key": "sec:results",
+        "explanation": "label is defined but never referenced",
+        "auto_fixable": false
+      }
+    ],
+    "closure_after": {
+      "cite_keys": 2,
+      "bib_keys": 3,
+      "label_keys": 7,
+      "ref_keys": 3,
+      "citations_without_entry": [
+        "wang2021"
+      ],
+      "references_without_label": [
+        "tab:param"
+      ],
+      "unused_bib_entries": [
+        "liu2020",
+        "smith2018"
+      ],
+      "closed": false
+    }
+  },
+  "fixes": {
+    "applied": [],
+    "rejected": [],
+    "unresolved": [
+      {
+        "rule": "ENV-NO-ENGINE",
+        "severity": "error",
+        "detail": "No TeX engine is installed in this environment, so the compile loop could not run. Everything below is static analysis on the sources; the diagnostics are what a compiler would report, derived from the source structure, not from a run."
+      }
+    ],
+    "files_modified": [],
+    "files_added": [],
+    "files_removed": [],
+    "diff": "fixes/changes.diff"
+  },
+  "integrity": {
+    "findings": [],
+    "clean": true
+  },
+  "reproducibility": {
+    "engine": "pdflatex",
+    "bib_backend": "bibtex",
+    "pass_commands": [],
+    "input_hashes": {
+      "main.tex": "59399a595583bbc11563a0b910fd3f8c10c2ff89c794395911029fefdc3675e5",
+      "refs.bib": "f8b7f91f00ce1bef433cd96f600d239d3bbecfdb63a0e696e1b47105c2e78833",
+      "sections/intro.tex": "d91ffea46e13cef0b1a88282907c014d385fecbb9e7bf9c7287f8e90aa3e6b52",
+      "sections/method.tex": "34fe75417d83f869eff19cdcb5988be697f6c256abcfe53e8066ab9592265acd",
+      "sections/results.tex": "e38722fc1ee0515e1716c01046f79a9f28e1012f739833dd2bf989f93bf7642b"
+    },
+    "pdf_sha256": null,
+    "repro_dir": "repro",
+    "note": "同版本引擎与宏包 + 同输入哈希 → 版面可复现；PDF 字节级哈希不保证相同（时间戳与字体子集顺序会变）。"
+  },
+  "deliverables": {
+    "fixed_sources": "fixed",
+    "main_tex": "fixed/main.tex",
+    "pdf": null,
+    "preview_png": [],
+    "build_logs": "build",
+    "diagnostics": "diagnostics.json",
+    "static_checks": "static-checks.json",
+    "patches": "fixes/patches.json",
+    "diff": "fixes/changes.diff",
+    "report": "report.md",
+    "repro": "repro"
+  },
+  "human_review": [
+    {
+      "item": "C-CITE-NO-ENTRY",
+      "file": "sections/intro.tex",
+      "line": 8,
+      "why": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]"
+    },
+    {
+      "item": "G-GRAPHIC-MISSING",
+      "file": "sections/results.tex",
+      "line": 8,
+      "why": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'"
+    },
+    {
+      "item": "I-INCLUDE-MISSING",
+      "file": "main.tex",
+      "line": null,
+      "why": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path"
+    },
+    {
+      "item": "T-CELL-MISMATCH",
+      "file": "sections/method.tex",
+      "line": 17,
+      "why": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin"
+    },
+    {
+      "item": "X-LABEL-BEFORE-CAPTION",
+      "file": "sections/results.tex",
+      "line": 9,
+      "why": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number"
+    },
+    {
+      "item": "X-REF-WITHOUT-LABEL",
+      "file": "sections/results.tex",
+      "line": 13,
+      "why": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'"
+    }
+  ],
+  "uncertainties": [
+    "本机没有 TeX 引擎，编译结论未经实际运行验证；静态诊断基于源码结构与 TeX 日志语法。",
+    "有 1 个 \\cite 键在任何 .bib 里都找不到：wang2021。这需要作者或文献库补齐，Skill 不会凭空生成条目。",
+    "ENV-NO-ENGINE: No TeX engine is installed in this environment, so the compile loop could not run. Everything below is static analysis on the sources; the diagnostics are what a compiler would report, derived from th"
+  ],
+  "change_log": [
+    {
+      "step": "snapshot",
+      "what": "输入工程快照到 work/snapshots，用于逐条回溯"
+    },
+    {
+      "step": "discover",
+      "what": "识别主文件 main.tex（依据：directory contains .tex sources）"
+    },
+    {
+      "step": "engine",
+      "what": "选定引擎 pdflatex：default for Latin-script documents"
+    },
+    {
+      "step": "static",
+      "what": "静态检查 13 条，结构审计 1 条"
+    },
+    {
+      "step": "build",
+      "what": "编译 0 轮，实际执行 0 个 pass"
+    },
+    {
+      "step": "repair",
+      "what": "应用补丁 0 条，回滚 0 条，未解决 1 条"
+    },
+    {
+      "step": "integrity",
+      "what": "完整性检查 0 条（通过）"
+    },
+    {
+      "step": "output",
+      "what": "写出 fixed/、fixes/、build/、repro/、diagnostics.json、static-checks.json、result.json"
+    }
+  ],
+  "log": [
+    "case_id=example-01  output_contract=['status', 'diagnostics', 'build', 'fixes', 'sources', 'uncertainties']",
+    "project root=D:\\DSH default\\latex13-skill\\submission\\examples\\input\\paper main=main.tex files=5",
+    "snapshot -> .example-work\\snapshots",
+    "engines: ",
+    "engine=pdflatex (default for Latin-script documents)  bib=bibtex",
+    "static: 13 findings (6 errors), 1 structural",
+    "no engine: static-only mode",
+    "preview: False"
+  ],
+  "sources": [
+    {
+      "claim": "S-BRACE-UNCLOSED at 1 '{' never closed. TeX reports this at end of file, not here.",
+      "evidence": "compiler log",
+      "file": "sections/intro.tex",
+      "line": 10,
+      "rule": "S-BRACE-UNCLOSED",
+      "severity": "error",
+      "raw": "{\"kind\": \"brace\", \"file\": \"sections/intro.tex\", \"rule\": \"S-BRACE-UNCLOSED\", \"severity\": \"error\", \"final_depth\": 1, \"unclosed\": [{\"line\": 10, \"snippet\": \"The cla"
+    },
+    {
+      "claim": "C-CITE-NO-ENTRY at \\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+      "evidence": "compiler log",
+      "file": "sections/intro.tex",
+      "line": 8,
+      "rule": "C-CITE-NO-ENTRY",
+      "severity": "error",
+      "raw": "{\"kind\": \"citation\", \"rule\": \"C-CITE-NO-ENTRY\", \"severity\": \"error\", \"key\": \"wang2021\", \"file\": \"sections/intro.tex\", \"line\": 8, \"explanation\": \"\\\\cite{wang2021"
+    },
+    {
+      "claim": "G-GRAPHIC-MISSING at \\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+      "evidence": "compiler log",
+      "file": "sections/results.tex",
+      "line": 8,
+      "rule": "G-GRAPHIC-MISSING",
+      "severity": "error",
+      "raw": "{\"kind\": \"graphics\", \"rule\": \"G-GRAPHIC-MISSING\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 8, \"target\": \"figures/conductivity-vs-thickness\","
+    },
+    {
+      "claim": "I-INCLUDE-MISSING at \\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search",
+      "evidence": "compiler log",
+      "file": "main.tex",
+      "line": null,
+      "rule": "I-INCLUDE-MISSING",
+      "severity": "error",
+      "raw": "{\"kind\": \"include\", \"rule\": \"I-INCLUDE-MISSING\", \"severity\": \"error\", \"file\": \"main.tex\", \"target\": \"sections/discussion-missing\", \"explanation\": \"\\\\input/\\\\inc"
+    },
+    {
+      "claim": "T-CELL-MISMATCH at row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pus",
+      "evidence": "compiler log",
+      "file": "sections/method.tex",
+      "line": 17,
+      "rule": "T-CELL-MISMATCH",
+      "severity": "error",
+      "raw": "{\"kind\": \"table\", \"rule\": \"T-CELL-MISMATCH\", \"severity\": \"error\", \"file\": \"sections/method.tex\", \"line\": 17, \"declared_columns\": 4, \"cells_in_row\": 5, \"row_exce"
+    },
+    {
+      "claim": "X-LABEL-BEFORE-CAPTION at \\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to th",
+      "evidence": "compiler log",
+      "file": "sections/results.tex",
+      "line": 9,
+      "rule": "X-LABEL-BEFORE-CAPTION",
+      "severity": "error",
+      "raw": "{\"kind\": \"reference\", \"rule\": \"X-LABEL-BEFORE-CAPTION\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 9, \"explanation\": \"\\\\label comes before \\\\c"
+    },
+    {
+      "claim": "X-REF-WITHOUT-LABEL at \\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+      "evidence": "compiler log",
+      "file": "sections/results.tex",
+      "line": 13,
+      "rule": "X-REF-WITHOUT-LABEL",
+      "severity": "error",
+      "raw": "{\"kind\": \"reference\", \"rule\": \"X-REF-WITHOUT-LABEL\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 13, \"key\": \"tab:param\", \"explanation\": \"\\\\ref{"
+    },
+    {
+      "claim": "M-ALIGN-NO-AMP at align without '&' produces one right-aligned column instead of aligned relations",
+      "evidence": "compiler log",
+      "file": "sections/method.tex",
+      "line": 40,
+      "rule": "M-ALIGN-NO-AMP",
+      "severity": "warning",
+      "raw": "{\"kind\": \"math\", \"rule\": \"M-ALIGN-NO-AMP\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 40, \"explanation\": \"align without '&' produces one righ"
+    },
+    {
+      "claim": "M-UNIT-ITALIC at a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wro",
+      "evidence": "compiler log",
+      "file": "sections/method.tex",
+      "line": 35,
+      "rule": "M-UNIT-ITALIC",
+      "severity": "warning",
+      "raw": "{\"kind\": \"math\", \"rule\": \"M-UNIT-ITALIC\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 35, \"excerpt\": \"E = 3.2 J\", \"explanation\": \"a number-wit"
+    },
+    {
+      "claim": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+      "evidence": "static check",
+      "file": "sections/intro.tex",
+      "line": 8,
+      "rule": "C-CITE-NO-ENTRY",
+      "severity": "error"
+    },
+    {
+      "claim": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+      "evidence": "static check",
+      "file": "sections/results.tex",
+      "line": 8,
+      "rule": "G-GRAPHIC-MISSING",
+      "severity": "error"
+    },
+    {
+      "claim": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+      "evidence": "static check",
+      "file": "main.tex",
+      "line": null,
+      "rule": "I-INCLUDE-MISSING",
+      "severity": "error"
+    },
+    {
+      "claim": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 17,
+      "rule": "T-CELL-MISMATCH",
+      "severity": "error"
+    },
+    {
+      "claim": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+      "evidence": "static check",
+      "file": "sections/results.tex",
+      "line": 9,
+      "rule": "X-LABEL-BEFORE-CAPTION",
+      "severity": "error"
+    },
+    {
+      "claim": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+      "evidence": "static check",
+      "file": "sections/results.tex",
+      "line": 13,
+      "rule": "X-REF-WITHOUT-LABEL",
+      "severity": "error"
+    },
+    {
+      "claim": "align without '&' produces one right-aligned column instead of aligned relations",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 40,
+      "rule": "M-ALIGN-NO-AMP",
+      "severity": "warning"
+    },
+    {
+      "claim": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 35,
+      "rule": "M-UNIT-ITALIC",
+      "severity": "warning"
+    },
+    {
+      "claim": "label is defined but never referenced",
+      "evidence": "static check",
+      "file": "sections/intro.tex",
+      "line": 2,
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info"
+    },
+    {
+      "claim": "label is defined but never referenced",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 2,
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info"
+    },
+    {
+      "claim": "label is defined but never referenced",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 11,
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info"
+    },
+    {
+      "claim": "label is defined but never referenced",
+      "evidence": "static check",
+      "file": "sections/method.tex",
+      "line": 33,
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info"
+    },
+    {
+      "claim": "label is defined but never referenced",
+      "evidence": "static check",
+      "file": "sections/results.tex",
+      "line": 2,
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info"
+    }
+  ],
+  "contract": {
+    "declared": [
+      "status",
+      "diagnostics",
+      "build",
+      "fixes",
+      "sources",
+      "uncertainties"
+    ],
+    "satisfied": {
+      "status": "native",
+      "diagnostics": "native",
+      "build": "native",
+      "fixes": "native",
+      "sources": "native",
+      "uncertainties": "native"
+    },
+    "missing": []
+  }
+}

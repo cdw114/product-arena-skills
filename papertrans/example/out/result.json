@@ -1,0 +1,75 @@
+{
+  "case_id": null,
+  "task": null,
+  "status": "success",
+  "target_lang": "zh",
+  "summary": {
+    "segments_total": 3,
+    "segments_translated": 3,
+    "coverage": 1.0,
+    "verdicts": {
+      "pass": 2,
+      "warn": 1,
+      "fail": 0
+    },
+    "placeholder_integrity": {
+      "expected": 11,
+      "found": 11,
+      "ratio": 1.0
+    },
+    "term_consistency_rate": 1.0,
+    "term_count": 9,
+    "unsure_markers": 1,
+    "issue_counts": {
+      "placeholder_order_changed": 1,
+      "numbers_added": 1,
+      "translator_unsure": 1
+    },
+    "duplicate_groups": []
+  },
+  "result": {
+    "bilingual": "bilingual.md",
+    "bilingual_json": "bilingual.json",
+    "glossary": "glossary_used.json",
+    "references": null
+  },
+  "evidence": {
+    "source_file": "tests\\attention.pdf",
+    "n_pages": 1,
+    "parser": "pymupdf",
+    "title_source": "Attention Is All You Need",
+    "authors_verbatim": [
+      {
+        "page": 1,
+        "block": "P01B04",
+        "text": "Ashish Vaswani∗ Google Brain avaswani@google.com"
+      },
+      {
+        "page": 1,
+        "block": "P01B05",
+        "text": "Noam Shazeer∗ Google Brain noam@google.com"
+      },
+      {
+        "page": 1,
+        "block": "P01B06",
+        "text": "Niki Parmar∗ Google Research nikip@google.com"
+      }
+    ],
+    "segment_locator": "bilingual.json[].{page,pages,bbox,source_blocks}",
+    "per_segment_verdicts": "verify.json",
+    "per_segment_marks": "bilingual.json[].marks"
+  },
+  "uncertainty": {
+    "missing_segments": [],
+    "translator_unsure_markers": 1,
+    "warn_segments": [
+      "S003"
+    ],
+    "fail_segments": [],
+    "term_inconsistencies": [],
+    "excluded_blocks_not_translated": [],
+    "parser_warnings": []
+  },
+  "change_records": [],
+  "generated_at": "2026-11-25T16:21:24+00:00"
+}

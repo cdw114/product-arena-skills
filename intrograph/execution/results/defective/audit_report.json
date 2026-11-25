@@ -1,0 +1,802 @@
+{
+  "case_id": "gcp-example-001",
+  "gate": "fail",
+  "summary": {
+    "checks_run": 18,
+    "errors": 21,
+    "warnings": 12,
+    "infos": 3,
+    "rules_failed": [
+      "R01",
+      "R05",
+      "R07",
+      "R09",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14"
+    ],
+    "rules_warned": [
+      "R02",
+      "R03",
+      "R04",
+      "R08",
+      "R15",
+      "R16",
+      "R17",
+      "R18"
+    ]
+  },
+  "must_fix": [
+    {
+      "rule": "R01",
+      "question": "对得上",
+      "code": "invented_citation",
+      "message": "引用标记 zhang2024phantom 在文献库与文末参考文献表中都找不到对应条目，无法核对。"
+    },
+    {
+      "rule": "R01",
+      "question": "对得上",
+      "code": "invented_citation",
+      "message": "\\cite{zhang2024phantom} 的键不在文献库中（共 11 条），疑似编造引用。"
+    },
+    {
+      "rule": "R05",
+      "question": "说得实",
+      "code": "must_cite_missing",
+      "message": "R0009（Label-scarce coreset selection for molecular pretraining）被标为必须引用，但成稿中没有引用它。"
+    },
+    {
+      "rule": "R05",
+      "question": "说得实",
+      "code": "must_cite_missing",
+      "message": "R0010（Scaling laws for unlabelled molecular pretraining corpora）被标为必须引用，但成稿中没有引用它。"
+    },
+    {
+      "rule": "R07",
+      "question": "分得清",
+      "code": "group_no_dimension",
+      "message": "分组 G1 没有声明比较维度（dimension），无法判断它是按问题、方法路线还是评价方式分组。"
+    },
+    {
+      "rule": "R09",
+      "question": "分得清",
+      "code": "cited_but_ungrouped",
+      "message": "R0005（InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。"
+    },
+    {
+      "rule": "R09",
+      "question": "分得清",
+      "code": "cited_but_ungrouped",
+      "message": "R0006（Self-supervised graph transformer on large-scale molecular data）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。"
+    },
+    {
+      "rule": "R09",
+      "question": "分得清",
+      "code": "cited_but_ungrouped",
+      "message": "R0007（Active learning for convolutional neural networks: a core-set approach）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。"
+    },
+    {
+      "rule": "R09",
+      "question": "分得清",
+      "code": "cited_but_ungrouped",
+      "message": "R0011（A survey of pretraining corpora for molecular learning）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。"
+    },
+    {
+      "rule": "R10",
+      "question": "说得实",
+      "code": "gap_from_uncited_work",
+      "message": "空白 PG1 声称由 R0009 的局限推出，但相关工作正文没有引用 R0009。"
+    },
+    {
+      "rule": "R10",
+      "question": "说得实",
+      "code": "unverifiable_quote",
+      "message": "空白 PG1 引用的 R0009 原文片段在该条目文本中找不到：'selection ignores the total cost of pretraining the corpus'"
+    },
+    {
+      "rule": "R10",
+      "question": "说得实",
+      "code": "gap_from_uncited_work",
+      "message": "空白 PG2 声称由 R0010 的局限推出，但相关工作正文没有引用 R0010。"
+    },
+    {
+      "rule": "R11",
+      "question": "说得实",
+      "code": "gap_part_empty",
+      "message": "有空白账本但成稿没有研究空白段落。"
+    },
+    {
+      "rule": "R11",
+      "question": "说得实",
+      "code": "gap_part_empty",
+      "message": "有空白账本但成稿没有研究空白段落。"
+    },
+    {
+      "rule": "R12",
+      "question": "对得上",
+      "code": "evidence_table_missing",
+      "message": "贡献 C2 指向 Table 9，但正文索引里没有该表（已识别表：[1, 2, 3]）。"
+    },
+    {
+      "rule": "R12",
+      "question": "对得上",
+      "code": "contribution_evidence_unresolved",
+      "message": "贡献 C2 的 1 条证据全部无法定位到本文字方法/图表/结果。"
+    },
+    {
+      "rule": "R12",
+      "question": "对得上",
+      "code": "contribution_without_evidence",
+      "message": "贡献 C3 没有任何证据定位，属于无法核对的断言：An attribution of the gain to the coverage score."
+    },
+    {
+      "rule": "R12",
+      "question": "对得上",
+      "code": "evidence_figure_missing",
+      "message": "贡献 C4 指向 Fig. 9，但正文索引里没有该图（已识别图：[1, 2]）。"
+    },
+    {
+      "rule": "R12",
+      "question": "对得上",
+      "code": "contribution_evidence_unresolved",
+      "message": "贡献 C4 的 1 条证据全部无法定位到本文字方法/图表/结果。"
+    },
+    {
+      "rule": "R13",
+      "question": "对得上",
+      "code": "invented_metric",
+      "message": "成稿中的 27.4% 在本论文材料与文献库里都找不到出处。"
+    },
+    {
+      "rule": "R14",
+      "question": "立得住",
+      "code": "part_missing",
+      "message": "缺少 gap 部分（Research Gap）。"
+    }
+  ],
+  "by_question": {
+    "对得上": {
+      "error": 8,
+      "warn": 5,
+      "pass": 0,
+      "checks": [
+        {
+          "id": "R01",
+          "title": "citation_integrity",
+          "status": "error"
+        },
+        {
+          "id": "R04",
+          "title": "reference_metadata",
+          "status": "warn"
+        },
+        {
+          "id": "R12",
+          "title": "contribution_evidence",
+          "status": "error"
+        },
+        {
+          "id": "R13",
+          "title": "number_provenance",
+          "status": "error"
+        },
+        {
+          "id": "R15",
+          "title": "novelty_claim_bounded",
+          "status": "warn"
+        },
+        {
+          "id": "R17",
+          "title": "citation_style_consistency",
+          "status": "warn"
+        },
+        {
+          "id": "R18",
+          "title": "abstract_metric_covered",
+          "status": "warn"
+        }
+      ]
+    },
+    "说得实": {
+      "error": 7,
+      "warn": 4,
+      "pass": 0,
+      "checks": [
+        {
+          "id": "R02",
+          "title": "uncited_claim",
+          "status": "warn"
+        },
+        {
+          "id": "R03",
+          "title": "citation_anchor_drift",
+          "status": "warn"
+        },
+        {
+          "id": "R05",
+          "title": "coverage_of_required_works",
+          "status": "error"
+        },
+        {
+          "id": "R10",
+          "title": "gap_provenance",
+          "status": "error"
+        },
+        {
+          "id": "R11",
+          "title": "gap_filled_by_own_work",
+          "status": "error"
+        }
+      ]
+    },
+    "立得住": {
+      "error": 1,
+      "warn": 1,
+      "pass": 1,
+      "checks": [
+        {
+          "id": "R06",
+          "title": "recent_progress_covered",
+          "status": "pass"
+        },
+        {
+          "id": "R14",
+          "title": "four_part_structure",
+          "status": "error"
+        },
+        {
+          "id": "R16",
+          "title": "vacuous_background",
+          "status": "warn"
+        }
+      ]
+    },
+    "分得清": {
+      "error": 5,
+      "warn": 2,
+      "pass": 0,
+      "checks": [
+        {
+          "id": "R07",
+          "title": "group_completeness",
+          "status": "error"
+        },
+        {
+          "id": "R08",
+          "title": "serial_summary_pattern",
+          "status": "warn"
+        },
+        {
+          "id": "R09",
+          "title": "grouping_consistency",
+          "status": "error"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "R01",
+      "title": "citation_integrity",
+      "question": "对得上",
+      "status": "error",
+      "checked": 25,
+      "note": "",
+      "n_error": 2,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "invented_citation",
+          "severity": "error",
+          "message": "引用标记 zhang2024phantom 在文献库与文末参考文献表中都找不到对应条目，无法核对。",
+          "rule": "R01",
+          "marker": "zhang2024phantom",
+          "sentence": "Pretraining objectives for graphs have been studied systematically [3], extended to\ncontrastive positives built from chemical substructures [4], formulated as mutual\ninformation be",
+          "part": "related_work"
+        },
+        {
+          "code": "invented_citation",
+          "severity": "error",
+          "message": "\\cite{zhang2024phantom} 的键不在文献库中（共 11 条），疑似编造引用。",
+          "rule": "R01",
+          "marker": "zhang2024phantom",
+          "part": "related_work"
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "title": "uncited_claim",
+      "question": "说得实",
+      "status": "warn",
+      "checked": 25,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "uncited_claim",
+          "severity": "warn",
+          "message": "该句含 literature 类论断但没有任何引用，也没有标注为作者判断。",
+          "rule": "R02",
+          "kinds": [
+            "literature"
+          ],
+          "sentence": "Prior work has shown that pretraining on more molecules always helps.",
+          "part": "background",
+          "para": 0
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "title": "citation_anchor_drift",
+      "question": "说得实",
+      "status": "warn",
+      "checked": 11,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "citation_anchor_drift",
+          "severity": "warn",
+          "message": "段落前 1 句有论断但无引用，引用集中在段末；引用应落在它所支撑的那一句上。",
+          "rule": "R03",
+          "part": "background",
+          "para": 0,
+          "uncited_claim_1": "Prior work has shown that pretraining on more molecules always helps.",
+          "citation_at_end": "Contrastive pretraining scans the whole unlabelled pool\nevery epoch, so the number of forward passes grows with pool size [4]."
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "title": "reference_metadata",
+      "question": "对得上",
+      "status": "warn",
+      "checked": 9,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "deduplicated_entry",
+          "severity": "info",
+          "message": "R0004 由 1 条重复记录合并（wang2022molclr）。",
+          "rule": "R04",
+          "ref_id": "R0004"
+        },
+        {
+          "code": "metadata_bad_doi",
+          "severity": "warn",
+          "message": "R0011 的 DOI 形式不合法：10.1234",
+          "rule": "R04",
+          "ref_id": "R0011",
+          "doi": "10.1234"
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "title": "coverage_of_required_works",
+      "question": "说得实",
+      "status": "error",
+      "checked": 7,
+      "note": "",
+      "n_error": 2,
+      "n_warn": 2,
+      "findings": [
+        {
+          "code": "must_cite_missing",
+          "severity": "error",
+          "message": "R0009（Label-scarce coreset selection for molecular pretraining）被标为必须引用，但成稿中没有引用它。",
+          "rule": "R05",
+          "ref_id": "R0009"
+        },
+        {
+          "code": "must_cite_missing",
+          "severity": "error",
+          "message": "R0010（Scaling laws for unlabelled molecular pretraining corpora）被标为必须引用，但成稿中没有引用它。",
+          "rule": "R05",
+          "ref_id": "R0010"
+        },
+        {
+          "code": "role_work_uncited",
+          "severity": "warn",
+          "message": "R0009 被标为 recent，但成稿未引用。",
+          "rule": "R05",
+          "ref_id": "R0009",
+          "role": "recent"
+        },
+        {
+          "code": "role_work_uncited",
+          "severity": "warn",
+          "message": "R0010 被标为 recent，但成稿未引用。",
+          "rule": "R05",
+          "ref_id": "R0010",
+          "role": "recent"
+        },
+        {
+          "code": "library_entries_uncited",
+          "severity": "info",
+          "message": "文献库 11 条中有 2 条未被引用：R0009,R0010",
+          "rule": "R05",
+          "ref_ids": [
+            "R0009",
+            "R0010"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "title": "recent_progress_covered",
+      "question": "立得住",
+      "status": "pass",
+      "checked": 3,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "recent_work_cited",
+          "severity": "info",
+          "message": "R0011 属于近三年工作，已引用。",
+          "rule": "R06",
+          "ref_id": "R0011"
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "title": "group_completeness",
+      "question": "分得清",
+      "status": "error",
+      "checked": 2,
+      "note": "",
+      "n_error": 1,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "group_no_dimension",
+          "severity": "error",
+          "message": "分组 G1 没有声明比较维度（dimension），无法判断它是按问题、方法路线还是评价方式分组。",
+          "rule": "R07",
+          "group": "G1"
+        },
+        {
+          "code": "group_work_field_missing",
+          "severity": "warn",
+          "message": "分组 G1 中的 R0004 缺字段 limitation，无法在同一维度上比较。",
+          "rule": "R07",
+          "group": "G1",
+          "ref_id": "R0004",
+          "fields": [
+            "limitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "title": "serial_summary_pattern",
+      "question": "分得清",
+      "status": "warn",
+      "checked": 4,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "serial_summary_pattern",
+          "severity": "warn",
+          "message": "相关工作中连续 3 段各自只讲一篇文献且没有比较词，属于逐篇摘要拼接，不是按维度比较。",
+          "rule": "R08",
+          "paragraphs": [
+            3
+          ],
+          "works": [
+            [
+              "R0007"
+            ],
+            [
+              "R0001"
+            ],
+            [
+              "R0002"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "title": "grouping_consistency",
+      "question": "分得清",
+      "status": "error",
+      "checked": 14,
+      "note": "",
+      "n_error": 4,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "cited_but_ungrouped",
+          "severity": "error",
+          "message": "R0005（InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。",
+          "rule": "R09",
+          "ref_id": "R0005"
+        },
+        {
+          "code": "cited_but_ungrouped",
+          "severity": "error",
+          "message": "R0006（Self-supervised graph transformer on large-scale molecular data）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。",
+          "rule": "R09",
+          "ref_id": "R0006"
+        },
+        {
+          "code": "cited_but_ungrouped",
+          "severity": "error",
+          "message": "R0007（Active learning for convolutional neural networks: a core-set approach）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。",
+          "rule": "R09",
+          "ref_id": "R0007"
+        },
+        {
+          "code": "cited_but_ungrouped",
+          "severity": "error",
+          "message": "R0011（A survey of pretraining corpora for molecular learning）在相关工作中被引用，但没有进入任何分组，比较维度上无法定位它。",
+          "rule": "R09",
+          "ref_id": "R0011"
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "title": "gap_provenance",
+      "question": "说得实",
+      "status": "error",
+      "checked": 2,
+      "note": "",
+      "n_error": 3,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "gap_from_uncited_work",
+          "severity": "error",
+          "message": "空白 PG1 声称由 R0009 的局限推出，但相关工作正文没有引用 R0009。",
+          "rule": "R10",
+          "gap": "PG1",
+          "ref_id": "R0009"
+        },
+        {
+          "code": "unverifiable_quote",
+          "severity": "error",
+          "message": "空白 PG1 引用的 R0009 原文片段在该条目文本中找不到：'selection ignores the total cost of pretraining the corpus'",
+          "rule": "R10",
+          "gap": "PG1",
+          "ref_id": "R0009",
+          "quote": "selection ignores the total cost of pretraining the corpus"
+        },
+        {
+          "code": "gap_from_uncited_work",
+          "severity": "error",
+          "message": "空白 PG2 声称由 R0010 的局限推出，但相关工作正文没有引用 R0010。",
+          "rule": "R10",
+          "gap": "PG2",
+          "ref_id": "R0010"
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "title": "gap_filled_by_own_work",
+      "question": "说得实",
+      "status": "error",
+      "checked": 2,
+      "note": "",
+      "n_error": 2,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "gap_part_empty",
+          "severity": "error",
+          "message": "有空白账本但成稿没有研究空白段落。",
+          "rule": "R11",
+          "gap": "PG1"
+        },
+        {
+          "code": "gap_part_empty",
+          "severity": "error",
+          "message": "有空白账本但成稿没有研究空白段落。",
+          "rule": "R11",
+          "gap": "PG2"
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "title": "contribution_evidence",
+      "question": "对得上",
+      "status": "error",
+      "checked": 4,
+      "note": "",
+      "n_error": 5,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "evidence_table_missing",
+          "severity": "error",
+          "message": "贡献 C2 指向 Table 9，但正文索引里没有该表（已识别表：[1, 2, 3]）。",
+          "rule": "R12",
+          "contribution": "C2",
+          "locator": "Table 9"
+        },
+        {
+          "code": "contribution_evidence_unresolved",
+          "severity": "error",
+          "message": "贡献 C2 的 1 条证据全部无法定位到本文字方法/图表/结果。",
+          "rule": "R12",
+          "contribution": "C2"
+        },
+        {
+          "code": "contribution_without_evidence",
+          "severity": "error",
+          "message": "贡献 C3 没有任何证据定位，属于无法核对的断言：An attribution of the gain to the coverage score.",
+          "rule": "R12",
+          "contribution": "C3"
+        },
+        {
+          "code": "evidence_figure_missing",
+          "severity": "error",
+          "message": "贡献 C4 指向 Fig. 9，但正文索引里没有该图（已识别图：[1, 2]）。",
+          "rule": "R12",
+          "contribution": "C4",
+          "locator": "Fig. 9"
+        },
+        {
+          "code": "contribution_evidence_unresolved",
+          "severity": "error",
+          "message": "贡献 C4 的 1 条证据全部无法定位到本文字方法/图表/结果。",
+          "rule": "R12",
+          "contribution": "C4"
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "title": "number_provenance",
+      "question": "对得上",
+      "status": "error",
+      "checked": 25,
+      "note": "",
+      "n_error": 1,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "invented_metric",
+          "severity": "error",
+          "message": "成稿中的 27.4% 在本论文材料与文献库里都找不到出处。",
+          "rule": "R13",
+          "value": "27.4",
+          "unit": "%",
+          "sentence": "accuracy by 27.4% over the strongest baseline (Table 9).",
+          "part": "contributions"
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "title": "four_part_structure",
+      "question": "立得住",
+      "status": "error",
+      "checked": 4,
+      "note": "",
+      "n_error": 1,
+      "n_warn": 0,
+      "findings": [
+        {
+          "code": "part_missing",
+          "severity": "error",
+          "message": "缺少 gap 部分（Research Gap）。",
+          "rule": "R14",
+          "part": "gap"
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "title": "novelty_claim_bounded",
+      "question": "对得上",
+      "status": "warn",
+      "checked": 25,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "unbounded_novelty_claim",
+          "severity": "warn",
+          "message": "贡献部分出现 'first to' 类拔高表述，但没有任何贡献声明适用范围/不主张的内容。",
+          "rule": "R15",
+          "sentence": "- The first to make molecular pretraining affordable at 100 labels.",
+          "part": "contributions"
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "title": "vacuous_background",
+      "question": "立得住",
+      "status": "warn",
+      "checked": 11,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "vacuous_background",
+          "severity": "warn",
+          "message": "背景中出现空转铺垫「has attracted ... attention」，没有指向具体问题或技术约束：has attracted widespread attention",
+          "rule": "R16",
+          "part": "background",
+          "para": 0,
+          "phrase": "has attracted ... attention"
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "title": "citation_style_consistency",
+      "question": "对得上",
+      "status": "warn",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 1,
+      "findings": [
+        {
+          "code": "mixed_citation_style",
+          "severity": "warn",
+          "message": "成稿混用了多种引用标记：numeric(11), key(2)。目标格式下应统一。",
+          "rule": "R17",
+          "styles": {
+            "numeric": 11,
+            "key": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "title": "abstract_metric_covered",
+      "question": "对得上",
+      "status": "warn",
+      "checked": 2,
+      "note": "",
+      "n_error": 0,
+      "n_warn": 2,
+      "findings": [
+        {
+          "code": "abstract_metric_unclaimed",
+          "severity": "warn",
+          "message": "摘要里的关键数值 11.3% 没有进入任何贡献条目，也没有在引言/相关工作中出现；读者无法从贡献列表看到这个结果。",
+          "rule": "R18",
+          "value": "11.3",
+          "unit": "%"
+        },
+        {
+          "code": "abstract_metric_unclaimed",
+          "severity": "warn",
+          "message": "摘要里的关键数值 62.4% 没有进入任何贡献条目，也没有在引言/相关工作中出现；读者无法从贡献列表看到这个结果。",
+          "rule": "R18",
+          "value": "62.4",
+          "unit": "%"
+        }
+      ]
+    }
+  ],
+  "draft_chars": 2468,
+  "part_method": "slot"
+}

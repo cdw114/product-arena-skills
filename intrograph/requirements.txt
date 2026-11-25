@@ -1,0 +1,9 @@
+# 无第三方依赖：scripts/ 只用 Python 标准库（json / re / csv / os / hashlib /
+# unicodedata / argparse / subprocess）。
+#
+# 需要 Python >= 3.8。Python 3.9+ 更佳（dict 合并运算符只在 run_case 内部用
+# `|`，已用 `{**a, **b}` 兼容写法的地方不受影响）。
+#
+# 可选（本 Skill 不直接调用，仅在评测镜像需要先做 PDF/docx 转文本时用到）：
+#   pymupdf>=1.23,<2          # pdf-text-tool 提供
+#   python-docx>=1.0          # office-* 工具链提供

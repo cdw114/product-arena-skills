@@ -1,0 +1,26 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "EXAMPLE of the reference ledger, written by hand for the shipped example case. role: seminal / representative / recent / baseline / survey / application / other. cluster matches ledger_groups.json.",
+  "entries": [
+    {"ref_id": "R0001", "role": "seminal", "cluster": "G3", "must_cite": true,
+     "one_line": "GCN defines the localized spectral propagation rule that almost every molecular encoder inherits; the receptive field is one hop per layer."},
+    {"ref_id": "R0002", "role": "seminal", "cluster": "G3", "must_cite": true,
+     "one_line": "MPNN unifies message-passing models for molecules and fixes a neighbourhood radius per step."},
+    {"ref_id": "R0003", "role": "representative", "cluster": "G1", "must_cite": true,
+     "one_line": "Systematic study of graph pretraining objectives; naive pretraining can hurt, and the unlabelled corpus is used as one fixed pool."},
+    {"ref_id": "R0004", "role": "representative", "cluster": "G1", "must_cite": true,
+     "one_line": "MolCLR builds contrastive positives by atom masking, bond deletion and subgraph removal over the full unlabelled pool."},
+    {"ref_id": "R0005", "role": "baseline", "cluster": "G1", "must_cite": false,
+     "one_line": "InfoGraph maximises mutual information between graph- and substructure-level representations, agnostic to which unlabelled graphs are used."},
+    {"ref_id": "R0006", "role": "representative", "cluster": "G1", "must_cite": false,
+     "one_line": "GROVER pretrains a graph transformer on eleven million unlabelled molecules with node/edge self-supervision."},
+    {"ref_id": "R0007", "role": "seminal", "cluster": "G2", "must_cite": true,
+     "one_line": "k-centre core-set selection for images; the guarantee is stated for a fixed feature space."},
+    {"ref_id": "R0008", "role": "baseline", "cluster": "G3", "must_cite": false,
+     "one_line": "SchNet's continuous-filter convolution gives rotation/translation invariant molecular representations, trained from scratch per task."},
+    {"ref_id": "R0009", "role": "recent", "cluster": "G2", "must_cite": true,
+     "one_line": "Selects pretraining molecules by expected informativeness for the label budget; ignores the cost of the corpus itself."},
+    {"ref_id": "R0010", "role": "recent", "cluster": "G2", "must_cite": true,
+     "one_line": "Power-law scaling of downstream error against corpus size on a fixed, uncurated corpus."}
+  ]
+}

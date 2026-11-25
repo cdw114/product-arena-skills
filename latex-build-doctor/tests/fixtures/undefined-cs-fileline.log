@@ -1,0 +1,38 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./sections/method.tex
+./sections/method.tex:14: Undefined control sequence.
+l.14 \toprule
+             
+./sections/method.tex:18: Undefined control sequence.
+l.18 \midrule
+             
+./sections/method.tex:26: Undefined control sequence.
+l.26 \bottomrule
+                
+)
+! LaTeX Error: File `siunitx.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.31 \usepackage
+                {siunitx}
+*** (cannot \read from terminal in nonstop modes)
+
+Here is how much of TeX's memory you used:
+ 1288 strings out of 478994
+ 16421 string characters out of 5824974
+ 297978 words of memory out of 5000021
+!  ==> Fatal error occurred, no output PDF file produced!

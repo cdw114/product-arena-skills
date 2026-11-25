@@ -1,0 +1,296 @@
+{
+  "case_id": "example-01",
+  "engine": {
+    "engine": "pdflatex",
+    "reason": "default for Latin-script documents",
+    "evidence": [
+      "no engine-specific marker found"
+    ],
+    "confidence": "medium"
+  },
+  "bib_backend": {
+    "backend": "bibtex",
+    "reason": "\\bibliography present"
+  },
+  "iterations": [],
+  "final_stats": {},
+  "items": [
+    {
+      "id": "D001",
+      "kind": "error",
+      "severity": "error",
+      "message": "1 '{' never closed. TeX reports this at end of file, not here.",
+      "file": "sections/intro.tex",
+      "line": 10,
+      "rule": "S-BRACE-UNCLOSED",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 3,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"brace\", \"file\": \"sections/intro.tex\", \"rule\": \"S-BRACE-UNCLOSED\", \"severity\": \"error\", \"final_depth\": 1, \"unclosed\": [{\"line\": 10, \"snippet\": \"The classical model assumes a continuous medium {and neglects interface scattering\"}], \"explanation\": \"1 '{' never closed. TeX reports this at end "
+      ],
+      "root_cause": {
+        "category": "brace",
+        "explanation": "1 '{' never closed. TeX reports this at end of file, not here.",
+        "confidence": "high",
+        "evidence": [
+          "S-BRACE-UNCLOSED"
+        ]
+      }
+    },
+    {
+      "id": "D002",
+      "kind": "error",
+      "severity": "error",
+      "message": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+      "file": "sections/intro.tex",
+      "line": 8,
+      "rule": "C-CITE-NO-ENTRY",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 2,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"citation\", \"rule\": \"C-CITE-NO-ENTRY\", \"severity\": \"error\", \"key\": \"wang2021\", \"file\": \"sections/intro.tex\", \"line\": 8, \"explanation\": \"\\\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]\", \"auto_fixable\": false}"
+      ],
+      "root_cause": {
+        "category": "citation",
+        "explanation": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+        "confidence": "high",
+        "evidence": [
+          "C-CITE-NO-ENTRY"
+        ]
+      }
+    },
+    {
+      "id": "D003",
+      "kind": "error",
+      "severity": "error",
+      "message": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+      "file": "sections/results.tex",
+      "line": 8,
+      "rule": "G-GRAPHIC-MISSING",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 7,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"graphics\", \"rule\": \"G-GRAPHIC-MISSING\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 8, \"target\": \"figures/conductivity-vs-thickness\", \"searched\": [\"sections\\\\figures/conductivity-vs-thickness\", \"sections\\\\figures/conductivity-vs-thickness.pdf\", \"sections\\\\figures/conductiv"
+      ],
+      "root_cause": {
+        "category": "graphics",
+        "explanation": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+        "confidence": "high",
+        "evidence": [
+          "G-GRAPHIC-MISSING"
+        ]
+      }
+    },
+    {
+      "id": "D004",
+      "kind": "error",
+      "severity": "error",
+      "message": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+      "file": "main.tex",
+      "line": null,
+      "rule": "I-INCLUDE-MISSING",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 1,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"include\", \"rule\": \"I-INCLUDE-MISSING\", \"severity\": \"error\", \"file\": \"main.tex\", \"target\": \"sections/discussion-missing\", \"explanation\": \"\\\\input/\\\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path\", \"auto_fixable\": false}"
+      ],
+      "root_cause": {
+        "category": "include",
+        "explanation": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+        "confidence": "high",
+        "evidence": [
+          "I-INCLUDE-MISSING"
+        ]
+      }
+    },
+    {
+      "id": "D005",
+      "kind": "error",
+      "severity": "error",
+      "message": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+      "file": "sections/method.tex",
+      "line": 17,
+      "rule": "T-CELL-MISMATCH",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 4,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"table\", \"rule\": \"T-CELL-MISMATCH\", \"severity\": \"error\", \"file\": \"sections/method.tex\", \"line\": 17, \"declared_columns\": 4, \"cells_in_row\": 5, \"row_excerpt\": \"B & 60 & 18.2 & Si & extra\", \"explanation\": \"row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later "
+      ],
+      "root_cause": {
+        "category": "table",
+        "explanation": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+        "confidence": "high",
+        "evidence": [
+          "T-CELL-MISMATCH"
+        ]
+      }
+    },
+    {
+      "id": "D006",
+      "kind": "error",
+      "severity": "error",
+      "message": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+      "file": "sections/results.tex",
+      "line": 9,
+      "rule": "X-LABEL-BEFORE-CAPTION",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 8,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"reference\", \"rule\": \"X-LABEL-BEFORE-CAPTION\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 9, \"explanation\": \"\\\\label comes before \\\\caption inside a float, so it captures the enclosing section counter and every \\\\ref to the figure prints the wrong number\", \"auto_fixable\": "
+      ],
+      "root_cause": {
+        "category": "reference",
+        "explanation": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+        "confidence": "high",
+        "evidence": [
+          "X-LABEL-BEFORE-CAPTION"
+        ]
+      }
+    },
+    {
+      "id": "D007",
+      "kind": "error",
+      "severity": "error",
+      "message": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+      "file": "sections/results.tex",
+      "line": 13,
+      "rule": "X-REF-WITHOUT-LABEL",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 9,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"reference\", \"rule\": \"X-REF-WITHOUT-LABEL\", \"severity\": \"error\", \"file\": \"sections/results.tex\", \"line\": 13, \"key\": \"tab:param\", \"explanation\": \"\\\\ref{tab:param} has no \\\\label{tab:param} anywhere in the project, so the compiled PDF prints '??'\", \"auto_fixable\": false}"
+      ],
+      "root_cause": {
+        "category": "reference",
+        "explanation": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+        "confidence": "high",
+        "evidence": [
+          "X-REF-WITHOUT-LABEL"
+        ]
+      }
+    },
+    {
+      "id": "D008",
+      "kind": "warning",
+      "severity": "warning",
+      "message": "align without '&' produces one right-aligned column instead of aligned relations",
+      "file": "sections/method.tex",
+      "line": 40,
+      "rule": "M-ALIGN-NO-AMP",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 6,
+      "suggestion": null,
+      "context": null,
+      "raw": [
+        "{\"kind\": \"math\", \"rule\": \"M-ALIGN-NO-AMP\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 40, \"explanation\": \"align without '&' produces one right-aligned column instead of aligned relations\", \"auto_fixable\": false}"
+      ],
+      "root_cause": {
+        "category": "math",
+        "explanation": "align without '&' produces one right-aligned column instead of aligned relations",
+        "confidence": "medium",
+        "evidence": [
+          "M-ALIGN-NO-AMP"
+        ]
+      }
+    },
+    {
+      "id": "D009",
+      "kind": "warning",
+      "severity": "warning",
+      "message": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+      "file": "sections/method.tex",
+      "line": 35,
+      "rule": "M-UNIT-ITALIC",
+      "confidence": "medium",
+      "source": "static",
+      "cascade_parent": null,
+      "fix_order": 5,
+      "suggestion": "\\SI{3.2}{J} (siunitx) or 3.2\\,\\mathrm{J}",
+      "context": null,
+      "raw": [
+        "{\"kind\": \"math\", \"rule\": \"M-UNIT-ITALIC\", \"severity\": \"warning\", \"file\": \"sections/method.tex\", \"line\": 35, \"excerpt\": \"E = 3.2 J\", \"explanation\": \"a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong\", \"suggestion\": \"\\\\SI{3.2}{J} (siunitx)"
+      ],
+      "root_cause": {
+        "category": "math",
+        "explanation": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+        "confidence": "medium",
+        "evidence": [
+          "M-UNIT-ITALIC"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "live": 9,
+    "suppressed": 0,
+    "by_severity": {
+      "error": 7,
+      "warning": 2
+    },
+    "fatal_errors": 7,
+    "warnings": 2
+  },
+  "structural_before": [
+    {
+      "kind": "brace",
+      "file": "sections/intro.tex",
+      "rule": "S-BRACE-UNCLOSED",
+      "severity": "error",
+      "final_depth": 1,
+      "unclosed": [
+        {
+          "line": 10,
+          "snippet": "The classical model assumes a continuous medium {and neglects interface scattering"
+        }
+      ],
+      "explanation": "1 '{' never closed. TeX reports this at end of file, not here."
+    }
+  ],
+  "structural_after": [
+    {
+      "kind": "brace",
+      "file": "sections/intro.tex",
+      "rule": "S-BRACE-UNCLOSED",
+      "severity": "error",
+      "final_depth": 1,
+      "unclosed": [
+        {
+          "line": 10,
+          "snippet": "The classical model assumes a continuous medium {and neglects interface scattering"
+        }
+      ],
+      "explanation": "1 '{' never closed. TeX reports this at end of file, not here."
+    }
+  ]
+}

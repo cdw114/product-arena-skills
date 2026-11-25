@@ -1,0 +1,35 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./main.aux)
+(./sections/method.tex
+Runaway argument?
+{\frac{\partial u}{\partial t} = \alpha \nabla^2 u
+! Paragraph ended before \frac was complete.
+<to be read again> 
+                   \par 
+l.47 
+
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+)
+! File ended while scanning use of \frac.
+<inserted text> 
+                \par 
+<*> main.tex
+                
+*** (job aborted, file error in nonstop mode)
+
+! Emergency stop.
+<*> main.tex
+                
+*** (job aborted, file error in nonstop mode)
+
+!  ==> Fatal error occurred, no output PDF file produced!

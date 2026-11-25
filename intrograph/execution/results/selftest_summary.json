@@ -1,0 +1,518 @@
+{
+  "ran_at": "2026-11-26T01:02:41+0800",
+  "python": "3.14.6",
+  "note": "LOCAL SELF-TEST on fixtures that ship with the bundle. Not an official case, not a benchmark score. Regenerate with `python3 src/reproduce.py`.",
+  "runs": {
+    "clean_en": {
+      "gate": "pass",
+      "errors": 0,
+      "warnings": 0,
+      "state": "success",
+      "chars": 6611,
+      "refs": 10,
+      "groups": 3,
+      "gaps": 2,
+      "contributions": 4,
+      "checks": {
+        "gate_pass": true,
+        "no_errors": true,
+        "no_warnings": true,
+        "status_success": true,
+        "four_parts_present": true,
+        "all_refs_cited": true,
+        "contract_fields_present": true,
+        "outputs_written": true,
+        "no_html_comment_left": true
+      },
+      "passed": 9,
+      "total": 9
+    },
+    "defective": {
+      "gate": "fail",
+      "errors": 21,
+      "warnings": 12,
+      "defects_declared": 21,
+      "defects_caught": 21,
+      "missed": [],
+      "checks": {
+        "gate_fail": true,
+        "every_defect_caught": true,
+        "distinct_codes": true,
+        "errors_dominate": true
+      },
+      "passed": 4,
+      "total": 4,
+      "per_defect": [
+        {
+          "defect": "D01",
+          "mode": "编造引用：\\cite 的键在文献库里不存在",
+          "rule": "R01",
+          "code": "invented_citation",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D02",
+          "mode": "无来源论断：文献类断言没有引用也没有标为作者判断",
+          "rule": "R02",
+          "code": "uncited_claim",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D03",
+          "mode": "引用位置漂移：前几句是论断，引用堆在段末",
+          "rule": "R03",
+          "code": "citation_anchor_drift",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D04",
+          "mode": "元数据错误：DOI 形式不合法",
+          "rule": "R04",
+          "code": "metadata_bad_doi",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D05",
+          "mode": "覆盖缺失：标为必须引用的文献成稿未引",
+          "rule": "R05",
+          "code": "must_cite_missing",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D06",
+          "mode": "分组无比较维度",
+          "rule": "R07",
+          "code": "group_no_dimension",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D07",
+          "mode": "组内条目缺比较字段",
+          "rule": "R07",
+          "code": "group_work_field_missing",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D08",
+          "mode": "逐篇摘要拼接：连续 3 段各讲一篇且无比较词",
+          "rule": "R08",
+          "code": "serial_summary_pattern",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D09",
+          "mode": "引用了但没有进入任何分组",
+          "rule": "R09",
+          "code": "cited_but_ungrouped",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D10",
+          "mode": "空白不是由已引文献推出：来源文献正文没引",
+          "rule": "R10",
+          "code": "gap_from_uncited_work",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D11",
+          "mode": "空白依据的原文引文在来源里找不到",
+          "rule": "R10",
+          "code": "unverifiable_quote",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D12",
+          "mode": "有空白账本但成稿没有空白段落",
+          "rule": "R11",
+          "code": "gap_part_empty",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D13",
+          "mode": "贡献没有证据定位",
+          "rule": "R12",
+          "code": "contribution_without_evidence",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D14",
+          "mode": "贡献指向不存在的表",
+          "rule": "R12",
+          "code": "evidence_table_missing",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D15",
+          "mode": "贡献指向不存在的图",
+          "rule": "R12",
+          "code": "evidence_figure_missing",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D16",
+          "mode": "为写作补出材料里没有的数值",
+          "rule": "R13",
+          "code": "invented_metric",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D17",
+          "mode": "四部分不全",
+          "rule": "R14",
+          "code": "part_missing",
+          "severity": "error",
+          "caught": true
+        },
+        {
+          "defect": "D18",
+          "mode": "无条件拔高表述",
+          "rule": "R15",
+          "code": "unbounded_novelty_claim",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D19",
+          "mode": "空转铺垫式背景",
+          "rule": "R16",
+          "code": "vacuous_background",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D20",
+          "mode": "引用格式混用",
+          "rule": "R17",
+          "code": "mixed_citation_style",
+          "severity": "warn",
+          "caught": true
+        },
+        {
+          "defect": "D21",
+          "mode": "摘要里的关键结果没有进入任何贡献条目",
+          "rule": "R18",
+          "code": "abstract_metric_unclaimed",
+          "severity": "warn",
+          "caught": true
+        }
+      ]
+    },
+    "zh": {
+      "gate": "pass",
+      "errors": 0,
+      "warnings": 0,
+      "state": "success",
+      "early_partial": {
+        "plan_written": true,
+        "plan_status_partial": true,
+        "plan_has_case_id": true,
+        "scaffold_written": true
+      },
+      "checks": {
+        "zip_plan_checks": true,
+        "gate_pass": true,
+        "no_errors": true,
+        "status_success": true,
+        "lang_zh_detected": true,
+        "gbt7714_rendered": true,
+        "cjk_output": true,
+        "four_parts_present": true,
+        "contract_fields_present": true
+      },
+      "passed": 9,
+      "total": 9
+    },
+    "no_library": {
+      "gate": "fail",
+      "state": "partial",
+      "invented_citations_flagged": 1,
+      "checks": {
+        "ran": true,
+        "library_empty_reported": true,
+        "unresolved_citation_flagged": true,
+        "honest_state": true,
+        "limits_mention_empty_library": true,
+        "result_written": true
+      },
+      "passed": 6,
+      "total": 6
+    }
+  },
+  "clean_en": {
+    "gate": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "state": "success",
+    "chars": 6611,
+    "refs": 10,
+    "groups": 3,
+    "gaps": 2,
+    "contributions": 4,
+    "checks": {
+      "gate_pass": true,
+      "no_errors": true,
+      "no_warnings": true,
+      "status_success": true,
+      "four_parts_present": true,
+      "all_refs_cited": true,
+      "contract_fields_present": true,
+      "outputs_written": true,
+      "no_html_comment_left": true
+    },
+    "passed": 9,
+    "total": 9
+  },
+  "defective": {
+    "gate": "fail",
+    "errors": 21,
+    "warnings": 12,
+    "defects_declared": 21,
+    "defects_caught": 21,
+    "missed": [],
+    "checks": {
+      "gate_fail": true,
+      "every_defect_caught": true,
+      "distinct_codes": true,
+      "errors_dominate": true
+    },
+    "passed": 4,
+    "total": 4,
+    "per_defect": [
+      {
+        "defect": "D01",
+        "mode": "编造引用：\\cite 的键在文献库里不存在",
+        "rule": "R01",
+        "code": "invented_citation",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D02",
+        "mode": "无来源论断：文献类断言没有引用也没有标为作者判断",
+        "rule": "R02",
+        "code": "uncited_claim",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D03",
+        "mode": "引用位置漂移：前几句是论断，引用堆在段末",
+        "rule": "R03",
+        "code": "citation_anchor_drift",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D04",
+        "mode": "元数据错误：DOI 形式不合法",
+        "rule": "R04",
+        "code": "metadata_bad_doi",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D05",
+        "mode": "覆盖缺失：标为必须引用的文献成稿未引",
+        "rule": "R05",
+        "code": "must_cite_missing",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D06",
+        "mode": "分组无比较维度",
+        "rule": "R07",
+        "code": "group_no_dimension",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D07",
+        "mode": "组内条目缺比较字段",
+        "rule": "R07",
+        "code": "group_work_field_missing",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D08",
+        "mode": "逐篇摘要拼接：连续 3 段各讲一篇且无比较词",
+        "rule": "R08",
+        "code": "serial_summary_pattern",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D09",
+        "mode": "引用了但没有进入任何分组",
+        "rule": "R09",
+        "code": "cited_but_ungrouped",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D10",
+        "mode": "空白不是由已引文献推出：来源文献正文没引",
+        "rule": "R10",
+        "code": "gap_from_uncited_work",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D11",
+        "mode": "空白依据的原文引文在来源里找不到",
+        "rule": "R10",
+        "code": "unverifiable_quote",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D12",
+        "mode": "有空白账本但成稿没有空白段落",
+        "rule": "R11",
+        "code": "gap_part_empty",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D13",
+        "mode": "贡献没有证据定位",
+        "rule": "R12",
+        "code": "contribution_without_evidence",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D14",
+        "mode": "贡献指向不存在的表",
+        "rule": "R12",
+        "code": "evidence_table_missing",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D15",
+        "mode": "贡献指向不存在的图",
+        "rule": "R12",
+        "code": "evidence_figure_missing",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D16",
+        "mode": "为写作补出材料里没有的数值",
+        "rule": "R13",
+        "code": "invented_metric",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D17",
+        "mode": "四部分不全",
+        "rule": "R14",
+        "code": "part_missing",
+        "severity": "error",
+        "caught": true
+      },
+      {
+        "defect": "D18",
+        "mode": "无条件拔高表述",
+        "rule": "R15",
+        "code": "unbounded_novelty_claim",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D19",
+        "mode": "空转铺垫式背景",
+        "rule": "R16",
+        "code": "vacuous_background",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D20",
+        "mode": "引用格式混用",
+        "rule": "R17",
+        "code": "mixed_citation_style",
+        "severity": "warn",
+        "caught": true
+      },
+      {
+        "defect": "D21",
+        "mode": "摘要里的关键结果没有进入任何贡献条目",
+        "rule": "R18",
+        "code": "abstract_metric_unclaimed",
+        "severity": "warn",
+        "caught": true
+      }
+    ]
+  },
+  "zh": {
+    "gate": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "state": "success",
+    "early_partial": {
+      "plan_written": true,
+      "plan_status_partial": true,
+      "plan_has_case_id": true,
+      "scaffold_written": true
+    },
+    "checks": {
+      "zip_plan_checks": true,
+      "gate_pass": true,
+      "no_errors": true,
+      "status_success": true,
+      "lang_zh_detected": true,
+      "gbt7714_rendered": true,
+      "cjk_output": true,
+      "four_parts_present": true,
+      "contract_fields_present": true
+    },
+    "passed": 9,
+    "total": 9
+  },
+  "no_library": {
+    "gate": "fail",
+    "state": "partial",
+    "invented_citations_flagged": 1,
+    "checks": {
+      "ran": true,
+      "library_empty_reported": true,
+      "unresolved_citation_flagged": true,
+      "honest_state": true,
+      "limits_mention_empty_library": true,
+      "result_written": true
+    },
+    "passed": 6,
+    "total": 6
+  },
+  "totals": {
+    "passed": 28,
+    "total": 28,
+    "defects_caught": 21,
+    "defects_declared": 21
+  },
+  "wall_time_s": 1.8,
+  "execution_window": {
+    "ran_at": "2026-11-25T17:02:42Z",
+    "wall_time_s": 1.8
+  }
+}

@@ -1,0 +1,88 @@
+{
+ "summary": {
+  "n_segments": 3,
+  "n_translated": 3,
+  "missing": [],
+  "extra": [],
+  "verdicts": {
+   "pass": 2,
+   "warn": 1,
+   "fail": 0
+  },
+  "placeholder_integrity": {
+   "expected": 11,
+   "found": 11,
+   "ratio": 1.0
+  },
+  "duplicate_groups": [],
+  "unsure_markers": 1,
+  "issue_counts": {
+   "placeholder_order_changed": 1,
+   "numbers_added": 1,
+   "translator_unsure": 1
+  }
+ },
+ "segments": [
+  {
+   "id": "S001",
+   "verdict": "pass",
+   "issues": [],
+   "placeholders": {
+    "expected": 0,
+    "found": 0
+   },
+   "restored": "注意力就是你所需要的一切",
+   "n_unsure": 0
+  },
+  {
+   "id": "S002",
+   "verdict": "pass",
+   "issues": [],
+   "placeholders": {
+    "expected": 0,
+    "found": 0
+   },
+   "restored": "摘要",
+   "n_unsure": 0
+  },
+  {
+   "id": "S003",
+   "verdict": "warn",
+   "issues": [
+    {
+     "type": "placeholder_order_changed",
+     "severity": "warn",
+     "n_inversions": 2,
+     "pairs": [
+      {
+       "a": "28.4",
+       "b": "2014"
+      },
+      {
+       "a": "41.8",
+       "b": "3.5 days"
+      }
+     ]
+    },
+    {
+     "type": "numbers_added",
+     "severity": "warn",
+     "values": [
+      "8"
+     ]
+    },
+    {
+     "type": "translator_unsure",
+     "severity": "info",
+     "marker": "[待确认: 模型名 Transformer 按原文保留]"
+    }
+   ],
+   "placeholders": {
+    "expected": 11,
+    "found": 11
+   },
+   "restored": "主流的sequence transduction模型基于复杂的循环或convolutional neural networks，包含一个编码器和一个解码器。表现最好的模型还通过attention mechanism连接编码器和解码器。我们提出一种新的简单网络架构——Transformer，它仅基于attention mechanisms，完全摒弃了循环和卷积。在两项machine translation任务上的实验表明，这些模型质量更优，同时更易并行化，训练时间显著减少。我们的模型在 WMT 2014 英德翻译任务上取得 28.4 BLEU，比包括集成模型在内的现有最佳结果高出 2 BLEU 以上。在 WMT 2014 英法翻译任务上，我们的模型在 8 块 GPU 上训练 3.5 days 后，取得了 41.8 的单模型最佳 BLEU 分数，仅相当于文献中最佳模型训练成本的一小部分。我们通过将 Transformer 成功应用于English constituency parsing（在大规模和有限训练数据下均如此），证明它能很好地泛化到其他任务。[待确认: 模型名 Transformer 按原文保留]",
+   "n_unsure": 1
+  }
+ ]
+}

@@ -1,0 +1,439 @@
+{
+ "terms": {
+  "T001": {
+   "source": "attention mechanism",
+   "target": "注意力机制",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=15 count=10 roles=body,caption,list pages=[1, 2, 5, 10, 13]",
+   "status": "approved"
+  },
+  "T002": {
+   "source": "Dot-Product Attention",
+   "target": "点积注意力",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=13 count=8 roles=body,caption,heading,list pages=[1, 4, 5]",
+   "status": "approved"
+  },
+  "T003": {
+   "source": "Multi-Head Attention",
+   "target": "多头注意力",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=13 count=8 roles=body,caption,heading pages=[1, 2, 3, 4, 5]",
+   "status": "approved"
+  },
+  "T004": {
+   "source": "Scaled Dot-Product Attention",
+   "target": "缩放点积注意力",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=11 count=6 roles=body,caption,heading,list pages=[1, 4, 5]",
+   "status": "approved"
+  },
+  "T005": {
+   "source": "Positional Encoding",
+   "target": "位置编码",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=9 count=7 roles=body,heading pages=[6, 8, 9]",
+   "status": "approved"
+  },
+  "T006": {
+   "source": "English constituency",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=9 count=4 roles=body,caption,heading pages=[1, 9, 10]",
+   "status": "proposed"
+  },
+  "T007": {
+   "source": "English constituency parsing",
+   "target": "英语成分句法分析",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=9 count=4 roles=body,caption,heading pages=[1, 9, 10]",
+   "status": "approved"
+  },
+  "T008": {
+   "source": "sequence transduction",
+   "target": "序列转换",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=8 count=6 roles=body pages=[1, 2, 5, 6, 10]",
+   "status": "approved"
+  },
+  "T009": {
+   "source": "machine translation",
+   "target": "机器翻译",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=7 count=3 roles=body,heading pages=[1, 2, 8]",
+   "status": "approved"
+  },
+  "T010": {
+   "source": "attention function",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=4 count=4 roles=body,footnote pages=[3, 4]",
+   "status": "proposed"
+  },
+  "T011": {
+   "source": "linear transformation",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=4 count=4 roles=body pages=[5]",
+   "status": "proposed"
+  },
+  "T012": {
+   "source": "sequential operations",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=4 count=3 roles=body,caption pages=[6]",
+   "status": "proposed"
+  },
+  "T013": {
+   "source": "convolutional neural networks",
+   "target": "卷积神经网络",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "NLP",
+   "note": "weight=4 count=2 roles=body pages=[1, 2]",
+   "status": "approved"
+  },
+  "T014": {
+   "source": "encoder self-attention",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=4 count=2 roles=caption pages=[13, 15]",
+   "status": "proposed"
+  },
+  "T015": {
+   "source": "including ensembles",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=4 count=2 roles=body pages=[1, 8]",
+   "status": "proposed"
+  },
+  "T016": {
+   "source": "additive attention",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body pages=[4]",
+   "status": "proposed"
+  },
+  "T017": {
+   "source": "beam size",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body pages=[8, 9, 10]",
+   "status": "proposed"
+  },
+  "T018": {
+   "source": "compatibility function",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body pages=[4, 9]",
+   "status": "proposed"
+  },
+  "T019": {
+   "source": "input sequence",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body,list pages=[2, 5, 6]",
+   "status": "proposed"
+  },
+  "T020": {
+   "source": "long-range dependencies",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body pages=[6]",
+   "status": "proposed"
+  },
+  "T021": {
+   "source": "self-attention layer",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body,list pages=[5, 6]",
+   "status": "proposed"
+  },
+  "T022": {
+   "source": "softmax function",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=3 roles=body pages=[4, 5]",
+   "status": "proposed"
+  },
+  "T023": {
+   "source": "byte-pair encoding",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=2 roles=body,caption pages=[7, 9]",
+   "status": "proposed"
+  },
+  "T024": {
+   "source": "kernel size",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=2 roles=body,caption pages=[5, 6]",
+   "status": "proposed"
+  },
+  "T025": {
+   "source": "translation quality",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=3 count=2 roles=body,caption pages=[2, 8]",
+   "status": "proposed"
+  },
+  "T026": {
+   "source": "Label Smoothing",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[8]",
+   "status": "proposed"
+  },
+  "T027": {
+   "source": "computational complexity",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[6]",
+   "status": "proposed"
+  },
+  "T028": {
+   "source": "encoder-decoder architectures",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[2, 10]",
+   "status": "proposed"
+  },
+  "T029": {
+   "source": "encoder-decoder attention",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=list pages=[5]",
+   "status": "proposed"
+  },
+  "T030": {
+   "source": "layer normalization",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[3]",
+   "status": "proposed"
+  },
+  "T031": {
+   "source": "learned positional",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[6, 9]",
+   "status": "proposed"
+  },
+  "T032": {
+   "source": "learned positional embeddings",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[6, 9]",
+   "status": "proposed"
+  },
+  "T033": {
+   "source": "operations required",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[2, 6]",
+   "status": "proposed"
+  },
+  "T034": {
+   "source": "previously published",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[8]",
+   "status": "proposed"
+  },
+  "T035": {
+   "source": "relying entirely",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[2]",
+   "status": "proposed"
+  },
+  "T036": {
+   "source": "residual connections",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[3]",
+   "status": "proposed"
+  },
+  "T037": {
+   "source": "sentence representations",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[2, 6]",
+   "status": "proposed"
+  },
+  "T038": {
+   "source": "sequential computation",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[2]",
+   "status": "proposed"
+  },
+  "T039": {
+   "source": "single attention",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[4, 5]",
+   "status": "proposed"
+  },
+  "T040": {
+   "source": "single-head attention",
+   "target": "",
+   "abbr": "",
+   "pos": "noun",
+   "domain": "",
+   "note": "weight=2 count=2 roles=body pages=[5, 9]",
+   "status": "proposed"
+  }
+ },
+ "consistency": {
+  "T001": {
+   "source": "attention mechanism",
+   "target": "注意力机制",
+   "status": "approved",
+   "n_target": 2,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T002": {
+   "source": "Dot-Product Attention",
+   "target": "点积注意力",
+   "status": "approved",
+   "n_target": 0,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T003": {
+   "source": "Multi-Head Attention",
+   "target": "多头注意力",
+   "status": "approved",
+   "n_target": 0,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T004": {
+   "source": "Scaled Dot-Product Attention",
+   "target": "缩放点积注意力",
+   "status": "approved",
+   "n_target": 0,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T005": {
+   "source": "Positional Encoding",
+   "target": "位置编码",
+   "status": "approved",
+   "n_target": 0,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T007": {
+   "source": "English constituency parsing",
+   "target": "英语成分句法分析",
+   "status": "approved",
+   "n_target": 1,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T008": {
+   "source": "sequence transduction",
+   "target": "序列转换",
+   "status": "approved",
+   "n_target": 1,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T009": {
+   "source": "machine translation",
+   "target": "机器翻译",
+   "status": "approved",
+   "n_target": 1,
+   "n_source_leak": 0,
+   "consistent": true
+  },
+  "T013": {
+   "source": "convolutional neural networks",
+   "target": "卷积神经网络",
+   "status": "approved",
+   "n_target": 1,
+   "n_source_leak": 0,
+   "consistent": true
+  }
+ },
+ "consistency_rate": 1.0
+}

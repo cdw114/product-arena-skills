@@ -1,0 +1,261 @@
+{
+  "diff": {
+    "changed": true,
+    "n_edits": 25,
+    "edits": [
+      {
+        "op": "replace",
+        "before": "言\n\n深度学习方法在诸多领域取得了突破[3]。Transformer 架构摒弃了循",
+        "after": "言\n\n深度学习方法在诸多领域取得了突破[1]。Transformer 架构摒弃了循"
+      },
+      {
+        "op": "replace",
+        "before": "ansformer 架构摒弃了循环结构[1]，并已成为主流骨架。许多后续工作对其进",
+        "after": "ansformer 架构摒弃了循环结构[2]，并已成为主流骨架。许多后续工作对其进"
+      },
+      {
+        "op": "replace",
+        "before": "为主流骨架。许多后续工作对其进行了扩展[2,4]。\n\n近年来，大规模预训练模型[5",
+        "after": "为主流骨架。许多后续工作对其进行了扩展[3,4]。\n\n近年来，大规模预训练模型[2"
+      },
+      {
+        "op": "replace",
+        "before": "2,4]。\n\n近年来，大规模预训练模型[5] 引起了广泛关注。图注中的引用如图 1",
+        "after": "3,4]。\n\n近年来，大规模预训练模型[2] 引起了广泛关注。图注中的引用如图 1"
+      },
+      {
+        "op": "replace",
+        "before": "。图注中的引用如图 1 所示（数据来源[2]）。\n\n图 1 示意图（引自[1]）\n",
+        "after": "。图注中的引用如图 1 所示（数据来源[3]）。\n\n图 1 示意图（引自[2]）\n"
+      },
+      {
+        "op": "replace",
+        "before": "来源[2]）。\n\n图 1 示意图（引自[1]）\n\n## 方法\n\n我们采用注意力机制",
+        "after": "来源[3]）。\n\n图 1 示意图（引自[2]）\n\n## 方法\n\n我们采用注意力机制"
+      },
+      {
+        "op": "replace",
+        "before": "）\n\n## 方法\n\n我们采用注意力机制[1]。中文文献亦有相关报道[6]。此外，一",
+        "after": "）\n\n## 方法\n\n我们采用注意力机制[2]。中文文献亦有相关报道[5]。此外，一"
+      },
+      {
+        "op": "replace",
+        "before": "注意力机制[1]。中文文献亦有相关报道[6]。此外，一些研究[7] 探讨了效率问题",
+        "after": "注意力机制[2]。中文文献亦有相关报道[5]。此外，一些研究[6] 探讨了效率问题"
+      },
+      {
+        "op": "replace",
+        "before": "文献亦有相关报道[6]。此外，一些研究[7] 探讨了效率问题。\n\n## 参考文献\n",
+        "after": "文献亦有相关报道[5]。此外，一些研究[6] 探讨了效率问题。\n\n## 参考文献\n"
+      },
+      {
+        "op": "insert",
+        "before": "效率问题。\n\n## 参考文献\n\n[1] Vaswani A, Shazeer N",
+        "after": "效率问题。\n\n## 参考文献\n\n[1] LECUN Y, BENGIO Y, HINTON G Deep learning[J]. Nature, 2015, 521(7553): 436-444. DOI: 10.1038/nature14539.\n[2] VASWANI A, SHAZEER N"
+      },
+      {
+        "op": "replace",
+        "before": "率问题。\n\n## 参考文献\n\n[1] Vaswani A, Shazeer N. Attention",
+        "after": "8/nature14539.\n[2] VASWANI A, SHAZEER N A"
+      },
+      {
+        "op": "replace",
+        "before": "文献\n\n[1] Vaswani A, Shazeer N. Attention is All yo",
+        "after": "nature14539.\n[2] VASWANI A, SHAZEER N Attention is All yo"
+      },
+      {
+        "op": "insert",
+        "before": "ion is All you Need[C]. NeurIPS, 2017.\n[",
+        "after": "ion is All you Need[J]. Advances in Neural Information Processing Systems, 2017. DOI: 10.48550/arXiv.1706.03762.\n[3] DEVLIN J, CHANG MW, LEE K, et "
+      },
+      {
+        "op": "replace",
+        "before": "on is All you Need[C]. NeurIPS, 2017.\n[2] Devlin J, Chang M W. BE",
+        "after": "762.\n[3] DEVLIN J, CHANG MW, LEE K, et al BERT: Pre-training"
+      },
+      {
+        "op": "delete",
+        "before": "rIPS, 2017.\n[2] Devlin J, Chang M W. BERT: Pre-training ",
+        "after": "ANG MW, LEE K, et al BERT: Pre-training "
+      },
+      {
+        "op": "replace",
+        "before": "guage Understanding[J]. NAACL, 2019: 4171-4",
+        "after": "guage Understanding[C]// NAACL-HLT. 2019. 41"
+      },
+      {
+        "op": "replace",
+        "before": "erstanding[J]. NAACL, 2019: 4171-4186.\n[3",
+        "after": "rstanding[C]// NAACL-HLT. 2019. 4171-4186. DO"
+      },
+      {
+        "op": "replace",
+        "before": "ding[J]. NAACL, 2019: 4171-4186.\n[3] LeCu",
+        "after": "C]// NAACL-HLT. 2019. 4171-4186. DOI: 10."
+      },
+      {
+        "op": "replace",
+        "before": "CL, 2019: 4171-4186.\n[3] LeCun Y, Bengio Y, Hinton G.",
+        "after": "LT. 2019. 4171-4186. DOI: 10.18653/v1/N19-1423.\n[4] BROWN TB Language M"
+      },
+      {
+        "op": "replace",
+        "before": "4186.\n[3] LeCun Y, Bengio Y, Hinton G. Deep learning[J]. Nature, 2015, 521(7553): 436-444.\n[4] Brown T B, et al. La",
+        "after": "3/v1/N19-1423.\n[4] BROWN TB Language Models ar"
+      },
+      {
+        "op": "delete",
+        "before": "553): 436-444.\n[4] Brown T B, et al. Language Models are",
+        "after": "9-1423.\n[4] BROWN TB Language Models are"
+      },
+      {
+        "op": "replace",
+        "before": "e Few-Shot Learners[J]. NeurIPS, 2020.\n[5] Vaswani A, Shazeer N. Attention Is All You Need[J]. arXiv preprint arXiv:1706.03762, 2017.\n[6] 张英, 李明. 基于注意力机制的中文",
+        "after": "e Few-Shot Learners[Z]. 2020.\n[5] 张英, 李明 基于注意力机制的中文文"
+      },
+      {
+        "op": "delete",
+        "before": "62, 2017.\n[6] 张英, 李明. 基于注意力机制的中文文本分类研究[J]",
+        "after": "Z]. 2020.\n[5] 张英, 李明 基于注意力机制的中文文本分类研究[J]"
+      },
+      {
+        "op": "replace",
+        "before": "0, 43(5): 888-899.\n[7] Unknown Author. No",
+        "after": "0, 43(5): 888-899.\n[6] Unknown Author. No"
+      },
+      {
+        "op": "replace",
+        "before": "nal of Nothing, 2099.\n",
+        "after": "nal of Nothing, 2099  [⚠ 未在文献库中找到对应条目，需人工核验]\n"
+      }
+    ]
+  },
+  "marker_edits": [
+    {
+      "cid": "C009",
+      "before": "[7]",
+      "after": "[6]",
+      "ref_ids": [
+        "U007"
+      ],
+      "numbers": [
+        6
+      ]
+    },
+    {
+      "cid": "C008",
+      "before": "[6]",
+      "after": "[5]",
+      "ref_ids": [
+        "R005"
+      ],
+      "numbers": [
+        5
+      ]
+    },
+    {
+      "cid": "C007",
+      "before": "[1]",
+      "after": "[2]",
+      "ref_ids": [
+        "R001"
+      ],
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "cid": "C006",
+      "before": "[1]",
+      "after": "[2]",
+      "ref_ids": [
+        "R001"
+      ],
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "cid": "C005",
+      "before": "[2]",
+      "after": "[3]",
+      "ref_ids": [
+        "R002"
+      ],
+      "numbers": [
+        3
+      ]
+    },
+    {
+      "cid": "C004",
+      "before": "[5]",
+      "after": "[2]",
+      "ref_ids": [
+        "R001"
+      ],
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "cid": "C003",
+      "before": "[2,4]",
+      "after": "[3,4]",
+      "ref_ids": [
+        "R002",
+        "R004"
+      ],
+      "numbers": [
+        3,
+        4
+      ]
+    },
+    {
+      "cid": "C002",
+      "before": "[1]",
+      "after": "[2]",
+      "ref_ids": [
+        "R001"
+      ],
+      "numbers": [
+        2
+      ]
+    },
+    {
+      "cid": "C001",
+      "before": "[3]",
+      "after": "[1]",
+      "ref_ids": [
+        "R003"
+      ],
+      "numbers": [
+        1
+      ]
+    }
+  ],
+  "merges": [
+    {
+      "canonical": "R004",
+      "merged": [
+        "R006"
+      ],
+      "basis": [
+        {
+          "merged": "R006",
+          "signals": {
+            "title_exact": 1,
+            "authors_overlap": 1.0,
+            "authors_same_first": 1,
+            "year_same": 1
+          },
+          "score": 5.5,
+          "title": "Language Models are Few-Shot Learners",
+          "year": "2020",
+          "doi": "",
+          "type": "other",
+          "source_key": "brown2020arxiv"
+        }
+      ]
+    }
+  ]
+}

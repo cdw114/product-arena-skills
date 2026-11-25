@@ -1,0 +1,88 @@
+- id: A1
+  text: The dominant sequence transduction models are based on complex recurrent or convolutional neural networks.
+  claim_type: observation
+  subject: dominant sequence transduction models
+  predicate: "are based on"
+  object: recurrent or convolutional networks
+  quote: "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder."
+  relation: direct
+  confidence: high
+  narrative_role: background
+- id: A2
+  text: The best performing models also connect the encoder and decoder through an attention mechanism.
+  claim_type: observation
+  subject: best performing models
+  predicate: connect
+  object: encoder and decoder
+  qualifiers: {condition: "through an attention mechanism"}
+  quote: "The best performing models also connect the encoder and decoder through an attention mechanism."
+  relation: direct
+  confidence: high
+  narrative_role: background
+- id: A3
+  text: The authors propose the Transformer, a network architecture based solely on attention mechanisms.
+  claim_type: method
+  subject: we
+  predicate: propose
+  object: Transformer
+  quote: "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
+  relation: direct
+  confidence: high
+  narrative_role: objective
+- id: A4
+  text: The Transformer dispenses with recurrence and convolutions entirely.
+  claim_type: method
+  subject: Transformer
+  predicate: "dispenses with"
+  object: recurrence and convolutions
+  quote: "the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
+  relation: direct
+  confidence: high
+  narrative_role: method
+- id: A5
+  text: Experiments on two machine translation tasks show these models to be superior in quality.
+  claim_type: result
+  subject: these models
+  predicate: "are superior"
+  object: quality
+  qualifiers: {population: "two machine translation tasks"}
+  quote: "Experiments on two machine translation tasks show these models to be superior in quality"
+  relation: direct
+  confidence: high
+  narrative_role: result
+- id: A6
+  text: These models require significantly less time to train.
+  claim_type: result
+  subject: these models
+  predicate: "require"
+  object: less time to train
+  qualifiers: {comparator: "significantly"}
+  quote: "show these models to be superior in quality while being more parallelizable and requiring significantly less time to train"
+  relation: direct
+  confidence: high
+  narrative_role: result
+- id: A7
+  text: These models are more parallelizable than the recurrent baselines.
+  claim_type: interpretation
+  subject: these models
+  predicate: "are more parallelizable"
+  object: recurrent baselines
+  relation: inferred
+  confidence: medium
+  narrative_role: conclusion
+  inference_chain:
+    - from: [A4, A6]
+      to: this
+      rationale: the source states the models are more parallelizable; compared with the recurrent models named in A1 this is a comparison, so the claim is one reading step beyond the quote.
+  quote: "while being more parallelizable and requiring significantly less time to train"
+- id: A8
+  text: The model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task.
+  claim_type: result
+  subject: our model
+  predicate: achieves
+  object: "28.4 BLEU"
+  qualifiers: {population: "WMT 2014 English-to-German", metric: "BLEU", magnitude: 28.4, unit: "BLEU"}
+  quote: "Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task"
+  relation: direct
+  confidence: high
+  narrative_role: result

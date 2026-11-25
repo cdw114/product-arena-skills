@@ -1,0 +1,16 @@
+{
+  "_doc": "Common Chinese surnames: pinyin (lowercase, no tones) → CJK. Used only as a *hint* for author matching between a CJK-name record and a romanised-name record; never as proof. Extend freely.",
+  "zhang": "张", "wang": "王", "li": "李", "zhao": "赵", "chen": "陈", "liu": "刘", "yang": "杨", "huang": "黄", "wu": "吴",
+  "zhou": "周", "xu": "徐", "sun": "孙", "ma": "马", "zhu": "朱", "hu": "胡", "guo": "郭", "he": "何", "gao": "高", "lin": "林",
+  "luo": "罗", "zheng": "郑", "liang": "梁", "xie": "谢", "song": "宋", "tang": "唐", "han": "韩", "ceng": "曾", "zeng": "曾", "deng": "邓",
+  "feng": "冯", "cao": "曹", "peng": "彭", "xiao": "肖", "xie_": "萧", "tian": "田", "dong": "董", "yuan": "袁", "pan": "潘", "yu": "于",
+  "jiang": "蒋", "cai": "蔡", "cai_": "蔡", "du": "杜", "ye": "叶", "cheng": "程", "su": "苏", "wei": "魏", "lu": "吕", "ding": "丁",
+  "ren": "任", "shen": "沈", "yao": "姚", "han_": "韩", "jin": "金", "qin": "秦", "tan": "谭", "qiu": "邱", "jia": "贾", "gu": "顾",
+  "fan": "范", "meng": "孟", "lei": "雷", "hou": "侯", "bai": "白", "long": "龙", "wan": "万", "duan": "段", "cao_": "曹", "qian": "钱",
+  "yan": "严", "wu_": "武", "dai": "戴", "mo": "莫", "kong": "孔", "xiang": "向", "shi": "石", "cui": "崔", "kang": "康", "miao": "苗",
+  "zhong": "钟", "wang_": "汪", "gong": "龚", "shao": "邵", "lu_": "卢", "fang": "方", "dai_": "代", "qiu_": "仇", "zhan": "詹", "nie": "聂",
+  "xiong": "熊", "jie": "解", "zou": "邹", "yin": "尹", "shen_": "申", "dou": "窦", "ge": "葛", "zhu_": "诸", "pan_": "盘", "ling": "凌",
+  "liu_": "柳", "hsu": "徐", "tsai": "蔡", "chang": "张", "chao": "赵", "chien": "钱", "chow": "周", "chu": "朱", "ho": "何",
+  "hung": "洪", "kuo": "郭", "liao": "廖", "lin_": "林", "szu": "司", "teng": "滕", "tseng": "曾", "wang2": "汪", "wu2": "吳",
+  "yang_": "楊", "yu_": "俞", "yueh": "岳"
+}

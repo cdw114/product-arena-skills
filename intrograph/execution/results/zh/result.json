@@ -1,0 +1,521 @@
+{
+  "case_id": "zh-example-001",
+  "skill": {
+    "name": "intrograph",
+    "version": "1.0.0"
+  },
+  "generated_at": "2026-11-26T01:02:42+08:00",
+  "status": {
+    "state": "success",
+    "gate": "pass",
+    "reason": "18 项确定性核对全部通过（0 error，0 warning）。",
+    "limits": [],
+    "notes": []
+  },
+  "task": {
+    "text": "为这篇中文论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分，中文，数字制引用。",
+    "intent": {
+      "intents": [
+        "draft",
+        "citations"
+      ],
+      "mode": "draft",
+      "has_existing_intro": true,
+      "draft_present": false
+    },
+    "lang": "zh",
+    "citation_style": "numeric",
+    "genre": "",
+    "length_limit": null
+  },
+  "inputs": {
+    "case_json": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh\\case.json",
+    "case_json_problems": [],
+    "output_contract": {
+      "required": [
+        "case_id",
+        "status",
+        "result",
+        "introduction_related_work",
+        "related_work",
+        "research_gap",
+        "contributions",
+        "citation_map",
+        "references_used",
+        "evidence",
+        "uncertainty",
+        "changes"
+      ]
+    },
+    "output_contract_fields": [
+      "case_id",
+      "status",
+      "result",
+      "introduction_related_work",
+      "related_work",
+      "research_gap",
+      "contributions",
+      "citation_map",
+      "references_used",
+      "evidence",
+      "uncertainty",
+      "changes"
+    ],
+    "manuscript": {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh\\manuscript.md",
+      "chars": 564,
+      "words": 57,
+      "lang": "zh",
+      "title": "谱嵌入覆盖选择：低标注分子性质预测的预训练语料策略",
+      "section_titles": [
+        "谱嵌入覆盖选择：低标注分子性质预测的预训练语料策略",
+        "引言",
+        "相关工作",
+        "方法",
+        "实验",
+        "结论"
+      ],
+      "intro_sections": [
+        "引言",
+        "相关工作"
+      ],
+      "reflist_n": 2
+    },
+    "library": {
+      "n": 2,
+      "sources": [
+        {
+          "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh\\library.bib",
+          "format": "bibtex",
+          "n": 2
+        }
+      ],
+      "fallback": "none"
+    },
+    "contract_filling": {
+      "aliased": [],
+      "unfilled": []
+    }
+  },
+  "result": {
+    "introduction_related_work_file": "introduction_related_work.md",
+    "related_work_table_file": "related_work_table.md",
+    "contribution_table_file": "contribution_table.md",
+    "parts": {
+      "background": {
+        "present": true,
+        "chars": 241,
+        "paragraphs": 2,
+        "text": "## 1 研究背景\n\n分子性质预测是虚拟筛选与毒性评估的基础环节，真正的限制在标注一侧：一次可靠测量往往需要数周湿实验，多数实际任务只能提供数百条标注。图卷积网络[1]把分子的局部拓扑编码为可学习表示，这一表示空间决定了模型能拟合什么，却决定不了需要多少标注。\n\n预训练是缓解标注稀缺的常规做法：先在未标注分子库上做掩码或对比学习，再在下游少量标注上微调。问题在于语料一侧从未被当作决策变量——[2] 把整个未标注分子库视为给定且免费的资源，逐轮扫过全部分子，成本随库规模线性增长。"
+      },
+      "related_work": {
+        "present": true,
+        "chars": 204,
+        "paragraphs": 2,
+        "text": "## 2 相关工作\n\n第一类路线优化表示空间本身。图卷积编码器[1]在固定谱滤波下获得线性可扩展的传播规则，代价是每层只看一跳邻域；这条路线的取舍落在表示能力与感受野上，而不在花多少算力去读语料。\n\n第二类路线优化用哪些分子。按下游标注预算的信息量排序，可比随机预训练提升约 8.6%[2]；相比之下，覆盖度驱动的选择在固定表示空间内给出可证明的界。两者都停在“选哪些”这一层，而把“读多少遍”留给默认设置。"
+      },
+      "gap": {
+        "present": true,
+        "chars": 238,
+        "paragraphs": 2,
+        "text": "## 3 研究空白\n\n两条路线共同留下同一个缺口：覆盖保证只在固定表示空间内成立，无法迁移到仍在学习中的表示[1]，而按标注预算排序的做法忽略了预训练语料本身的成本[2]。真正决定低标注预训练是否可行的量是预训练成本，已引工作没有一条把它当作优化对象。\n\n本文把未标注分子库当作决策变量：先做谱嵌入、在嵌入上按贪心覆盖度选择，再只在核心集上预训练。因为选择发生在预训练之前，[1] 的覆盖论证第一次可以落在固定空间上；因为预算显式，[2] 报告的规模效应变成可以提前触达的量。"
+      },
+      "contributions": {
+        "present": true,
+        "chars": 206,
+        "paragraphs": 3,
+        "text": "## 4 主要贡献\n\n- **选择先于预训练的处理流程。** 在谱嵌入上按贪心覆盖度选核心集，只在该核心集上做掩码预训练，语料成本从固定开销变成可调预算（第 3 节，图 1）。\n- **固定标注预算下的收益。** 每数据集 100 条标注时，平均绝对误差下降 8.2%，预训练成本下降 41.5%（表 1）。\n\n本文的主张限于未标注分子库充足、标注预算很小的分子性质预测；覆盖度打分没有理论保证，这一点不作声称。"
+      }
+    },
+    "part_order": [
+      "background",
+      "related_work",
+      "gap",
+      "contributions"
+    ],
+    "chars": 889,
+    "n_citations": 6,
+    "n_distinct_refs": 2,
+    "n_groups": 1,
+    "n_gaps": 1,
+    "n_contributions": 2,
+    "reference_numbering": {
+      "R0001": 1,
+      "R0002": 2
+    }
+  },
+  "introduction_related_work": "## 1 研究背景\n\n分子性质预测是虚拟筛选与毒性评估的基础环节，真正的限制在标注一侧：一次可靠测量往往需要数周湿实验，多数实际任务只能提供数百条标注。图卷积网络[1]把分子的局部拓扑编码为可学习表示，这一表示空间决定了模型能拟合什么，却决定不了需要多少标注。\n\n预训练是缓解标注稀缺的常规做法：先在未标注分子库上做掩码或对比学习，再在下游少量标注上微调。问题在于语料一侧从未被当作决策变量——[2] 把整个未标注分子库视为给定且免费的资源，逐轮扫过全部分子，成本随库规模线性增长。\n\n## 2 相关工作\n\n第一类路线优化表示空间本身。图卷积编码器[1]在固定谱滤波下获得线性可扩展的传播规则，代价是每层只看一跳邻域；这条路线的取舍落在表示能力与感受野上，而不在花多少算力去读语料。\n\n第二类路线优化用哪些分子。按下游标注预算的信息量排序，可比随机预训练提升约 8.6%[2]；相比之下，覆盖度驱动的选择在固定表示空间内给出可证明的界。两者都停在“选哪些”这一层，而把“读多少遍”留给默认设置。\n\n## 3 研究空白\n\n两条路线共同留下同一个缺口：覆盖保证只在固定表示空间内成立，无法迁移到仍在学习中的表示[1]，而按标注预算排序的做法忽略了预训练语料本身的成本[2]。真正决定低标注预训练是否可行的量是预训练成本，已引工作没有一条把它当作优化对象。\n\n本文把未标注分子库当作决策变量：先做谱嵌入、在嵌入上按贪心覆盖度选择，再只在核心集上预训练。因为选择发生在预训练之前，[1] 的覆盖论证第一次可以落在固定空间上；因为预算显式，[2] 报告的规模效应变成可以提前触达的量。\n\n## 4 主要贡献\n\n- **选择先于预训练的处理流程。** 在谱嵌入上按贪心覆盖度选核心集，只在该核心集上做掩码预训练，语料成本从固定开销变成可调预算（第 3 节，图 1）。\n- **固定标注预算下的收益。** 每数据集 100 条标注时，平均绝对误差下降 8.2%，预训练成本下降 41.5%（表 1）。\n\n本文的主张限于未标注分子库充足、标注预算很小的分子性质预测；覆盖度打分没有理论保证，这一点不作声称。\n",
+  "background": "## 1 研究背景\n\n分子性质预测是虚拟筛选与毒性评估的基础环节，真正的限制在标注一侧：一次可靠测量往往需要数周湿实验，多数实际任务只能提供数百条标注。图卷积网络[1]把分子的局部拓扑编码为可学习表示，这一表示空间决定了模型能拟合什么，却决定不了需要多少标注。\n\n预训练是缓解标注稀缺的常规做法：先在未标注分子库上做掩码或对比学习，再在下游少量标注上微调。问题在于语料一侧从未被当作决策变量——[2] 把整个未标注分子库视为给定且免费的资源，逐轮扫过全部分子，成本随库规模线性增长。",
+  "related_work": {
+    "text": "## 2 相关工作\n\n第一类路线优化表示空间本身。图卷积编码器[1]在固定谱滤波下获得线性可扩展的传播规则，代价是每层只看一跳邻域；这条路线的取舍落在表示能力与感受野上，而不在花多少算力去读语料。\n\n第二类路线优化用哪些分子。按下游标注预算的信息量排序，可比随机预训练提升约 8.6%[2]；相比之下，覆盖度驱动的选择在固定表示空间内给出可证明的界。两者都停在“选哪些”这一层，而把“读多少遍”留给默认设置。",
+    "groups": [
+      {
+        "group_id": "G1",
+        "label": "按什么信号去选语料",
+        "dimension": "选择信号，以及它优化的量",
+        "ref_ids": [
+          "R0001",
+          "R0002"
+        ],
+        "comparison": {
+          "dimension": "选择信号 vs 它优化的量",
+          "tradeoff": "一篇优化固定空间内的覆盖，另一篇优化标注预算的信息量，两篇都没有把预训练成本作为优化对象。",
+          "best_for": "预训练算力充裕、只缺标注的场景"
+        }
+      }
+    ],
+    "table_file": "related_work_table.md"
+  },
+  "research_gap": {
+    "text": "## 3 研究空白\n\n两条路线共同留下同一个缺口：覆盖保证只在固定表示空间内成立，无法迁移到仍在学习中的表示[1]，而按标注预算排序的做法忽略了预训练语料本身的成本[2]。真正决定低标注预训练是否可行的量是预训练成本，已引工作没有一条把它当作优化对象。\n\n本文把未标注分子库当作决策变量：先做谱嵌入、在嵌入上按贪心覆盖度选择，再只在核心集上预训练。因为选择发生在预训练之前，[1] 的覆盖论证第一次可以落在固定空间上；因为预算显式，[2] 报告的规模效应变成可以提前触达的量。",
+    "gaps": [
+      {
+        "gap_id": "PG1",
+        "statement": "已引的选择规则都没有把预训练语料成本当作优化对象。",
+        "derived_from": [
+          {
+            "ref_id": "R0001",
+            "limitation_kind": "method_gap",
+            "evidence": {
+              "kind": "quote",
+              "text": "覆盖保证，无法迁移到仍在学习中的表示"
+            }
+          },
+          {
+            "ref_id": "R0002",
+            "limitation_kind": "shared_limitation",
+            "evidence": {
+              "kind": "quote",
+              "text": "忽略了预训练语料本身的成本"
+            }
+          }
+        ],
+        "how_filled": {
+          "contribution_ids": [
+            "C1",
+            "C2"
+          ],
+          "mechanism": "选择先于预训练，把语料成本变成显式预算"
+        },
+        "confidence": "high"
+      }
+    ]
+  },
+  "contributions": {
+    "text": "## 4 主要贡献\n\n- **选择先于预训练的处理流程。** 在谱嵌入上按贪心覆盖度选核心集，只在该核心集上做掩码预训练，语料成本从固定开销变成可调预算（第 3 节，图 1）。\n- **固定标注预算下的收益。** 每数据集 100 条标注时，平均绝对误差下降 8.2%，预训练成本下降 41.5%（表 1）。\n\n本文的主张限于未标注分子库充足、标注预算很小的分子性质预测；覆盖度打分没有理论保证，这一点不作声称。",
+    "items": [
+      {
+        "contribution_id": "C1",
+        "text": "选择先于预训练的处理流程：在谱嵌入上按贪心覆盖度选核心集，只在该核心集上预训练。",
+        "kind": "method",
+        "evidence": [
+          {
+            "locator_type": "section",
+            "locator": "3",
+            "claim_in_source": "再在嵌入上做贪心覆盖度选择"
+          },
+          {
+            "locator_type": "figure",
+            "locator": "图 1",
+            "claim_in_source": "图 1 给出整体流程"
+          }
+        ],
+        "scope": {
+          "stated_limits": "覆盖度打分没有理论保证",
+          "not_claimed": "选择规则的最优性"
+        }
+      },
+      {
+        "contribution_id": "C2",
+        "text": "固定标注预算下的收益：平均绝对误差下降 8.2%，预训练成本下降 41.5%。",
+        "kind": "experiment",
+        "evidence": [
+          {
+            "locator_type": "table",
+            "locator": "表 1",
+            "claim_in_source": "表 1 给出平均绝对误差"
+          },
+          {
+            "locator_type": "result",
+            "locator": "摘要",
+            "claim_in_source": "平均绝对误差下降 8.2%，预训练成本下降 41.5%"
+          }
+        ],
+        "scope": {
+          "stated_limits": "只在三个数据集与 100 条标注设置下验证",
+          "not_claimed": "任意蛋白家族的泛化"
+        }
+      }
+    ],
+    "table_file": "contribution_table.md"
+  },
+  "citation_map": [
+    {
+      "part": "background",
+      "para": 0,
+      "sentence": "图卷积网络[1]把分子的局部拓扑编码为可学习表示，这一表示空间决定了模型能拟合什么，却决定不了需要多少标注。",
+      "markers": [
+        "[1]"
+      ],
+      "ref_ids": [
+        "R0001"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "background",
+      "para": 1,
+      "sentence": "问题在于语料一侧从未被当作决策变量——[2] 把整个未标注分子库视为给定且免费的资源，逐轮扫过全部分子，成本随库规模线性增长。",
+      "markers": [
+        "[2]"
+      ],
+      "ref_ids": [
+        "R0002"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 0,
+      "sentence": "图卷积编码器[1]在固定谱滤波下获得线性可扩展的传播规则，代价是每层只看一跳邻域；这条路线的取舍落在表示能力与感受野上，而不在花多少算力去读语料。",
+      "markers": [
+        "[1]"
+      ],
+      "ref_ids": [
+        "R0001"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 1,
+      "sentence": "按下游标注预算的信息量排序，可比随机预训练提升约 8.6%[2]；相比之下，覆盖度驱动的选择在固定表示空间内给出可证明的界。",
+      "markers": [
+        "[2]"
+      ],
+      "ref_ids": [
+        "R0002"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 0,
+      "sentence": "两条路线共同留下同一个缺口：覆盖保证只在固定表示空间内成立，无法迁移到仍在学习中的表示[1]，而按标注预算排序的做法忽略了预训练语料本身的成本[2]。",
+      "markers": [
+        "[1]",
+        "[2]"
+      ],
+      "ref_ids": [
+        "R0001",
+        "R0002"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 1,
+      "sentence": "因为选择发生在预训练之前，[1] 的覆盖论证第一次可以落在固定空间上；因为预算显式，[2] 报告的规模效应变成可以提前触达的量。",
+      "markers": [
+        "[1]",
+        "[2]"
+      ],
+      "ref_ids": [
+        "R0001",
+        "R0002"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    }
+  ],
+  "contribution_map": [
+    {
+      "contribution_id": "C1",
+      "evidence": [
+        {
+          "locator_type": "section",
+          "locator": "3",
+          "claim_in_source": "再在嵌入上做贪心覆盖度选择"
+        },
+        {
+          "locator_type": "figure",
+          "locator": "图 1",
+          "claim_in_source": "图 1 给出整体流程"
+        }
+      ]
+    },
+    {
+      "contribution_id": "C2",
+      "evidence": [
+        {
+          "locator_type": "table",
+          "locator": "表 1",
+          "claim_in_source": "表 1 给出平均绝对误差"
+        },
+        {
+          "locator_type": "result",
+          "locator": "摘要",
+          "claim_in_source": "平均绝对误差下降 8.2%，预训练成本下降 41.5%"
+        }
+      ]
+    }
+  ],
+  "references_used": [
+    {
+      "ref_id": "R0001",
+      "number": 1,
+      "key": "zhang2020gcn",
+      "title": "基于图卷积的分子表示学习",
+      "authors": [
+        "张三",
+        "李四"
+      ],
+      "year": 2020,
+      "venue": "计算机学报",
+      "doi": "10.11897/SP.J.1016.2020.00001",
+      "type": "journal",
+      "gbt7714": "[1] 张三, 李四. 基于图卷积的分子表示学习[J]. 计算机学报, 2020, 43(3): 1-12. DOI: 10.11897/SP.J.1016.2020.00001.",
+      "ieee": "[1] 张三 and 李四, “基于图卷积的分子表示学习,” 计算机学报, vol. 43, no. 3, pp. 1-12, 2020. doi: 10.11897/SP.J.1016.2020.00001.",
+      "apa7": "张三, & 李四 (2020). 基于图卷积的分子表示学习. 计算机学报, 43(3), 1-12. https://doi.org/10.11897/SP.J.1016.2020.00001"
+    },
+    {
+      "ref_id": "R0002",
+      "number": 2,
+      "key": "wang2024coreset",
+      "title": "分子预训练的核心集选择研究",
+      "authors": [
+        "王五"
+      ],
+      "year": 2024,
+      "venue": "软件学报",
+      "doi": "10.13328/j.cnki.jos.2024.00088",
+      "type": "journal",
+      "gbt7714": "[2] 王五. 分子预训练的核心集选择研究[J]. 软件学报, 2024, 35(2): 88-101. DOI: 10.13328/j.cnki.jos.2024.00088.",
+      "ieee": "[2] 王五, “分子预训练的核心集选择研究,” 软件学报, vol. 35, no. 2, pp. 88-101, 2024. doi: 10.13328/j.cnki.jos.2024.00088.",
+      "apa7": "王五 (2024). 分子预训练的核心集选择研究. 软件学报, 35(2), 88-101. https://doi.org/10.13328/j.cnki.jos.2024.00088"
+    }
+  ],
+  "evidence": {
+    "group_ledger": [
+      {
+        "group_id": "G1",
+        "dimension": "选择信号，以及它优化的量",
+        "works": [
+          "R0001",
+          "R0002"
+        ]
+      }
+    ],
+    "gap_provenance": [
+      {
+        "gap_id": "PG1",
+        "from": [
+          "R0001",
+          "R0002"
+        ],
+        "limitation_kinds": [
+          "method_gap",
+          "shared_limitation"
+        ],
+        "evidence_kinds": [
+          "quote",
+          "quote"
+        ]
+      }
+    ],
+    "manuscript_locators": {
+      "figures": [
+        "Fig. 1"
+      ],
+      "tables": [
+        "Table 1",
+        "Table 2"
+      ],
+      "sections": [
+        "谱嵌入覆盖选择：低标注分子性质预测的预训练语料策略",
+        "引言",
+        "相关工作",
+        "方法",
+        "实验",
+        "结论"
+      ],
+      "n_numbers_indexed": 2
+    }
+  },
+  "audit": {
+    "gate": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "report_file": "audit_report.md",
+    "summary_file": "audit_report.json",
+    "rules_failed": []
+  },
+  "uncertainty": {
+    "unresolved_citations": [],
+    "ambiguous_citations": [],
+    "unchecked_quotes": [],
+    "author_judgments": [],
+    "notes": [
+      "[01:02:42] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\zh work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_zh",
+      "[01:02:42] case_id=zh-example-001 task='为这篇中文论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分，中文，数字制引用。'",
+      "[01:02:42] audit gate=pass errors=0 warnings=0"
+    ],
+    "not_done": []
+  },
+  "changes": [
+    {
+      "step": "plan",
+      "what": "解析输入、建文献库与稿件索引、写脚手架与账本模板"
+    },
+    {
+      "step": "draft",
+      "what": "按账本写 background / related_work / gap / contributions 四部分"
+    },
+    {
+      "step": "audit",
+      "what": "运行 18 项确定性核对，逐条给出错误与警告"
+    },
+    {
+      "step": "finalize",
+      "what": "渲染成稿、比较表、贡献表、引用表与 result.json"
+    }
+  ],
+  "sources": [
+    {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh\\manuscript.md",
+      "sha256": "a0b87612ef885d9f3929a77224da8978e72f0519ea794569e16d3094fe9d251f",
+      "kind": "input"
+    },
+    {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh\\library.bib",
+      "sha256": "59aa9a804251b7d9b4a706b6a82ce46a348d3ecf0b252493b7bfde2059572ccd",
+      "kind": "input"
+    }
+  ],
+  "artifacts": {
+    "introduction_related_work": "introduction_related_work.md",
+    "related_work_table": "related_work_table.md",
+    "contribution_table": "contribution_table.md",
+    "audit_report_md": "audit_report.md",
+    "audit_report_json": "audit_report.json",
+    "citation_map": "citation_map.json",
+    "refs_cited_bib": "refs_cited.bib",
+    "refs_cited_txt": "refs_cited.txt",
+    "refs_cited_style": "gbt7714"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "skill_version": "1.0.0",
+    "now_year": 2026
+  },
+  "log": [
+    "[01:02:42] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_zh out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\zh work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_zh",
+    "[01:02:42] case_id=zh-example-001 task='为这篇中文论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分，中文，数字制引用。'",
+    "[01:02:42] audit gate=pass errors=0 warnings=0"
+  ]
+}

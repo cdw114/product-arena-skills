@@ -1,0 +1,574 @@
+{
+  "case_id": "synthetic-01",
+  "generated_at": "2026-11-26T00:02:50+08:00",
+  "status": "partial",
+  "inputs": {
+    "manuscript": "D:\\DSH default\\writing04-skill\\submission\\examples\\input\\manuscript.md",
+    "libraries": [
+      {
+        "path": "D:\\DSH default\\writing04-skill\\submission\\examples\\input\\library.bib",
+        "format": "bibtex",
+        "n": 6
+      }
+    ],
+    "task_excerpt": "任务：请对稿件进行参考文献整理：对文献库去重并说明合并依据；按首次出现顺序重排正文编号并同步文末列表；\n转换为 GB/T 7714—2015 格式；核验条目元数据；逐句检查正文论断与所引文献是否对应，并标记证据不足的句子。\n"
+  },
+  "actions": [
+    "renumber",
+    "dedup",
+    "convert:gbt7714",
+    "verify",
+    "consistency"
+  ],
+  "target_style": {
+    "citation": "numeric",
+    "label": "gbt"
+  },
+  "stats": {
+    "citations": 9,
+    "library_in": 7,
+    "library_out": 6,
+    "merged": 1,
+    "review_pairs": 0,
+    "edits": 9,
+    "uncited": 0,
+    "unresolved": 0,
+    "consistency_issues": 0,
+    "verify_errors": 1,
+    "claim_pairs": 10,
+    "claim_pending": 0
+  },
+  "log": [
+    "[2026-11-26T00:02:50+08:00] case.json: D:\\DSH default\\writing04-skill\\submission\\examples\\input\\case.json",
+    "[2026-11-26T00:02:50+08:00] task: D:\\DSH default\\writing04-skill\\submission\\examples\\input\\task.md",
+    "[2026-11-26T00:02:50+08:00] manuscript: 818 chars, sections=3, citations=9, style=numeric-bracket",
+    "[2026-11-26T00:02:50+08:00] library D:\\DSH default\\writing04-skill\\submission\\examples\\input\\library.bib: 6 entries (bibtex)",
+    "[2026-11-26T00:02:50+08:00] reflist item [7] has no library match → U007 (flagged)",
+    "[2026-11-26T00:02:50+08:00] resolved 10 refs, unresolved 0",
+    "[2026-11-26T00:02:50+08:00] actions=['renumber', 'dedup', 'convert:gbt7714', 'verify', 'consistency'] style=numeric/gbt",
+    "[2026-11-26T00:02:50+08:00] dedup: {'input': 7, 'output': 6, 'merged': 1}",
+    "[2026-11-26T00:02:50+08:00] renumber: 9 marker edits, uncited=0, unresolved=0, issues=0",
+    "[2026-11-26T00:02:50+08:00] convert → gbt7714",
+    "[2026-11-26T00:02:50+08:00] verify: {'n': 6, 'errors': 1, 'warnings': 3, 'verified': 0, 'mismatch': 0, 'unverified': 5}"
+  ],
+  "dedup": {
+    "stats": {
+      "input": 7,
+      "output": 6,
+      "merged": 1
+    },
+    "merge_log": [
+      {
+        "canonical": "R004",
+        "merged": [
+          "R006"
+        ],
+        "basis": [
+          {
+            "merged": "R006",
+            "signals": {
+              "title_exact": 1,
+              "authors_overlap": 1.0,
+              "authors_same_first": 1,
+              "year_same": 1
+            },
+            "score": 5.5,
+            "title": "Language Models are Few-Shot Learners",
+            "year": "2020",
+            "doi": "",
+            "type": "other",
+            "source_key": "brown2020arxiv"
+          }
+        ]
+      }
+    ],
+    "needs_review": []
+  },
+  "renumber": {
+    "order": [
+      "R003",
+      "R001",
+      "R002",
+      "R004",
+      "R005",
+      "U007"
+    ],
+    "numbering": {
+      "R003": 1,
+      "R001": 2,
+      "R002": 3,
+      "R004": 4,
+      "R005": 5,
+      "U007": 6
+    },
+    "edits": [
+      {
+        "cid": "C009",
+        "before": "[7]",
+        "after": "[6]",
+        "ref_ids": [
+          "U007"
+        ],
+        "numbers": [
+          6
+        ]
+      },
+      {
+        "cid": "C008",
+        "before": "[6]",
+        "after": "[5]",
+        "ref_ids": [
+          "R005"
+        ],
+        "numbers": [
+          5
+        ]
+      },
+      {
+        "cid": "C007",
+        "before": "[1]",
+        "after": "[2]",
+        "ref_ids": [
+          "R001"
+        ],
+        "numbers": [
+          2
+        ]
+      },
+      {
+        "cid": "C006",
+        "before": "[1]",
+        "after": "[2]",
+        "ref_ids": [
+          "R001"
+        ],
+        "numbers": [
+          2
+        ]
+      },
+      {
+        "cid": "C005",
+        "before": "[2]",
+        "after": "[3]",
+        "ref_ids": [
+          "R002"
+        ],
+        "numbers": [
+          3
+        ]
+      },
+      {
+        "cid": "C004",
+        "before": "[5]",
+        "after": "[2]",
+        "ref_ids": [
+          "R001"
+        ],
+        "numbers": [
+          2
+        ]
+      },
+      {
+        "cid": "C003",
+        "before": "[2,4]",
+        "after": "[3,4]",
+        "ref_ids": [
+          "R002",
+          "R004"
+        ],
+        "numbers": [
+          3,
+          4
+        ]
+      },
+      {
+        "cid": "C002",
+        "before": "[1]",
+        "after": "[2]",
+        "ref_ids": [
+          "R001"
+        ],
+        "numbers": [
+          2
+        ]
+      },
+      {
+        "cid": "C001",
+        "before": "[3]",
+        "after": "[1]",
+        "ref_ids": [
+          "R003"
+        ],
+        "numbers": [
+          1
+        ]
+      }
+    ],
+    "uncited": [],
+    "unresolved": []
+  },
+  "consistency": {
+    "issues": [],
+    "anchor_positions": {
+      "sentence-end": 4,
+      "mid-sentence": 5,
+      "paragraph-end": 0,
+      "caption": 0,
+      "unknown": 0
+    },
+    "crossrefs_in_captions": [
+      {
+        "text": "数据来源[2]",
+        "numbers": [
+          "2"
+        ]
+      }
+    ],
+    "multi_citation_count": 1,
+    "n_citations": 9
+  },
+  "conversion": {
+    "style": "gbt7714",
+    "items": [
+      {
+        "n": 1,
+        "ref_id": "R005",
+        "text": "[1] 张英, 李明 基于注意力机制的中文文本分类研究[J]. 计算机学报, 2020, 43(5): 888-899."
+      },
+      {
+        "n": 2,
+        "ref_id": "R001",
+        "text": "[2] VASWANI A, SHAZEER N Attention is All you Need[J]. Advances in Neural Information Processing Systems, 2017. DOI: 10.48550/arXiv.1706.03762."
+      },
+      {
+        "n": 3,
+        "ref_id": "R002",
+        "text": "[3] DEVLIN J, CHANG MW, LEE K, et al BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding[C]// NAACL-HLT. 2019. 4171-4186. DOI: 10.18653/v1/N19-1423."
+      },
+      {
+        "n": 4,
+        "ref_id": "R003",
+        "text": "[4] LECUN Y, BENGIO Y, HINTON G Deep learning[J]. Nature, 2015, 521(7553): 436-444. DOI: 10.1038/nature14539."
+      },
+      {
+        "n": 5,
+        "ref_id": "R004",
+        "text": "[5] BROWN TB Language Models are Few-Shot Learners[Z]. 2020."
+      },
+      {
+        "n": 6,
+        "ref_id": "U007",
+        "text": "[6] Unknown Author. Nonexistent Paper on Efficiency[J]. Journal of Nothing, 2099  [⚠ 未在文献库中找到对应条目，需人工核验]"
+      }
+    ],
+    "field_report": [
+      {
+        "ref_id": "R005",
+        "missing": [],
+        "type": "journal-article",
+        "language": "zh"
+      },
+      {
+        "ref_id": "R001",
+        "missing": [
+          "volume/issue",
+          "pages"
+        ],
+        "type": "journal-article",
+        "language": "en"
+      },
+      {
+        "ref_id": "R002",
+        "missing": [],
+        "type": "conference-paper",
+        "language": "en"
+      },
+      {
+        "ref_id": "R003",
+        "missing": [],
+        "type": "journal-article",
+        "language": "en"
+      },
+      {
+        "ref_id": "R004",
+        "missing": [],
+        "type": "other",
+        "language": "en"
+      },
+      {
+        "ref_id": "U007",
+        "missing": [
+          "authors"
+        ],
+        "type": "other",
+        "language": ""
+      }
+    ]
+  },
+  "verification": {
+    "entries": [
+      {
+        "ref_id": "R001",
+        "status": "unverified_offline",
+        "problems": [
+          {
+            "field": "volume/issue",
+            "issue": "missing_field",
+            "severity": "warn"
+          },
+          {
+            "field": "pages",
+            "issue": "missing_field",
+            "severity": "warn"
+          }
+        ],
+        "online": null,
+        "fabrication_risk": "low"
+      },
+      {
+        "ref_id": "R002",
+        "status": "unverified_offline",
+        "problems": [],
+        "online": null,
+        "fabrication_risk": "low"
+      },
+      {
+        "ref_id": "R003",
+        "status": "unverified_offline",
+        "problems": [],
+        "online": null,
+        "fabrication_risk": "low"
+      },
+      {
+        "ref_id": "R004",
+        "status": "unverified_offline",
+        "problems": [],
+        "online": null,
+        "fabrication_risk": "low"
+      },
+      {
+        "ref_id": "R005",
+        "status": "unverified_offline",
+        "problems": [],
+        "online": null,
+        "fabrication_risk": "high"
+      },
+      {
+        "ref_id": "U007",
+        "status": "not_in_library",
+        "problems": [
+          {
+            "field": "authors",
+            "issue": "missing_field",
+            "severity": "warn"
+          },
+          {
+            "field": "entry",
+            "issue": "not_in_library",
+            "detail": "cited in manuscript but absent from the supplied library — possible fabricated or mis-transcribed reference",
+            "severity": "error"
+          }
+        ],
+        "online": null,
+        "fabrication_risk": "low"
+      }
+    ],
+    "summary": {
+      "n": 6,
+      "errors": 1,
+      "warnings": 3,
+      "verified": 0,
+      "mismatch": 0,
+      "unverified": 5
+    }
+  },
+  "claim_citation": {
+    "pairs": [
+      {
+        "cid": "C001",
+        "ref_id": "R003",
+        "claim": "深度学习方法在诸多领域取得了突破[3]。",
+        "anchor": "sentence-end",
+        "ref_title": "Deep learning",
+        "ref_year": "2015",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "LeCun 2015 Nature 综述系统梳理深度学习在各领域的突破，与句中综述性论断一致",
+        "sentence": "深度学习方法在诸多领域取得了突破[3]。"
+      },
+      {
+        "cid": "C002",
+        "ref_id": "R001",
+        "claim": "Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。",
+        "anchor": "mid-sentence",
+        "ref_title": "Attention is All you Need",
+        "ref_year": "2017",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致",
+        "sentence": "Transformer 架构摒弃了循环结构[1]，并已成为主流骨架。"
+      },
+      {
+        "cid": "C003",
+        "ref_id": "R002",
+        "claim": "许多后续工作对其进行了扩展[2,4]。",
+        "anchor": "sentence-end",
+        "ref_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "ref_year": "2019",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "BERT 是对 Transformer 的预训练扩展，属'后续工作扩展'之一",
+        "sentence": "许多后续工作对其进行了扩展[2,4]。"
+      },
+      {
+        "cid": "C003",
+        "ref_id": "R004",
+        "claim": "许多后续工作对其进行了扩展[2,4]。",
+        "anchor": "sentence-end",
+        "ref_title": "Language Models are Few-Shot Learners",
+        "ref_year": "2020",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "GPT-3 是大规模预训练语言模型，与'大规模预训练模型'论断一致",
+        "sentence": "许多后续工作对其进行了扩展[2,4]。"
+      },
+      {
+        "cid": "C004",
+        "ref_id": "R001",
+        "claim": "近年来，大规模预训练模型[5] 引起了广泛关注。",
+        "anchor": "mid-sentence",
+        "ref_title": "Attention is All you Need",
+        "ref_year": "2017",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致",
+        "sentence": "近年来，大规模预训练模型[5] 引起了广泛关注。"
+      },
+      {
+        "cid": "C005",
+        "ref_id": "R002",
+        "claim": "图注中的引用如图 1 所示（数据来源[2]）。",
+        "anchor": "mid-sentence",
+        "ref_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "ref_year": "2019",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "BERT 是对 Transformer 的预训练扩展，属'后续工作扩展'之一",
+        "sentence": "图注中的引用如图 1 所示（数据来源[2]）。"
+      },
+      {
+        "cid": "C006",
+        "ref_id": "R001",
+        "claim": "图 1 示意图（引自[1]）",
+        "anchor": "mid-sentence",
+        "ref_title": "Attention is All you Need",
+        "ref_year": "2017",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致",
+        "sentence": "图 1 示意图（引自[1]）"
+      },
+      {
+        "cid": "C007",
+        "ref_id": "R001",
+        "claim": "我们采用注意力机制[1]。",
+        "anchor": "sentence-end",
+        "ref_title": "Attention is All you Need",
+        "ref_year": "2017",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "Vaswani 2017 提出 Transformer，摒弃循环与卷积，仅用注意力，与'摒弃循环结构'一致",
+        "sentence": "我们采用注意力机制[1]。"
+      },
+      {
+        "cid": "C008",
+        "ref_id": "R005",
+        "claim": "中文文献亦有相关报道[6]。",
+        "anchor": "sentence-end",
+        "ref_title": "基于注意力机制的中文文本分类研究",
+        "ref_year": "2020",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "supports",
+        "basis": "该文研究基于注意力机制的中文文本分类，与'中文文献亦有相关报道'一致",
+        "sentence": "中文文献亦有相关报道[6]。"
+      },
+      {
+        "cid": "C009",
+        "ref_id": "U007",
+        "claim": "此外，一些研究[7] 探讨了效率问题。",
+        "anchor": "mid-sentence",
+        "ref_title": "Unknown Author. Nonexistent Paper on Efficiency[J]. Journal of Nothing, 2099.",
+        "ref_year": "2099",
+        "ref_abstract": null,
+        "ref_keywords": [],
+        "verdict": "not_in_library",
+        "basis": "引用指向库中不存在的条目，无法核验",
+        "sentence": "此外，一些研究[7] 探讨了效率问题。"
+      }
+    ],
+    "pending": 0,
+    "supported": 9,
+    "mismatch": 0,
+    "insufficient_evidence": 0
+  },
+  "insertions": [],
+  "artifacts": {
+    "manuscript_revised": "manuscript_revised.md",
+    "reference_list": "references_gbt7714.txt",
+    "library_canonical": "library_canonical.json",
+    "citation_map": "citation_map.json",
+    "changes": "changes.json",
+    "snapshots": "D:\\DSH default\\writing04-skill\\submission\\examples\\output\\work\\snapshots"
+  },
+  "status_reason": "unresolved citations or verification errors need human confirmation",
+  "human_review": [],
+  "change_log": [
+    {
+      "step": "parse",
+      "what": "9 citations, 7 library entries"
+    },
+    {
+      "step": "dedup",
+      "what": {
+        "input": 7,
+        "output": 6,
+        "merged": 1
+      }
+    },
+    {
+      "step": "renumber",
+      "what": "9 markers rewritten, list rebuilt (6 entries)"
+    },
+    {
+      "step": "convert",
+      "what": "gbt7714"
+    },
+    {
+      "step": "verify",
+      "what": {
+        "n": 6,
+        "errors": 1,
+        "warnings": 3,
+        "verified": 0,
+        "mismatch": 0,
+        "unverified": 5
+      }
+    }
+  ],
+  "uncertainties": [],
+  "environment": {
+    "python": "3.14.6",
+    "refmgr": "1.0.0",
+    "dependencies": "stdlib only",
+    "online": false
+  }
+}

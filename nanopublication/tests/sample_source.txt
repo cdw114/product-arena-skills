@@ -1,0 +1,20 @@
+=== page 1 ===
+A Synthetic Example for Skill Testing
+
+Abstract
+
+Compound 3 reduced tumor volume by 48% relative to vehicle in the xenograft model, and showed no significant weight loss in treated mice. We suggest that compound 3 may act through inhibition of MEK.
+
+=== page 2 ===
+Results
+
+We first established the dose-response relationship in vitro. Treatment with 5 mg/kg compound 3 reduced tumor volume by 48% relative to vehicle (Figure 1A). Tumor growth was measured over 21 days after inoculation. The effect was observed only when p53 was intact. Body weight did not differ between treated and vehicle groups (p = 0.41). Compound 3 may inhibit MEK signaling in these tumours. Smith et al. previously reported IC50 = 3.2 uM for the parental compound.
+
+=== page 3 ===
+Table 1. IC50 values
+
+| compound | IC50 (uM) |
+| compound 3 | 1.1 |
+| compound 4 | 8.7 |
+
+Figure 1. Tumor volume over time.

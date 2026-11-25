@@ -1,0 +1,91 @@
+[
+ {
+  "id": "S001",
+  "role": "title",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "context": "",
+  "masked": "Attention Is All You Need",
+  "marks": []
+ },
+ {
+  "id": "S002",
+  "role": "heading",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "context": "",
+  "masked": "Abstract",
+  "marks": []
+ },
+ {
+  "id": "S003",
+  "role": "body",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "context": "Abstract",
+  "masked": "The dominant ⟦TERM#0001⟧ models are based on complex recurrent or ⟦TERM#0002⟧ that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an ⟦TERM#0003⟧. We propose a new simple network architecture, the Transformer, based solely on ⟦TERM#0004⟧, dispensing with recurrence and convolutions entirely. Experiments on two ⟦TERM#0005⟧ tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves ⟦NUM#0006⟧ BLEU on the WMT ⟦NUM#0007⟧ Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT ⟦NUM#0008⟧ English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of ⟦NUM#0009⟧ after training for ⟦NUM#0010⟧ on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to ⟦TERM#0011⟧ both with large and limited training data.",
+  "marks": [
+   {
+    "surface": "⟦TERM#0001⟧",
+    "kind": "TERM",
+    "original": "sequence transduction"
+   },
+   {
+    "surface": "⟦TERM#0002⟧",
+    "kind": "TERM",
+    "original": "convolutional neural networks"
+   },
+   {
+    "surface": "⟦TERM#0003⟧",
+    "kind": "TERM",
+    "original": "attention mechanism"
+   },
+   {
+    "surface": "⟦TERM#0004⟧",
+    "kind": "TERM",
+    "original": "attention mechanisms"
+   },
+   {
+    "surface": "⟦TERM#0005⟧",
+    "kind": "TERM",
+    "original": "machine translation"
+   },
+   {
+    "surface": "⟦NUM#0006⟧",
+    "kind": "NUM",
+    "original": "28.4"
+   },
+   {
+    "surface": "⟦NUM#0007⟧",
+    "kind": "NUM",
+    "original": "2014"
+   },
+   {
+    "surface": "⟦NUM#0008⟧",
+    "kind": "NUM",
+    "original": "2014"
+   },
+   {
+    "surface": "⟦NUM#0009⟧",
+    "kind": "NUM",
+    "original": "41.8"
+   },
+   {
+    "surface": "⟦NUM#0010⟧",
+    "kind": "NUM",
+    "original": "3.5 days"
+   },
+   {
+    "surface": "⟦TERM#0011⟧",
+    "kind": "TERM",
+    "original": "English constituency parsing"
+   }
+  ]
+ }
+]

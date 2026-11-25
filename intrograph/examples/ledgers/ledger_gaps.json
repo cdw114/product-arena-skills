@@ -1,0 +1,42 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "EXAMPLE of the gap ledger. limitation_kind in shared_limitation / uncovered_scenario / conflicting_conclusions / evaluation_gap / method_gap / data_gap. evidence.kind in quote / paraphrase / author_judgment; every quote below occurs verbatim in that reference's abstract.",
+  "gaps": [
+    {
+      "gap_id": "PG1",
+      "statement": "Existing selection rules optimise the label budget or a fixed feature space, and none of them optimises the cost of pretraining the corpus itself.",
+      "derived_from": [
+        {"ref_id": "R0009", "limitation_kind": "shared_limitation",
+         "evidence": {"kind": "quote",
+                      "text": "ignores the cost of the pretraining corpus itself, which dominates the budget at scale"}},
+        {"ref_id": "R0004", "limitation_kind": "shared_limitation",
+         "evidence": {"kind": "quote",
+                      "text": "the number of forward passes grows linearly with pool size and dominates the compute budget"}},
+        {"ref_id": "R0007", "limitation_kind": "method_gap",
+         "evidence": {"kind": "quote",
+                      "text": "the coreset guarantee is stated for a fixed feature space and does not transfer to representations that are themselves learned"}}
+      ],
+      "how_filled": {"contribution_ids": ["C1", "C2"],
+                     "mechanism": "select before pretraining, in a fixed spectral embedding, so the corpus becomes an explicit budget"},
+      "confidence": "high"
+    },
+    {
+      "gap_id": "PG2",
+      "statement": "Scaling evidence shows most of a large unlabelled pool is redundant, but no experiment tests whether a much smaller curated corpus reaches the same plateau.",
+      "derived_from": [
+        {"ref_id": "R0010", "limitation_kind": "uncovered_scenario",
+         "evidence": {"kind": "quote",
+                      "text": "the study cannot say whether a smaller curated corpus would reach the same plateau with less compute"}},
+        {"ref_id": "R0006", "limitation_kind": "uncovered_scenario",
+         "evidence": {"kind": "quote",
+                      "text": "no experiment studies whether a smaller corpus would suffice"}},
+        {"ref_id": "R0005", "limitation_kind": "shared_limitation",
+         "evidence": {"kind": "quote",
+                      "text": "agnostic to which unlabelled graphs are used, so redundant corpora waste compute without improving the objective"}}
+      ],
+      "how_filled": {"contribution_ids": ["C4"],
+                     "mechanism": "a budget sweep that locates where selection stops paying"},
+      "confidence": "medium"
+    }
+  ]
+}

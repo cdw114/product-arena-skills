@@ -1,0 +1,53 @@
+{
+  "case_id": "gcp-example-001",
+  "note": "DEFECTIVE grouping ledger, shipped for the regression suite. Two defects are planted: group G1 has no comparison dimension, and R0004 has no limitation field. G2 is absent, so R0005/R0006/R0007 end up cited but ungrouped.",
+  "groups": [
+    {
+      "group_id": "G1",
+      "label": "Pretraining objectives on a whole unlabelled pool",
+      "dimension": "",
+      "works": [
+        {"ref_id": "R0003",
+         "method_route": "node-level plus graph-level objectives in one schedule",
+         "data_setting": "one fixed unlabelled molecular corpus, used whole",
+         "evaluation": "downstream classification and regression",
+         "conclusion": "objective choice matters more than encoder capacity",
+         "limitation": "corpus treated as a single pool; pretraining cost not modelled"},
+        {"ref_id": "R0004",
+         "method_route": "contrastive learning with atom masking, bond deletion and subgraph positives",
+         "data_setting": "full unlabelled pool, every molecule scanned each epoch",
+         "evaluation": "MoleculeNet property benchmarks",
+         "conclusion": "contrastive positives from chemical subgraphs beat supervised training in low label regimes",
+         "limitation": ""}
+      ],
+      "comparison": {"dimension": "", "tradeoff": "The objectives differ in sample efficiency per epoch."}
+    },
+    {
+      "group_id": "G3",
+      "label": "Encoders and geometric priors",
+      "dimension": "what inductive bias the encoder supplies",
+      "works": [
+        {"ref_id": "R0001",
+         "method_route": "first-order approximation of a localized spectral filter",
+         "data_setting": "citation and knowledge graphs",
+         "evaluation": "node classification accuracy",
+         "conclusion": "localized propagation scales linearly in edges",
+         "limitation": "one hop per layer"},
+        {"ref_id": "R0002",
+         "method_route": "message passing over a fixed neighbourhood radius",
+         "data_setting": "QM9 quantum chemistry",
+         "evaluation": "regression error on quantum-chemical targets",
+         "conclusion": "message passing reaches state of the art on QM9",
+         "limitation": "a single step cannot see beyond its radius"},
+        {"ref_id": "R0008",
+         "method_route": "continuous-filter convolution with rotation and translation invariance",
+         "data_setting": "QM9 molecules",
+         "evaluation": "mean absolute error on molecular targets",
+         "conclusion": "physically motivated filters reach state of the art without pretraining",
+         "limitation": "trained from scratch per task"}
+      ],
+      "comparison": {"dimension": "inductive bias vs dependence on labelled data",
+                     "tradeoff": "The bias fixes what can be represented; selection fixes what is learned from."}
+    }
+  ]
+}

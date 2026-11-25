@@ -1,0 +1,116 @@
+{
+ "S001": [],
+ "S002": [],
+ "S003": [
+  {
+   "idx": 1,
+   "kind": "TERM",
+   "original": "sequence transduction",
+   "start": 13,
+   "end": 34,
+   "surface": "⟦TERM#0001⟧",
+   "term_id": "T008",
+   "canonical": "sequence transduction"
+  },
+  {
+   "idx": 2,
+   "kind": "TERM",
+   "original": "convolutional neural networks",
+   "start": 76,
+   "end": 105,
+   "surface": "⟦TERM#0002⟧",
+   "term_id": "T013",
+   "canonical": "convolutional neural networks"
+  },
+  {
+   "idx": 3,
+   "kind": "TERM",
+   "original": "attention mechanism",
+   "start": 220,
+   "end": 239,
+   "surface": "⟦TERM#0003⟧",
+   "term_id": "T001",
+   "canonical": "attention mechanism"
+  },
+  {
+   "idx": 4,
+   "kind": "TERM",
+   "original": "attention mechanisms",
+   "start": 320,
+   "end": 340,
+   "surface": "⟦TERM#0004⟧",
+   "term_id": "T001",
+   "canonical": "attention mechanism"
+  },
+  {
+   "idx": 5,
+   "kind": "TERM",
+   "original": "machine translation",
+   "start": 415,
+   "end": 434,
+   "surface": "⟦TERM#0005⟧",
+   "term_id": "T009",
+   "canonical": "machine translation"
+  },
+  {
+   "idx": 6,
+   "kind": "NUM",
+   "original": "28.4",
+   "start": 584,
+   "end": 588,
+   "surface": "⟦NUM#0006⟧",
+   "term_id": "",
+   "canonical": ""
+  },
+  {
+   "idx": 7,
+   "kind": "NUM",
+   "original": "2014",
+   "start": 605,
+   "end": 609,
+   "surface": "⟦NUM#0007⟧",
+   "term_id": "",
+   "canonical": ""
+  },
+  {
+   "idx": 8,
+   "kind": "NUM",
+   "original": "2014",
+   "start": 735,
+   "end": 739,
+   "surface": "⟦NUM#0008⟧",
+   "term_id": "",
+   "canonical": ""
+  },
+  {
+   "idx": 9,
+   "kind": "NUM",
+   "original": "41.8",
+   "start": 848,
+   "end": 852,
+   "surface": "⟦NUM#0009⟧",
+   "term_id": "",
+   "canonical": ""
+  },
+  {
+   "idx": 10,
+   "kind": "NUM",
+   "original": "3.5 days",
+   "start": 872,
+   "end": 880,
+   "surface": "⟦NUM#0010⟧",
+   "term_id": "",
+   "canonical": ""
+  },
+  {
+   "idx": 11,
+   "kind": "TERM",
+   "original": "English constituency parsing",
+   "start": 1067,
+   "end": 1095,
+   "surface": "⟦TERM#0011⟧",
+   "term_id": "T007",
+   "canonical": "English constituency parsing"
+  }
+ ]
+}

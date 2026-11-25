@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ipynb_checkpoints/
+__MACOSX/
+.DS_Store
+Thumbs.db
+*.zip
+_work/

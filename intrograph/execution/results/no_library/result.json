@@ -1,0 +1,364 @@
+{
+  "case_id": "nolib-001",
+  "skill": {
+    "name": "intrograph",
+    "version": "1.0.0"
+  },
+  "generated_at": "2026-11-26T01:02:42+08:00",
+  "status": {
+    "state": "partial",
+    "gate": "fail",
+    "reason": "成稿已产出，但核对仍有 5 个 error（详见 audit_report.md）；下面列出的 limits 是未解决项。",
+    "limits": [
+      "5 deterministic check error(s) remain",
+      "R01/invented_citation: 引用标记 [1] 在文献库与文末参考文献表中都找不到对应条目，无法核对。",
+      "R07/group_no_dimension: 分组 G1 没有声明比较维度（dimension），无法判断它是按问题、方法路线还是评价方式分组。",
+      "R07/group_no_tradeoff: 分组 G1 没有写取舍结论（comparison.tradeoff），组内只是并列，没有比较。",
+      "R12/evidence_section_missing: 贡献 C1 指向章节 ''，正文里找不到该章节。",
+      "R12/contribution_evidence_unresolved: 贡献 C1 的 1 条证据全部无法定位到本文字方法/图表/结果。",
+      "library empty: citations unverifiable"
+    ],
+    "notes": []
+  },
+  "task": {
+    "text": "write the introduction and related work",
+    "intent": {
+      "intents": [
+        "draft"
+      ],
+      "mode": "draft",
+      "has_existing_intro": true,
+      "draft_present": false
+    },
+    "lang": "en",
+    "citation_style": "author-year",
+    "genre": "",
+    "length_limit": null
+  },
+  "inputs": {
+    "case_json": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_nolib\\case.json",
+    "case_json_problems": [],
+    "output_contract": {
+      "required": [
+        "case_id",
+        "status",
+        "introduction_related_work"
+      ]
+    },
+    "output_contract_fields": [
+      "case_id",
+      "status",
+      "introduction_related_work"
+    ],
+    "manuscript": {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_nolib\\manuscript.md",
+      "chars": 308,
+      "words": 49,
+      "lang": "en",
+      "title": "A short manuscript with no reference list",
+      "section_titles": [
+        "A short manuscript with no reference list",
+        "Introduction",
+        "Method"
+      ],
+      "intro_sections": [
+        "Introduction"
+      ],
+      "reflist_n": 0
+    },
+    "library": {
+      "n": 0,
+      "sources": [],
+      "fallback": "empty"
+    },
+    "contract_filling": {
+      "aliased": [],
+      "unfilled": []
+    }
+  },
+  "result": {
+    "introduction_related_work_file": "introduction_related_work.md",
+    "related_work_table_file": "related_work_table.md",
+    "contribution_table_file": "contribution_table.md",
+    "parts": {
+      "background": {
+        "present": true,
+        "chars": 146,
+        "paragraphs": 1,
+        "text": "## 1 Background\n\nSolubility prediction is a standard benchmark task. Previous work has reported that descriptor pruning reduces error by 4.4% [1]."
+      },
+      "related_work": {
+        "present": true,
+        "chars": 72,
+        "paragraphs": 1,
+        "text": "## 2 Related Work\n\nPrior work on descriptor selection reports gains [1]."
+      },
+      "gap": {
+        "present": true,
+        "chars": 115,
+        "paragraphs": 1,
+        "text": "## 3 Research Gap\n\nNo cited work measures the cost of the descriptor set itself [1], and this paper addresses that."
+      },
+      "contributions": {
+        "present": true,
+        "chars": 62,
+        "paragraphs": 1,
+        "text": "## 4 Contributions\n\n- We prune the descriptor set (Section 2)."
+      }
+    },
+    "part_order": [
+      "background",
+      "related_work",
+      "gap",
+      "contributions"
+    ],
+    "chars": 395,
+    "n_citations": 0,
+    "n_distinct_refs": 0,
+    "n_groups": 1,
+    "n_gaps": 1,
+    "n_contributions": 1,
+    "reference_numbering": {}
+  },
+  "introduction_related_work": "## 1 Background\n\nSolubility prediction is a standard benchmark task. Previous work has reported that descriptor pruning reduces error by 4.4% [1].\n\n## 2 Related Work\n\nPrior work on descriptor selection reports gains [1].\n\n## 3 Research Gap\n\nNo cited work measures the cost of the descriptor set itself [1], and this paper addresses that.\n\n## 4 Contributions\n\n- We prune the descriptor set (Section 2).\n",
+  "background": "## 1 Background\n\nSolubility prediction is a standard benchmark task. Previous work has reported that descriptor pruning reduces error by 4.4% [1].",
+  "related_work": {
+    "text": "## 2 Related Work\n\nPrior work on descriptor selection reports gains [1].",
+    "groups": [
+      {
+        "group_id": "G1",
+        "label": "",
+        "dimension": "",
+        "ref_ids": [
+          ""
+        ],
+        "comparison": {
+          "dimension": "",
+          "tradeoff": "",
+          "best_for": ""
+        }
+      }
+    ],
+    "table_file": "related_work_table.md"
+  },
+  "research_gap": {
+    "text": "## 3 Research Gap\n\nNo cited work measures the cost of the descriptor set itself [1], and this paper addresses that.",
+    "gaps": [
+      {
+        "gap_id": "PG1",
+        "statement": "",
+        "derived_from": [
+          {
+            "ref_id": "",
+            "limitation_kind": "shared_limitation",
+            "evidence": {
+              "kind": "quote",
+              "text": ""
+            }
+          }
+        ],
+        "how_filled": {
+          "contribution_ids": [
+            "C1"
+          ],
+          "mechanism": ""
+        },
+        "confidence": "medium"
+      }
+    ]
+  },
+  "contributions": {
+    "text": "## 4 Contributions\n\n- We prune the descriptor set (Section 2).",
+    "items": [
+      {
+        "contribution_id": "C1",
+        "text": "",
+        "kind": "method",
+        "evidence": [
+          {
+            "locator_type": "section",
+            "locator": "",
+            "claim_in_source": ""
+          }
+        ],
+        "scope": {
+          "stated_limits": "",
+          "not_claimed": ""
+        }
+      }
+    ],
+    "table_file": "contribution_table.md"
+  },
+  "citation_map": [
+    {
+      "part": "background",
+      "para": 0,
+      "sentence": "Previous work has reported that descriptor pruning reduces error by 4.4% [1].",
+      "markers": [
+        "[1]"
+      ],
+      "ref_ids": [],
+      "unresolved": [
+        "[1]"
+      ],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 0,
+      "sentence": "Prior work on descriptor selection reports gains [1].",
+      "markers": [
+        "[1]"
+      ],
+      "ref_ids": [],
+      "unresolved": [
+        "[1]"
+      ],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 0,
+      "sentence": "No cited work measures the cost of the descriptor set itself [1], and this paper addresses that.",
+      "markers": [
+        "[1]"
+      ],
+      "ref_ids": [],
+      "unresolved": [
+        "[1]"
+      ],
+      "resolution": "numeric"
+    }
+  ],
+  "contribution_map": [
+    {
+      "contribution_id": "C1",
+      "evidence": [
+        {
+          "locator_type": "section",
+          "locator": "",
+          "claim_in_source": ""
+        }
+      ]
+    }
+  ],
+  "references_used": [],
+  "evidence": {
+    "group_ledger": [
+      {
+        "group_id": "G1",
+        "dimension": "",
+        "works": [
+          ""
+        ]
+      }
+    ],
+    "gap_provenance": [
+      {
+        "gap_id": "PG1",
+        "from": [
+          ""
+        ],
+        "limitation_kinds": [
+          "shared_limitation"
+        ],
+        "evidence_kinds": [
+          "quote"
+        ]
+      }
+    ],
+    "manuscript_locators": {
+      "figures": [],
+      "tables": [],
+      "sections": [
+        "A short manuscript with no reference list",
+        "Introduction",
+        "Method"
+      ],
+      "n_numbers_indexed": 2
+    }
+  },
+  "audit": {
+    "gate": "fail",
+    "errors": 5,
+    "warnings": 7,
+    "report_file": "audit_report.md",
+    "summary_file": "audit_report.json",
+    "rules_failed": [
+      "R01",
+      "R07",
+      "R12"
+    ]
+  },
+  "uncertainty": {
+    "unresolved_citations": [
+      "[1]"
+    ],
+    "ambiguous_citations": [],
+    "unchecked_quotes": [],
+    "author_judgments": [],
+    "notes": [
+      "[01:02:42] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_nolib out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\no_library work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_nolib",
+      "[01:02:42] case_id=nolib-001 task='write the introduction and related work'",
+      "[01:02:42] audit gate=fail errors=5 warnings=7",
+      "[01:02:42]   FIX R01/invented_citation 引用标记 [1] 在文献库与文末参考文献表中都找不到对应条目，无法核对。",
+      "[01:02:42]   FIX R07/group_no_dimension 分组 G1 没有声明比较维度（dimension），无法判断它是按问题、方法路线还是评价方式分组。",
+      "[01:02:42]   FIX R07/group_no_tradeoff 分组 G1 没有写取舍结论（comparison.tradeoff），组内只是并列，没有比较。",
+      "[01:02:42]   FIX R12/evidence_section_missing 贡献 C1 指向章节 ''，正文里找不到该章节。",
+      "[01:02:42]   FIX R12/contribution_evidence_unresolved 贡献 C1 的 1 条证据全部无法定位到本文字方法/图表/结果。"
+    ],
+    "not_done": [
+      "没有文献库：引用无法核验，覆盖度检查全部跳过。"
+    ]
+  },
+  "changes": [
+    {
+      "step": "plan",
+      "what": "解析输入、建文献库与稿件索引、写脚手架与账本模板"
+    },
+    {
+      "step": "draft",
+      "what": "按账本写 background / related_work / gap / contributions 四部分"
+    },
+    {
+      "step": "audit",
+      "what": "运行 18 项确定性核对，逐条给出错误与警告"
+    },
+    {
+      "step": "finalize",
+      "what": "渲染成稿、比较表、贡献表、引用表与 result.json"
+    }
+  ],
+  "sources": [
+    {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_nolib\\manuscript.md",
+      "sha256": "74b1776d47f966ce0e37d812b416bbcae414b815f33d604d0c37e47828da13f6",
+      "kind": "input"
+    }
+  ],
+  "artifacts": {
+    "introduction_related_work": "introduction_related_work.md",
+    "related_work_table": "related_work_table.md",
+    "contribution_table": "contribution_table.md",
+    "audit_report_md": "audit_report.md",
+    "audit_report_json": "audit_report.json",
+    "citation_map": "citation_map.json",
+    "refs_cited_bib": "refs_cited.bib",
+    "refs_cited_txt": "refs_cited.txt"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "skill_version": "1.0.0",
+    "now_year": 2026
+  },
+  "log": [
+    "[01:02:42] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\input_nolib out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\no_library work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_nolib",
+    "[01:02:42] case_id=nolib-001 task='write the introduction and related work'",
+    "[01:02:42] audit gate=fail errors=5 warnings=7",
+    "[01:02:42]   FIX R01/invented_citation 引用标记 [1] 在文献库与文末参考文献表中都找不到对应条目，无法核对。",
+    "[01:02:42]   FIX R07/group_no_dimension 分组 G1 没有声明比较维度（dimension），无法判断它是按问题、方法路线还是评价方式分组。",
+    "[01:02:42]   FIX R07/group_no_tradeoff 分组 G1 没有写取舍结论（comparison.tradeoff），组内只是并列，没有比较。",
+    "[01:02:42]   FIX R12/evidence_section_missing 贡献 C1 指向章节 ''，正文里找不到该章节。",
+    "[01:02:42]   FIX R12/contribution_evidence_unresolved 贡献 C1 的 1 条证据全部无法定位到本文字方法/图表/结果。"
+  ]
+}

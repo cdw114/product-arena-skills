@@ -1,0 +1,14 @@
+{
+  "applied": [],
+  "rejected": [],
+  "unresolved": [
+    {
+      "rule": "ENV-NO-ENGINE",
+      "severity": "error",
+      "detail": "No TeX engine is installed in this environment, so the compile loop could not run. Everything below is static analysis on the sources; the diagnostics are what a compiler would report, derived from the source structure, not from a run."
+    }
+  ],
+  "files_added": [],
+  "files_modified": [],
+  "files_removed": []
+}

@@ -1,0 +1,99 @@
+{
+  "note": "Planted-defect regression suite. Each entry names one writing failure mode, the fixture that carries it, and the check that must catch it. `python3 src/reproduce.py` runs the auditor over examples/fixtures/draft_defective.md with the defective ledgers and fails if any of these (rule, code) pairs is missing; it also fails if the clean draft raises any error or warning at all. The pair is the contract, not the message text.",
+  "clean_fixture": {
+    "draft": "examples/fixtures/draft_good.md",
+    "ledgers": "examples/ledgers",
+    "expect": {"gate": "pass", "errors": 0, "warnings": 0}
+  },
+  "defective_fixture": {
+    "draft": "examples/fixtures/draft_defective.md",
+    "ledgers": "examples/fixtures (ledger_*.json)",
+    "library_extra": "examples/fixtures/library_extra_defective.bib",
+    "expect": {"gate": "fail"}
+  },
+  "defects": [
+    {"id": "D01", "mode": "编造引用：\\cite 的键在文献库里不存在",
+     "planted_as": "\\cite{zhang2024phantom}",
+     "rule": "R01", "code": "invented_citation", "severity": "error"},
+
+    {"id": "D02", "mode": "无来源论断：文献类断言没有引用也没有标为作者判断",
+     "planted_as": "Prior work has shown that pretraining on more molecules always helps.",
+     "rule": "R02", "code": "uncited_claim", "severity": "warn"},
+
+    {"id": "D03", "mode": "引用位置漂移：前几句是论断，引用堆在段末",
+     "planted_as": "background 第 1 段",
+     "rule": "R03", "code": "citation_anchor_drift", "severity": "warn"},
+
+    {"id": "D04", "mode": "元数据错误：DOI 形式不合法",
+     "planted_as": "doi = {10.1234}",
+     "rule": "R04", "code": "metadata_bad_doi", "severity": "warn"},
+
+    {"id": "D05", "mode": "覆盖缺失：标为必须引用的文献成稿未引",
+     "planted_as": "R0009 / R0010 未被引用",
+     "rule": "R05", "code": "must_cite_missing", "severity": "error"},
+
+    {"id": "D06", "mode": "分组无比较维度",
+     "planted_as": "G1.dimension 为空",
+     "rule": "R07", "code": "group_no_dimension", "severity": "error"},
+
+    {"id": "D07", "mode": "组内条目缺比较字段",
+     "planted_as": "R0004 无 limitation",
+     "rule": "R07", "code": "group_work_field_missing", "severity": "warn"},
+
+    {"id": "D08", "mode": "逐篇摘要拼接：连续 3 段各讲一篇且无比较词",
+     "planted_as": "related_work 前 3 段",
+     "rule": "R08", "code": "serial_summary_pattern", "severity": "warn"},
+
+    {"id": "D09", "mode": "引用了但没有进入任何分组",
+     "planted_as": "R0005 / R0006 / R0007 / R0011 被引用但不在分组账本里",
+     "rule": "R09", "code": "cited_but_ungrouped", "severity": "error"},
+
+    {"id": "D10", "mode": "空白不是由已引文献推出：来源文献正文没引",
+     "planted_as": "PG1 → R0009、PG2 → R0010，正文均未引用",
+     "rule": "R10", "code": "gap_from_uncited_work", "severity": "error"},
+
+    {"id": "D11", "mode": "空白依据的原文引文在来源里找不到",
+     "planted_as": "PG1 quote = 'selection ignores the total cost of pretraining the corpus'",
+     "rule": "R10", "code": "unverifiable_quote", "severity": "error"},
+
+    {"id": "D12", "mode": "有空白账本但成稿没有空白段落",
+     "planted_as": "缺少 <!-- part:gap --> 段",
+     "rule": "R11", "code": "gap_part_empty", "severity": "error"},
+
+    {"id": "D13", "mode": "贡献没有证据定位",
+     "planted_as": "C3.evidence = []",
+     "rule": "R12", "code": "contribution_without_evidence", "severity": "error"},
+
+    {"id": "D14", "mode": "贡献指向不存在的表",
+     "planted_as": "C2 locator = 'Table 9'",
+     "rule": "R12", "code": "evidence_table_missing", "severity": "error"},
+
+    {"id": "D15", "mode": "贡献指向不存在的图",
+     "planted_as": "C4 locator = 'Fig. 9'",
+     "rule": "R12", "code": "evidence_figure_missing", "severity": "error"},
+
+    {"id": "D16", "mode": "为写作补出材料里没有的数值",
+     "planted_as": "贡献段 'improves accuracy by 27.4%'",
+     "rule": "R13", "code": "invented_metric", "severity": "error"},
+
+    {"id": "D17", "mode": "四部分不全",
+     "planted_as": "只写了 background / related_work / contributions",
+     "rule": "R14", "code": "part_missing", "severity": "error"},
+
+    {"id": "D18", "mode": "无条件拔高表述",
+     "planted_as": "'The first to make molecular pretraining affordable'，且无 scope",
+     "rule": "R15", "code": "unbounded_novelty_claim", "severity": "warn"},
+
+    {"id": "D19", "mode": "空转铺垫式背景",
+     "planted_as": "'has attracted widespread attention' + 'with the rapid development of'",
+     "rule": "R16", "code": "vacuous_background", "severity": "warn"},
+
+    {"id": "D20", "mode": "引用格式混用",
+     "planted_as": "数字制 [n] 与 \\cite{} 混排",
+     "rule": "R17", "code": "mixed_citation_style", "severity": "warn"},
+
+    {"id": "D21", "mode": "摘要里的关键结果没有进入任何贡献条目",
+     "planted_as": "11.3% / 62.4% 未出现在贡献或引言",
+     "rule": "R18", "code": "abstract_metric_unclaimed", "severity": "warn"}
+  ]
+}

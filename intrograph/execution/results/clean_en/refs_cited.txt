@@ -1,0 +1,19 @@
+[1] T. N. Kipf and M. Welling, “Semi-supervised classification with graph convolutional networks,” in Proc. International Conference on Learning Representations, 2017. doi: 10.48550/arXiv.1609.02907.
+
+[2] J. Gilmer, S. S. Schoenholz, P. F. Riley, et al., “Neural message passing for quantum chemistry,” in Proc. International Conference on Machine Learning, pp. 1263-1272, 2017. doi: 10.48550/arXiv.1704.01212.
+
+[3] W. Hu, B. Liu, J. Gomes, et al., “Strategies for pre-training graph neural networks,” in Proc. International Conference on Learning Representations, 2020. doi: 10.48550/arXiv.1905.12265.
+
+[4] Y. Wang, J. Wang, Z. Cao, et al., “MolCLR: molecular contrastive learning of representations via graph neural networks,” Nature Machine Intelligence, vol. 4, no. 3, pp. 279-287, 2022. doi: 10.1038/s42256-022-00457-9.
+
+[5] F. Y. Sun, J. Hoffmann, V. Verma, et al., “InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization,” in Proc. International Conference on Learning Representations, 2020. doi: 10.48550/arXiv.1908.01000.
+
+[6] Y. Rong, Y. Bian, T. Xu, et al., “Self-supervised graph transformer on large-scale molecular data,” in Proc. Advances in Neural Information Processing Systems, vol. 33, pp. 12559-12571, 2020. doi: 10.48550/arXiv.2007.02835.
+
+[7] O. Sener and S. Savarese, “Active learning for convolutional neural networks: a core-set approach,” in Proc. International Conference on Learning Representations, 2018. doi: 10.48550/arXiv.1708.00489.
+
+[8] K. T. Sch\"utt, P. J. Kindermans, H. E. Sauceda, et al., “SchNet: a continuous-filter convolutional neural network for modeling quantum interactions,” in Proc. Advances in Neural Information Processing Systems, pp. 991-1001, 2017. doi: 10.48550/arXiv.1706.08566.
+
+[9] H. Liu, X. Ma, and Y. Zhao, “Label-scarce coreset selection for molecular pretraining,” Briefings in Bioinformatics, vol. 25, no. 2, pp. bbae051, 2024. doi: 10.1093/bib/bbae051.
+
+[10] L. Chen, A. Novak, and J. Park, “Scaling laws for unlabelled molecular pretraining corpora,” in Proc. International Conference on Machine Learning, 2025. doi: 10.48550/arXiv.2501.01234.

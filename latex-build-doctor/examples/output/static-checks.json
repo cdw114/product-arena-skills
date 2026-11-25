@@ -1,0 +1,212 @@
+{
+  "before": {
+    "total": 13,
+    "errors": 6,
+    "warnings": 2,
+    "info": 5,
+    "by_rule": {
+      "C-CITE-NO-ENTRY": 1,
+      "G-GRAPHIC-MISSING": 1,
+      "I-INCLUDE-MISSING": 1,
+      "T-CELL-MISMATCH": 1,
+      "X-LABEL-BEFORE-CAPTION": 1,
+      "X-REF-WITHOUT-LABEL": 1,
+      "M-ALIGN-NO-AMP": 1,
+      "M-UNIT-ITALIC": 1,
+      "X-LABEL-UNUSED": 5
+    }
+  },
+  "after": {
+    "total": 13,
+    "errors": 6,
+    "warnings": 2,
+    "info": 5,
+    "by_rule": {
+      "C-CITE-NO-ENTRY": 1,
+      "G-GRAPHIC-MISSING": 1,
+      "I-INCLUDE-MISSING": 1,
+      "T-CELL-MISMATCH": 1,
+      "X-LABEL-BEFORE-CAPTION": 1,
+      "X-REF-WITHOUT-LABEL": 1,
+      "M-ALIGN-NO-AMP": 1,
+      "M-UNIT-ITALIC": 1,
+      "X-LABEL-UNUSED": 5
+    }
+  },
+  "closure_before": {
+    "cite_keys": 2,
+    "bib_keys": 3,
+    "label_keys": 7,
+    "ref_keys": 3,
+    "citations_without_entry": [
+      "wang2021"
+    ],
+    "references_without_label": [
+      "tab:param"
+    ],
+    "unused_bib_entries": [
+      "liu2020",
+      "smith2018"
+    ],
+    "closed": false
+  },
+  "closure_after": {
+    "cite_keys": 2,
+    "bib_keys": 3,
+    "label_keys": 7,
+    "ref_keys": 3,
+    "citations_without_entry": [
+      "wang2021"
+    ],
+    "references_without_label": [
+      "tab:param"
+    ],
+    "unused_bib_entries": [
+      "liu2020",
+      "smith2018"
+    ],
+    "closed": false
+  },
+  "findings_after": [
+    {
+      "kind": "citation",
+      "rule": "C-CITE-NO-ENTRY",
+      "severity": "error",
+      "key": "wang2021",
+      "file": "sections/intro.tex",
+      "line": 8,
+      "explanation": "\\cite{wang2021} but no .bib entry has that key; BibTeX leaves it as [?]",
+      "auto_fixable": false
+    },
+    {
+      "kind": "graphics",
+      "rule": "G-GRAPHIC-MISSING",
+      "severity": "error",
+      "file": "sections/results.tex",
+      "line": 8,
+      "target": "figures/conductivity-vs-thickness",
+      "searched": [
+        "sections\\figures/conductivity-vs-thickness",
+        "sections\\figures/conductivity-vs-thickness.pdf",
+        "sections\\figures/conductivity-vs-thickness.png",
+        "sections\\figures/conductivity-vs-thickness.jpg",
+        "sections\\figures/conductivity-vs-thickness.jpeg",
+        "sections\\figures/conductivity-vs-thickness.eps"
+      ],
+      "explanation": "\\includegraphics{figures/conductivity-vs-thickness} resolves to no file; pdfTeX stops with 'File not found'",
+      "auto_fixable": false
+    },
+    {
+      "kind": "include",
+      "rule": "I-INCLUDE-MISSING",
+      "severity": "error",
+      "file": "main.tex",
+      "target": "sections/discussion-missing",
+      "explanation": "\\input/\\include{sections/discussion-missing} names a file that is neither in the project nor on the TeX search path",
+      "auto_fixable": false
+    },
+    {
+      "kind": "table",
+      "rule": "T-CELL-MISMATCH",
+      "severity": "error",
+      "file": "sections/method.tex",
+      "line": 17,
+      "declared_columns": 4,
+      "cells_in_row": 5,
+      "row_excerpt": "B & 60 & 18.2 & Si & extra",
+      "explanation": "row 3 has 5 cells but the preamble declares 4 columns; the extra '&' shifts every later column and usually pushes the table past the margin",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-BEFORE-CAPTION",
+      "severity": "error",
+      "file": "sections/results.tex",
+      "line": 9,
+      "explanation": "\\label comes before \\caption inside a float, so it captures the enclosing section counter and every \\ref to the figure prints the wrong number",
+      "auto_fixable": true,
+      "fix": "move \\label after \\caption"
+    },
+    {
+      "kind": "reference",
+      "rule": "X-REF-WITHOUT-LABEL",
+      "severity": "error",
+      "file": "sections/results.tex",
+      "line": 13,
+      "key": "tab:param",
+      "explanation": "\\ref{tab:param} has no \\label{tab:param} anywhere in the project, so the compiled PDF prints '??'",
+      "auto_fixable": false
+    },
+    {
+      "kind": "math",
+      "rule": "M-ALIGN-NO-AMP",
+      "severity": "warning",
+      "file": "sections/method.tex",
+      "line": 40,
+      "explanation": "align without '&' produces one right-aligned column instead of aligned relations",
+      "auto_fixable": false
+    },
+    {
+      "kind": "math",
+      "rule": "M-UNIT-ITALIC",
+      "severity": "warning",
+      "file": "sections/method.tex",
+      "line": 35,
+      "excerpt": "E = 3.2 J",
+      "explanation": "a number-with-unit appears inside math mode, so the unit is typeset in italic math font and the spacing is wrong",
+      "suggestion": "\\SI{3.2}{J} (siunitx) or 3.2\\,\\mathrm{J}",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info",
+      "file": "sections/intro.tex",
+      "line": 2,
+      "key": "sec:intro",
+      "explanation": "label is defined but never referenced",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info",
+      "file": "sections/method.tex",
+      "line": 2,
+      "key": "sec:method",
+      "explanation": "label is defined but never referenced",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info",
+      "file": "sections/method.tex",
+      "line": 11,
+      "key": "tab:params",
+      "explanation": "label is defined but never referenced",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info",
+      "file": "sections/method.tex",
+      "line": 33,
+      "key": "eq:bc",
+      "explanation": "label is defined but never referenced",
+      "auto_fixable": false
+    },
+    {
+      "kind": "reference",
+      "rule": "X-LABEL-UNUSED",
+      "severity": "info",
+      "file": "sections/results.tex",
+      "line": 2,
+      "key": "sec:results",
+      "explanation": "label is defined but never referenced",
+      "auto_fixable": false
+    }
+  ],
+  "overfull": []
+}

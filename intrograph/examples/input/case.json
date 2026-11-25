@@ -1,0 +1,12 @@
+{
+  "case_id": "gcp-example-001",
+  "task": "为这篇论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分。相关工作要按路线分组比较，不要逐篇摘要；研究空白必须从已引文献的局限推出；贡献要与正文的图表和实验结果对应。英文，数字制引用，正文可直接进稿，约 900-1200 词。",
+  "target_genre": "journal article introduction",
+  "target_lang": "en",
+  "citation_style": "numeric",
+  "length_limit": "900-1200 words",
+  "output_contract": {
+    "required": ["case_id", "status", "result", "introduction_related_work", "related_work", "research_gap", "contributions", "citation_map", "references_used", "evidence", "uncertainty", "changes"]
+  },
+  "materials": ["manuscript.md", "library.bib", "notes.md"]
+}

@@ -1,0 +1,992 @@
+{
+  "case_id": "gcp-example-001",
+  "skill": {
+    "name": "intrograph",
+    "version": "1.0.0"
+  },
+  "generated_at": "2026-11-26T01:02:41+08:00",
+  "status": {
+    "state": "success",
+    "gate": "pass",
+    "reason": "18 项确定性核对全部通过（0 error，0 warning）。",
+    "limits": [],
+    "notes": []
+  },
+  "task": {
+    "text": "为这篇论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分。相关工作要按路线分组比较，不要逐篇摘要；研究空白必须从已引文献的局限推出；贡献要与正文的图表和实验结果对应。英文，数字制引用，正文可直接进稿，约 900-1200 词。",
+    "intent": {
+      "intents": [
+        "draft",
+        "citations"
+      ],
+      "mode": "draft",
+      "has_existing_intro": true,
+      "draft_present": false
+    },
+    "lang": "en",
+    "citation_style": "numeric",
+    "genre": "journal article introduction",
+    "length_limit": "900-1200 words"
+  },
+  "inputs": {
+    "case_json": "D:\\DSH default\\writing08-skill\\submission\\examples\\input\\case.json",
+    "case_json_problems": [],
+    "output_contract": {
+      "required": [
+        "case_id",
+        "status",
+        "result",
+        "introduction_related_work",
+        "related_work",
+        "research_gap",
+        "contributions",
+        "citation_map",
+        "references_used",
+        "evidence",
+        "uncertainty",
+        "changes"
+      ]
+    },
+    "output_contract_fields": [
+      "case_id",
+      "status",
+      "result",
+      "introduction_related_work",
+      "related_work",
+      "research_gap",
+      "contributions",
+      "citation_map",
+      "references_used",
+      "evidence",
+      "uncertainty",
+      "changes"
+    ],
+    "manuscript": {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\examples\\input\\manuscript.md",
+      "chars": 4906,
+      "words": 702,
+      "lang": "en",
+      "title": "Graph Coreset Pretraining for Low-Resource Molecular Property Prediction",
+      "section_titles": [
+        "Graph Coreset Pretraining for Low-Resource Molecular Property Prediction",
+        "Introduction",
+        "Related Work",
+        "Method",
+        "Experiments",
+        "Conclusion"
+      ],
+      "intro_sections": [
+        "Introduction",
+        "Related Work"
+      ],
+      "reflist_n": 10
+    },
+    "library": {
+      "n": 10,
+      "sources": [
+        {
+          "path": "D:\\DSH default\\writing08-skill\\submission\\examples\\input\\library.bib",
+          "format": "bibtex",
+          "n": 11
+        }
+      ],
+      "fallback": "none"
+    },
+    "contract_filling": {
+      "aliased": [],
+      "unfilled": []
+    }
+  },
+  "result": {
+    "introduction_related_work_file": "introduction_related_work.md",
+    "related_work_table_file": "related_work_table.md",
+    "contribution_table_file": "contribution_table.md",
+    "parts": {
+      "background": {
+        "present": true,
+        "chars": 1589,
+        "paragraphs": 3,
+        "text": "## 1 Background\n\nMolecular property prediction decides which compounds reach an assay, and the binding\nconstraint on it is labelled data: a single high-quality measurement costs weeks of\nbench work, so most tasks supply a few hundred labels rather than the tens of\nthousands that supervised training assumes. The progress of the last decade has been\non the representation side. Message passing over a fixed neighbourhood radius [2] and\nlocalized spectral propagation [1] supply the inductive bias that makes molecular\ngraphs learnable, and physically motivated continuous filters push single-task\naccuracy on quantum-chemical targets towards experimental error [8].\n\nThat bias fixes what a model can represent, not how much data it needs. SchNet-class\nmodels are trained from scratch for every task [8], so each new endpoint pays the full\ntraining cost again, and this is why self-supervised pretraining has become the\ndefault: masked atom and bond objectives, contrastive objectives over chemically\nmeaningful positives, and mutual-information objectives over graph substructures all\ntransfer to downstream endpoints with far fewer labels [3, 4, 5, 6]. The recipe is now\nstable. What it assumes is not.\n\nEvery one of these objectives is defined over an unlabelled pool that is taken as\ngiven, whole and free. Contrastive pretraining scans the entire pool each epoch, so\nthe number of forward passes grows with pool size [4], and graph-transformer\npretraining on eleven million molecules does the same [6]. The corpus therefore\nenters the budget as a cost and never as a decision variable."
+      },
+      "related_work": {
+        "present": true,
+        "chars": 2505,
+        "paragraphs": 3,
+        "text": "## 2 Related Work\n\nThree routes can be distinguished by what they treat as the thing to optimise. The\nfirst optimises the pretraining objective. Node- and graph-level objectives can be\ncombined, and objective choice matters more than encoder capacity, to the point where\nnaive pretraining hurts [3]; contrastive positives built from atom masking, bond\ndeletion and subgraph removal outperform supervised training when labels are scarce\n[4]; mutual-information objectives between graph and substructure embeddings are\ncompetitive on graph-level benchmarks [5]; and node- and edge-level self-supervision\non a graph transformer transfers to molecular classification at scale [6]. These\nworks differ in sample efficiency per epoch but agree on the setting: the pool is\nfixed and every molecule is visited. Their trade-off is therefore a trade-off in the\nobjective alone, whereas the compute cost per epoch is set by a quantity that none of\nthem varies.\n\nThe second route optimises which molecules are used. Greedy k-centre selection gives\na subset whose training error is bounded relative to the full set [7]; label-aware\nselection instead ranks molecules by how informative they would be for the downstream\nlabel budget and gains up to 8.6% over random pretraining [9]. The two differ in what\nthey trust: [7] trusts a fixed feature space enough to guarantee coverage inside it,\nwhereas [9] trusts an informativeness estimate and gives up any guarantee. Scaling\nstudies supply the missing quantity: downstream error falls as a power law in corpus\nsize and flattens past roughly one million molecules [10], which implies that a large\nfraction of the pool is redundant, but the law is fitted on an uncurated corpus and so\ncannot say how small a curated one could be. Taken together, the three works establish\nthat the corpus matters and that no existing selection rule optimises its cost.\n\nThe third route optimises the encoder and its geometric priors [1, 2, 8]. Localized\npropagation scales linearly in edges and reaches global spectral information only by\nstacking layers [1]; a single message-passing step cannot see beyond its radius [2];\ncontinuous-filter convolution enforces rotation and translation invariance and reaches\nstate of the art on a single task without any pretraining [8]. This route is\ncomplementary rather than competing: it fixes the representable space in which any\nselection rule must operate, and its cost model of retraining per task is precisely\nwhat pretraining is meant to remove."
+      },
+      "gap": {
+        "present": true,
+        "chars": 1271,
+        "paragraphs": 2,
+        "text": "## 3 Research Gap\n\nThe corpus question is not unanswered so much as unasked. Selection rules optimise\neither coverage of a feature space that does not yet exist [7] or the label budget\n[9], and both leave the cost of pretraining unmodelled, while label-aware selection\nexplicitly ignores the cost of the corpus itself [9]. Scaling evidence says most of\nthe pool is redundant [10], and the large-scale pretraining papers observe the cost\nwithout testing whether a smaller corpus would suffice [6]. The gap is therefore a\nmismatch of objective: the quantity that decides whether low-resource pretraining is\naffordable is the pretraining cost, and no cited selection rule optimises it, because\nnone of them is stated over a representation that is still being learned [7].\n\nWe take that mismatch as the design target. This paper treats the unlabelled pool as a\ndecision variable rather than a cost, selects a coverage-maximising coreset in a fixed\nspectral embedding before any pretraining happens, and pretrains only on that subset.\nBecause selection precedes learning, the coverage argument of [7] applies where it\npreviously could not, and because the budget is explicit, the plateau observed in [10]\nbecomes a quantity to be reached sooner rather than a law to be obeyed."
+      },
+      "contributions": {
+        "present": true,
+        "chars": 1246,
+        "paragraphs": 6,
+        "text": "## 4 Contributions\n\n- **A selection-before-pretraining pipeline.** Molecules are ranked by a greedy\n  coverage score in a spectral embedding of the graph Laplacian and only the selected\n  coreset is pretrained, so the corpus cost becomes a tunable budget rather than a\n  fixed tax (Section 3, Fig. 1).\n- **Accuracy at a fixed label budget.** At 100 labels per dataset the pipeline\n  improves accuracy by 11.3% over the strongest self-supervised baseline and reduces\n  pretraining cost by 62.4%, from 41 GPU-hours to 15.4 GPU-hours (Table 1, Table 3).\n- **An attribution of the gain.** Removing the coverage score and selecting uniformly\n  drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%, so\n  the benefit comes from which molecules are used rather than from the objective\n  (Table 2).\n- **A budget sweep.** The advantage persists as the coreset budget grows and narrows\n  to 3.1% at a 20% budget, which locates the regime in which selection stops paying\n  (Fig. 2).\n\nWe claim this for molecular property prediction with large unlabelled pools and small\nlabel budgets. We do not claim a theoretical guarantee for the coverage score, and we\ndo not claim transfer to protein families outside the kinase panel used here."
+      }
+    },
+    "part_order": [
+      "background",
+      "related_work",
+      "gap",
+      "contributions"
+    ],
+    "chars": 6611,
+    "n_citations": 13,
+    "n_distinct_refs": 10,
+    "n_groups": 3,
+    "n_gaps": 2,
+    "n_contributions": 4,
+    "reference_numbering": {
+      "R0001": 1,
+      "R0002": 2,
+      "R0003": 3,
+      "R0004": 4,
+      "R0005": 5,
+      "R0006": 6,
+      "R0007": 7,
+      "R0008": 8,
+      "R0009": 9,
+      "R0010": 10
+    }
+  },
+  "introduction_related_work": "## 1 Background\n\nMolecular property prediction decides which compounds reach an assay, and the binding\nconstraint on it is labelled data: a single high-quality measurement costs weeks of\nbench work, so most tasks supply a few hundred labels rather than the tens of\nthousands that supervised training assumes. The progress of the last decade has been\non the representation side. Message passing over a fixed neighbourhood radius [2] and\nlocalized spectral propagation [1] supply the inductive bias that makes molecular\ngraphs learnable, and physically motivated continuous filters push single-task\naccuracy on quantum-chemical targets towards experimental error [8].\n\nThat bias fixes what a model can represent, not how much data it needs. SchNet-class\nmodels are trained from scratch for every task [8], so each new endpoint pays the full\ntraining cost again, and this is why self-supervised pretraining has become the\ndefault: masked atom and bond objectives, contrastive objectives over chemically\nmeaningful positives, and mutual-information objectives over graph substructures all\ntransfer to downstream endpoints with far fewer labels [3, 4, 5, 6]. The recipe is now\nstable. What it assumes is not.\n\nEvery one of these objectives is defined over an unlabelled pool that is taken as\ngiven, whole and free. Contrastive pretraining scans the entire pool each epoch, so\nthe number of forward passes grows with pool size [4], and graph-transformer\npretraining on eleven million molecules does the same [6]. The corpus therefore\nenters the budget as a cost and never as a decision variable.\n\n## 2 Related Work\n\nThree routes can be distinguished by what they treat as the thing to optimise. The\nfirst optimises the pretraining objective. Node- and graph-level objectives can be\ncombined, and objective choice matters more than encoder capacity, to the point where\nnaive pretraining hurts [3]; contrastive positives built from atom masking, bond\ndeletion and subgraph removal outperform supervised training when labels are scarce\n[4]; mutual-information objectives between graph and substructure embeddings are\ncompetitive on graph-level benchmarks [5]; and node- and edge-level self-supervision\non a graph transformer transfers to molecular classification at scale [6]. These\nworks differ in sample efficiency per epoch but agree on the setting: the pool is\nfixed and every molecule is visited. Their trade-off is therefore a trade-off in the\nobjective alone, whereas the compute cost per epoch is set by a quantity that none of\nthem varies.\n\nThe second route optimises which molecules are used. Greedy k-centre selection gives\na subset whose training error is bounded relative to the full set [7]; label-aware\nselection instead ranks molecules by how informative they would be for the downstream\nlabel budget and gains up to 8.6% over random pretraining [9]. The two differ in what\nthey trust: [7] trusts a fixed feature space enough to guarantee coverage inside it,\nwhereas [9] trusts an informativeness estimate and gives up any guarantee. Scaling\nstudies supply the missing quantity: downstream error falls as a power law in corpus\nsize and flattens past roughly one million molecules [10], which implies that a large\nfraction of the pool is redundant, but the law is fitted on an uncurated corpus and so\ncannot say how small a curated one could be. Taken together, the three works establish\nthat the corpus matters and that no existing selection rule optimises its cost.\n\nThe third route optimises the encoder and its geometric priors [1, 2, 8]. Localized\npropagation scales linearly in edges and reaches global spectral information only by\nstacking layers [1]; a single message-passing step cannot see beyond its radius [2];\ncontinuous-filter convolution enforces rotation and translation invariance and reaches\nstate of the art on a single task without any pretraining [8]. This route is\ncomplementary rather than competing: it fixes the representable space in which any\nselection rule must operate, and its cost model of retraining per task is precisely\nwhat pretraining is meant to remove.\n\n## 3 Research Gap\n\nThe corpus question is not unanswered so much as unasked. Selection rules optimise\neither coverage of a feature space that does not yet exist [7] or the label budget\n[9], and both leave the cost of pretraining unmodelled, while label-aware selection\nexplicitly ignores the cost of the corpus itself [9]. Scaling evidence says most of\nthe pool is redundant [10], and the large-scale pretraining papers observe the cost\nwithout testing whether a smaller corpus would suffice [6]. The gap is therefore a\nmismatch of objective: the quantity that decides whether low-resource pretraining is\naffordable is the pretraining cost, and no cited selection rule optimises it, because\nnone of them is stated over a representation that is still being learned [7].\n\nWe take that mismatch as the design target. This paper treats the unlabelled pool as a\ndecision variable rather than a cost, selects a coverage-maximising coreset in a fixed\nspectral embedding before any pretraining happens, and pretrains only on that subset.\nBecause selection precedes learning, the coverage argument of [7] applies where it\npreviously could not, and because the budget is explicit, the plateau observed in [10]\nbecomes a quantity to be reached sooner rather than a law to be obeyed.\n\n## 4 Contributions\n\n- **A selection-before-pretraining pipeline.** Molecules are ranked by a greedy\n  coverage score in a spectral embedding of the graph Laplacian and only the selected\n  coreset is pretrained, so the corpus cost becomes a tunable budget rather than a\n  fixed tax (Section 3, Fig. 1).\n- **Accuracy at a fixed label budget.** At 100 labels per dataset the pipeline\n  improves accuracy by 11.3% over the strongest self-supervised baseline and reduces\n  pretraining cost by 62.4%, from 41 GPU-hours to 15.4 GPU-hours (Table 1, Table 3).\n- **An attribution of the gain.** Removing the coverage score and selecting uniformly\n  drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%, so\n  the benefit comes from which molecules are used rather than from the objective\n  (Table 2).\n- **A budget sweep.** The advantage persists as the coreset budget grows and narrows\n  to 3.1% at a 20% budget, which locates the regime in which selection stops paying\n  (Fig. 2).\n\nWe claim this for molecular property prediction with large unlabelled pools and small\nlabel budgets. We do not claim a theoretical guarantee for the coverage score, and we\ndo not claim transfer to protein families outside the kinase panel used here.\n",
+  "background": "## 1 Background\n\nMolecular property prediction decides which compounds reach an assay, and the binding\nconstraint on it is labelled data: a single high-quality measurement costs weeks of\nbench work, so most tasks supply a few hundred labels rather than the tens of\nthousands that supervised training assumes. The progress of the last decade has been\non the representation side. Message passing over a fixed neighbourhood radius [2] and\nlocalized spectral propagation [1] supply the inductive bias that makes molecular\ngraphs learnable, and physically motivated continuous filters push single-task\naccuracy on quantum-chemical targets towards experimental error [8].\n\nThat bias fixes what a model can represent, not how much data it needs. SchNet-class\nmodels are trained from scratch for every task [8], so each new endpoint pays the full\ntraining cost again, and this is why self-supervised pretraining has become the\ndefault: masked atom and bond objectives, contrastive objectives over chemically\nmeaningful positives, and mutual-information objectives over graph substructures all\ntransfer to downstream endpoints with far fewer labels [3, 4, 5, 6]. The recipe is now\nstable. What it assumes is not.\n\nEvery one of these objectives is defined over an unlabelled pool that is taken as\ngiven, whole and free. Contrastive pretraining scans the entire pool each epoch, so\nthe number of forward passes grows with pool size [4], and graph-transformer\npretraining on eleven million molecules does the same [6]. The corpus therefore\nenters the budget as a cost and never as a decision variable.",
+  "related_work": {
+    "text": "## 2 Related Work\n\nThree routes can be distinguished by what they treat as the thing to optimise. The\nfirst optimises the pretraining objective. Node- and graph-level objectives can be\ncombined, and objective choice matters more than encoder capacity, to the point where\nnaive pretraining hurts [3]; contrastive positives built from atom masking, bond\ndeletion and subgraph removal outperform supervised training when labels are scarce\n[4]; mutual-information objectives between graph and substructure embeddings are\ncompetitive on graph-level benchmarks [5]; and node- and edge-level self-supervision\non a graph transformer transfers to molecular classification at scale [6]. These\nworks differ in sample efficiency per epoch but agree on the setting: the pool is\nfixed and every molecule is visited. Their trade-off is therefore a trade-off in the\nobjective alone, whereas the compute cost per epoch is set by a quantity that none of\nthem varies.\n\nThe second route optimises which molecules are used. Greedy k-centre selection gives\na subset whose training error is bounded relative to the full set [7]; label-aware\nselection instead ranks molecules by how informative they would be for the downstream\nlabel budget and gains up to 8.6% over random pretraining [9]. The two differ in what\nthey trust: [7] trusts a fixed feature space enough to guarantee coverage inside it,\nwhereas [9] trusts an informativeness estimate and gives up any guarantee. Scaling\nstudies supply the missing quantity: downstream error falls as a power law in corpus\nsize and flattens past roughly one million molecules [10], which implies that a large\nfraction of the pool is redundant, but the law is fitted on an uncurated corpus and so\ncannot say how small a curated one could be. Taken together, the three works establish\nthat the corpus matters and that no existing selection rule optimises its cost.\n\nThe third route optimises the encoder and its geometric priors [1, 2, 8]. Localized\npropagation scales linearly in edges and reaches global spectral information only by\nstacking layers [1]; a single message-passing step cannot see beyond its radius [2];\ncontinuous-filter convolution enforces rotation and translation invariance and reaches\nstate of the art on a single task without any pretraining [8]. This route is\ncomplementary rather than competing: it fixes the representable space in which any\nselection rule must operate, and its cost model of retraining per task is precisely\nwhat pretraining is meant to remove.",
+    "groups": [
+      {
+        "group_id": "G1",
+        "label": "Pretraining objectives on a whole unlabelled pool",
+        "dimension": "what is predicted during pretraining, and how much of the pool is touched",
+        "ref_ids": [
+          "R0003",
+          "R0004",
+          "R0005",
+          "R0006"
+        ],
+        "comparison": {
+          "dimension": "pretraining objective vs corpus treatment",
+          "tradeoff": "All four routes spend their effort on the objective and none on which molecules are used: contrastive or generative objectives differ in sample efficiency per epoch, whereas GPU time per epoch is set by the pool size they all take as given. R0003 shows objective choice is decisive, which makes the corpus question invisible rather than answered.",
+          "best_for": "tasks where the unlabelled pool is small enough that scanning it repeatedly is affordable"
+        }
+      },
+      {
+        "group_id": "G2",
+        "label": "Selecting a subset of the unlabelled pool",
+        "dimension": "what signal drives selection, and what it optimises",
+        "ref_ids": [
+          "R0007",
+          "R0009",
+          "R0010"
+        ],
+        "comparison": {
+          "dimension": "selection signal vs what it optimises",
+          "tradeoff": "R0007 optimises coverage of a feature space that does not yet exist, R0009 optimises for the label budget but treats the corpus as free, and R0010 shows the corpus size matters yet assumes it is uncurated. None of the three optimises the cost of pretraining itself, which is the quantity that decides whether low-resource pretraining is affordable.",
+          "best_for": "settings where pretraining compute is abundant and only labels are scarce"
+        }
+      },
+      {
+        "group_id": "G3",
+        "label": "Encoders and geometric priors",
+        "dimension": "what inductive bias the encoder supplies, and whether it is pretrained at all",
+        "ref_ids": [
+          "R0001",
+          "R0002",
+          "R0008"
+        ],
+        "comparison": {
+          "dimension": "inductive bias vs dependence on labelled data",
+          "tradeoff": "These encoders bake in the geometry and topology of molecules, and R0008 shows that is enough to reach state of the art on a single task; the price is that each new task retrains from scratch. The bias and the pretraining question are therefore separable: the encoder fixes what can be represented, and selection fixes what is learned from.",
+          "best_for": "single-task settings with enough labelled data to train from scratch"
+        }
+      }
+    ],
+    "table_file": "related_work_table.md"
+  },
+  "research_gap": {
+    "text": "## 3 Research Gap\n\nThe corpus question is not unanswered so much as unasked. Selection rules optimise\neither coverage of a feature space that does not yet exist [7] or the label budget\n[9], and both leave the cost of pretraining unmodelled, while label-aware selection\nexplicitly ignores the cost of the corpus itself [9]. Scaling evidence says most of\nthe pool is redundant [10], and the large-scale pretraining papers observe the cost\nwithout testing whether a smaller corpus would suffice [6]. The gap is therefore a\nmismatch of objective: the quantity that decides whether low-resource pretraining is\naffordable is the pretraining cost, and no cited selection rule optimises it, because\nnone of them is stated over a representation that is still being learned [7].\n\nWe take that mismatch as the design target. This paper treats the unlabelled pool as a\ndecision variable rather than a cost, selects a coverage-maximising coreset in a fixed\nspectral embedding before any pretraining happens, and pretrains only on that subset.\nBecause selection precedes learning, the coverage argument of [7] applies where it\npreviously could not, and because the budget is explicit, the plateau observed in [10]\nbecomes a quantity to be reached sooner rather than a law to be obeyed.",
+    "gaps": [
+      {
+        "gap_id": "PG1",
+        "statement": "Existing selection rules optimise the label budget or a fixed feature space, and none of them optimises the cost of pretraining the corpus itself.",
+        "derived_from": [
+          {
+            "ref_id": "R0009",
+            "limitation_kind": "shared_limitation",
+            "evidence": {
+              "kind": "quote",
+              "text": "ignores the cost of the pretraining corpus itself, which dominates the budget at scale"
+            }
+          },
+          {
+            "ref_id": "R0004",
+            "limitation_kind": "shared_limitation",
+            "evidence": {
+              "kind": "quote",
+              "text": "the number of forward passes grows linearly with pool size and dominates the compute budget"
+            }
+          },
+          {
+            "ref_id": "R0007",
+            "limitation_kind": "method_gap",
+            "evidence": {
+              "kind": "quote",
+              "text": "the coreset guarantee is stated for a fixed feature space and does not transfer to representations that are themselves learned"
+            }
+          }
+        ],
+        "how_filled": {
+          "contribution_ids": [
+            "C1",
+            "C2"
+          ],
+          "mechanism": "select before pretraining, in a fixed spectral embedding, so the corpus becomes an explicit budget"
+        },
+        "confidence": "high"
+      },
+      {
+        "gap_id": "PG2",
+        "statement": "Scaling evidence shows most of a large unlabelled pool is redundant, but no experiment tests whether a much smaller curated corpus reaches the same plateau.",
+        "derived_from": [
+          {
+            "ref_id": "R0010",
+            "limitation_kind": "uncovered_scenario",
+            "evidence": {
+              "kind": "quote",
+              "text": "the study cannot say whether a smaller curated corpus would reach the same plateau with less compute"
+            }
+          },
+          {
+            "ref_id": "R0006",
+            "limitation_kind": "uncovered_scenario",
+            "evidence": {
+              "kind": "quote",
+              "text": "no experiment studies whether a smaller corpus would suffice"
+            }
+          },
+          {
+            "ref_id": "R0005",
+            "limitation_kind": "shared_limitation",
+            "evidence": {
+              "kind": "quote",
+              "text": "agnostic to which unlabelled graphs are used, so redundant corpora waste compute without improving the objective"
+            }
+          }
+        ],
+        "how_filled": {
+          "contribution_ids": [
+            "C4"
+          ],
+          "mechanism": "a budget sweep that locates where selection stops paying"
+        },
+        "confidence": "medium"
+      }
+    ]
+  },
+  "contributions": {
+    "text": "## 4 Contributions\n\n- **A selection-before-pretraining pipeline.** Molecules are ranked by a greedy\n  coverage score in a spectral embedding of the graph Laplacian and only the selected\n  coreset is pretrained, so the corpus cost becomes a tunable budget rather than a\n  fixed tax (Section 3, Fig. 1).\n- **Accuracy at a fixed label budget.** At 100 labels per dataset the pipeline\n  improves accuracy by 11.3% over the strongest self-supervised baseline and reduces\n  pretraining cost by 62.4%, from 41 GPU-hours to 15.4 GPU-hours (Table 1, Table 3).\n- **An attribution of the gain.** Removing the coverage score and selecting uniformly\n  drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%, so\n  the benefit comes from which molecules are used rather than from the objective\n  (Table 2).\n- **A budget sweep.** The advantage persists as the coreset budget grows and narrows\n  to 3.1% at a 20% budget, which locates the regime in which selection stops paying\n  (Fig. 2).\n\nWe claim this for molecular property prediction with large unlabelled pools and small\nlabel budgets. We do not claim a theoretical guarantee for the coverage score, and we\ndo not claim transfer to protein families outside the kinase panel used here.",
+    "items": [
+      {
+        "contribution_id": "C1",
+        "text": "A selection-before-pretraining pipeline that ranks molecules by coverage in a spectral embedding and pretrains only on the coreset.",
+        "kind": "method",
+        "evidence": [
+          {
+            "locator_type": "section",
+            "locator": "3",
+            "claim_in_source": "A greedy coverage score then selects molecules that maximise the distance to the already-selected set"
+          },
+          {
+            "locator_type": "figure",
+            "locator": "Fig. 1",
+            "claim_in_source": "Figure 1 shows the pipeline."
+          }
+        ],
+        "scope": {
+          "stated_limits": "no theoretical guarantee for the coverage score",
+          "not_claimed": "optimality of the selection rule"
+        }
+      },
+      {
+        "contribution_id": "C2",
+        "text": "At 100 labels per dataset the pipeline improves accuracy by 11.3% over the strongest self-supervised baseline and reduces pretraining cost by 62.4%.",
+        "kind": "experiment",
+        "evidence": [
+          {
+            "locator_type": "table",
+            "locator": "Table 1",
+            "claim_in_source": "GCP reaches 0.742 on ESOL, 0.781 on Tox21 and 0.704 on the kinase panel"
+          },
+          {
+            "locator_type": "result",
+            "locator": "abstract",
+            "claim_in_source": "improves accuracy by 11.3% over the strongest self-supervised baseline and reduces pretraining cost by 62.4%"
+          },
+          {
+            "locator_type": "table",
+            "locator": "Table 3",
+            "claim_in_source": "Pretraining cost falls from 41 GPU-hours to 15.4 GPU-hours"
+          }
+        ],
+        "scope": {
+          "stated_limits": "three datasets only, one of them proprietary",
+          "not_claimed": "generalisation to arbitrary protein families"
+        }
+      },
+      {
+        "contribution_id": "C3",
+        "text": "An attribution of the gain to the coverage score rather than to the self-supervised objective.",
+        "kind": "analysis",
+        "evidence": [
+          {
+            "locator_type": "table",
+            "locator": "Table 2",
+            "claim_in_source": "Removing the coverage score and selecting uniformly drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%"
+          }
+        ],
+        "scope": {
+          "stated_limits": "single ablation study on three datasets",
+          "not_claimed": "a causal decomposition of every design choice"
+        }
+      },
+      {
+        "contribution_id": "C4",
+        "text": "A coreset-budget sweep that locates the regime in which selection stops paying.",
+        "kind": "experiment",
+        "evidence": [
+          {
+            "locator_type": "figure",
+            "locator": "Fig. 2",
+            "claim_in_source": "at a 20% budget the gap narrows to 3.1%"
+          }
+        ],
+        "scope": {
+          "stated_limits": "budgets between 5% and 20% only",
+          "not_claimed": "behaviour beyond the swept budgets"
+        }
+      }
+    ],
+    "table_file": "contribution_table.md"
+  },
+  "citation_map": [
+    {
+      "part": "background",
+      "para": 0,
+      "sentence": "Message passing over a fixed neighbourhood radius [2] and\nlocalized spectral propagation [1] supply the inductive bias that makes molecular\ngraphs learnable, and physically motivated continuous filters push single-task\naccuracy on quantum-chemical targets towards experimental error [8].",
+      "markers": [
+        "[2]",
+        "[1]",
+        "[8]"
+      ],
+      "ref_ids": [
+        "R0002",
+        "R0001",
+        "R0008"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "background",
+      "para": 1,
+      "sentence": "SchNet-class\nmodels are trained from scratch for every task [8], so each new endpoint pays the full\ntraining cost again, and this is why self-supervised pretraining has become the\ndefault: masked atom and bond objectives, contrastive objectives over chemically\nmeaningful positives, and mutual-inform",
+      "markers": [
+        "[8]",
+        "[3, 4, 5, 6]"
+      ],
+      "ref_ids": [
+        "R0008",
+        "R0003",
+        "R0004",
+        "R0005",
+        "R0006"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "background",
+      "para": 2,
+      "sentence": "Contrastive pretraining scans the entire pool each epoch, so\nthe number of forward passes grows with pool size [4], and graph-transformer\npretraining on eleven million molecules does the same [6].",
+      "markers": [
+        "[4]",
+        "[6]"
+      ],
+      "ref_ids": [
+        "R0004",
+        "R0006"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 0,
+      "sentence": "Node- and graph-level objectives can be\ncombined, and objective choice matters more than encoder capacity, to the point where\nnaive pretraining hurts [3]; contrastive positives built from atom masking, bond\ndeletion and subgraph removal outperform supervised training when labels are scarce\n[4]; mutu",
+      "markers": [
+        "[3]",
+        "[4]",
+        "[5]",
+        "[6]"
+      ],
+      "ref_ids": [
+        "R0003",
+        "R0004",
+        "R0005",
+        "R0006"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 1,
+      "sentence": "Greedy k-centre selection gives\na subset whose training error is bounded relative to the full set [7]; label-aware\nselection instead ranks molecules by how informative they would be for the downstream\nlabel budget and gains up to 8.6% over random pretraining [9].",
+      "markers": [
+        "[7]",
+        "[9]"
+      ],
+      "ref_ids": [
+        "R0007",
+        "R0009"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 1,
+      "sentence": "The two differ in what\nthey trust: [7] trusts a fixed feature space enough to guarantee coverage inside it,\nwhereas [9] trusts an informativeness estimate and gives up any guarantee.",
+      "markers": [
+        "[7]",
+        "[9]"
+      ],
+      "ref_ids": [
+        "R0007",
+        "R0009"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 1,
+      "sentence": "Scaling\nstudies supply the missing quantity: downstream error falls as a power law in corpus\nsize and flattens past roughly one million molecules [10], which implies that a large\nfraction of the pool is redundant, but the law is fitted on an uncurated corpus and so\ncannot say how small a curated one",
+      "markers": [
+        "[10]"
+      ],
+      "ref_ids": [
+        "R0010"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 2,
+      "sentence": "The third route optimises the encoder and its geometric priors [1, 2, 8].",
+      "markers": [
+        "[1, 2, 8]"
+      ],
+      "ref_ids": [
+        "R0001",
+        "R0002",
+        "R0008"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "related_work",
+      "para": 2,
+      "sentence": "Localized\npropagation scales linearly in edges and reaches global spectral information only by\nstacking layers [1]; a single message-passing step cannot see beyond its radius [2];\ncontinuous-filter convolution enforces rotation and translation invariance and reaches\nstate of the art on a single task",
+      "markers": [
+        "[1]",
+        "[2]",
+        "[8]"
+      ],
+      "ref_ids": [
+        "R0001",
+        "R0002",
+        "R0008"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 0,
+      "sentence": "Selection rules optimise\neither coverage of a feature space that does not yet exist [7] or the label budget\n[9], and both leave the cost of pretraining unmodelled, while label-aware selection\nexplicitly ignores the cost of the corpus itself [9].",
+      "markers": [
+        "[7]",
+        "[9]",
+        "[9]"
+      ],
+      "ref_ids": [
+        "R0007",
+        "R0009"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 0,
+      "sentence": "Scaling evidence says most of\nthe pool is redundant [10], and the large-scale pretraining papers observe the cost\nwithout testing whether a smaller corpus would suffice [6].",
+      "markers": [
+        "[10]",
+        "[6]"
+      ],
+      "ref_ids": [
+        "R0010",
+        "R0006"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 0,
+      "sentence": "The gap is therefore a\nmismatch of objective: the quantity that decides whether low-resource pretraining is\naffordable is the pretraining cost, and no cited selection rule optimises it, because\nnone of them is stated over a representation that is still being learned [7].",
+      "markers": [
+        "[7]"
+      ],
+      "ref_ids": [
+        "R0007"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    },
+    {
+      "part": "gap",
+      "para": 1,
+      "sentence": "Because selection precedes learning, the coverage argument of [7] applies where it\npreviously could not, and because the budget is explicit, the plateau observed in [10]\nbecomes a quantity to be reached sooner rather than a law to be obeyed.",
+      "markers": [
+        "[7]",
+        "[10]"
+      ],
+      "ref_ids": [
+        "R0007",
+        "R0010"
+      ],
+      "unresolved": [],
+      "resolution": "numeric"
+    }
+  ],
+  "contribution_map": [
+    {
+      "contribution_id": "C1",
+      "evidence": [
+        {
+          "locator_type": "section",
+          "locator": "3",
+          "claim_in_source": "A greedy coverage score then selects molecules that maximise the distance to the already-selected set"
+        },
+        {
+          "locator_type": "figure",
+          "locator": "Fig. 1",
+          "claim_in_source": "Figure 1 shows the pipeline."
+        }
+      ]
+    },
+    {
+      "contribution_id": "C2",
+      "evidence": [
+        {
+          "locator_type": "table",
+          "locator": "Table 1",
+          "claim_in_source": "GCP reaches 0.742 on ESOL, 0.781 on Tox21 and 0.704 on the kinase panel"
+        },
+        {
+          "locator_type": "result",
+          "locator": "abstract",
+          "claim_in_source": "improves accuracy by 11.3% over the strongest self-supervised baseline and reduces pretraining cost by 62.4%"
+        },
+        {
+          "locator_type": "table",
+          "locator": "Table 3",
+          "claim_in_source": "Pretraining cost falls from 41 GPU-hours to 15.4 GPU-hours"
+        }
+      ]
+    },
+    {
+      "contribution_id": "C3",
+      "evidence": [
+        {
+          "locator_type": "table",
+          "locator": "Table 2",
+          "claim_in_source": "Removing the coverage score and selecting uniformly drops accuracy by 6.8%, while removing masked bond prediction costs only 1.4%"
+        }
+      ]
+    },
+    {
+      "contribution_id": "C4",
+      "evidence": [
+        {
+          "locator_type": "figure",
+          "locator": "Fig. 2",
+          "claim_in_source": "at a 20% budget the gap narrows to 3.1%"
+        }
+      ]
+    }
+  ],
+  "references_used": [
+    {
+      "ref_id": "R0001",
+      "number": 1,
+      "key": "kipf2017gcn",
+      "title": "Semi-supervised classification with graph convolutional networks",
+      "authors": [
+        "Kipf, Thomas N",
+        "Welling, Max"
+      ],
+      "year": 2017,
+      "venue": "International Conference on Learning Representations",
+      "doi": "10.48550/arXiv.1609.02907",
+      "type": "conference",
+      "gbt7714": "[1] KIPF TN, WELLING M. Semi-supervised classification with graph convolutional networks[C]. International Conference on Learning Representations, 2017. DOI: 10.48550/arXiv.1609.02907.",
+      "ieee": "[1] T. N. Kipf and M. Welling, “Semi-supervised classification with graph convolutional networks,” in Proc. International Conference on Learning Representations, 2017. doi: 10.48550/arXiv.1609.02907.",
+      "apa7": "Kipf, T. N., & Welling, M. (2017). Semi-supervised classification with graph convolutional networks. International Conference on Learning Representations. https://doi.org/10.48550/arXiv.1609.02907"
+    },
+    {
+      "ref_id": "R0002",
+      "number": 2,
+      "key": "gilmer2017mpnn",
+      "title": "Neural message passing for quantum chemistry",
+      "authors": [
+        "Gilmer, Justin",
+        "Schoenholz, Samuel S",
+        "Riley, Patrick F",
+        "Vinyals, Oriol",
+        "Dahl, George E"
+      ],
+      "year": 2017,
+      "venue": "International Conference on Machine Learning",
+      "doi": "10.48550/arXiv.1704.01212",
+      "type": "conference",
+      "gbt7714": "[2] GILMER J, SCHOENHOLZ SS, RILEY PF, et al. Neural message passing for quantum chemistry[C]. International Conference on Machine Learning, 2017: 1263-1272. DOI: 10.48550/arXiv.1704.01212.",
+      "ieee": "[2] J. Gilmer, S. S. Schoenholz, P. F. Riley, et al., “Neural message passing for quantum chemistry,” in Proc. International Conference on Machine Learning, pp. 1263-1272, 2017. doi: 10.48550/arXiv.1704.01212.",
+      "apa7": "Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O., & Dahl, G. E. (2017). Neural message passing for quantum chemistry. International Conference on Machine Learning, 1263-1272. https://doi.org/10.48550/arXiv.1704.01212"
+    },
+    {
+      "ref_id": "R0003",
+      "number": 3,
+      "key": "hu2020pretrain",
+      "title": "Strategies for pre-training graph neural networks",
+      "authors": [
+        "Hu, Weihua",
+        "Liu, Bowen",
+        "Gomes, Joseph",
+        "Zitnik, Marinka",
+        "Liang, Percy",
+        "Poczos, Barnabas",
+        "Leskovec, Jure"
+      ],
+      "year": 2020,
+      "venue": "International Conference on Learning Representations",
+      "doi": "10.48550/arXiv.1905.12265",
+      "type": "conference",
+      "gbt7714": "[3] HU W, LIU B, GOMES J, et al. Strategies for pre-training graph neural networks[C]. International Conference on Learning Representations, 2020. DOI: 10.48550/arXiv.1905.12265.",
+      "ieee": "[3] W. Hu, B. Liu, J. Gomes, et al., “Strategies for pre-training graph neural networks,” in Proc. International Conference on Learning Representations, 2020. doi: 10.48550/arXiv.1905.12265.",
+      "apa7": "Hu, W., Liu, B., Gomes, J., Zitnik, M., Liang, P., Poczos, B., & Leskovec, J. (2020). Strategies for pre-training graph neural networks. International Conference on Learning Representations. https://doi.org/10.48550/arXiv.1905.12265"
+    },
+    {
+      "ref_id": "R0004",
+      "number": 4,
+      "key": "wang2022molclr",
+      "title": "MolCLR: molecular contrastive learning of representations via graph neural networks",
+      "authors": [
+        "Wang, Yuyang",
+        "Wang, Jianren",
+        "Cao, Zhiming",
+        "Barati Farimani, Amir"
+      ],
+      "year": 2022,
+      "venue": "Nature Machine Intelligence",
+      "doi": "10.1038/s42256-022-00457-9",
+      "type": "journal",
+      "gbt7714": "[4] WANG Y, WANG J, CAO Z, et al. MolCLR: molecular contrastive learning of representations via graph neural networks[J]. Nature Machine Intelligence, 2022, 4(3): 279-287. DOI: 10.1038/s42256-022-00457-9.",
+      "ieee": "[4] Y. Wang, J. Wang, Z. Cao, et al., “MolCLR: molecular contrastive learning of representations via graph neural networks,” Nature Machine Intelligence, vol. 4, no. 3, pp. 279-287, 2022. doi: 10.1038/s42256-022-00457-9.",
+      "apa7": "Wang, Y., Wang, J., Cao, Z., & Barati Farimani, A. (2022). MolCLR: molecular contrastive learning of representations via graph neural networks. Nature Machine Intelligence, 4(3), 279-287. https://doi.org/10.1038/s42256-022-00457-9"
+    },
+    {
+      "ref_id": "R0005",
+      "number": 5,
+      "key": "sun2020infograph",
+      "title": "InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization",
+      "authors": [
+        "Sun, Fan-Yun",
+        "Hoffmann, Jordan",
+        "Verma, Vikas",
+        "Tang, Jian"
+      ],
+      "year": 2020,
+      "venue": "International Conference on Learning Representations",
+      "doi": "10.48550/arXiv.1908.01000",
+      "type": "conference",
+      "gbt7714": "[5] SUN FY, HOFFMANN J, VERMA V, et al. InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization[C]. International Conference on Learning Representations, 2020. DOI: 10.48550/arXiv.1908.01000.",
+      "ieee": "[5] F. Y. Sun, J. Hoffmann, V. Verma, et al., “InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization,” in Proc. International Conference on Learning Representations, 2020. doi: 10.48550/arXiv.1908.01000.",
+      "apa7": "Sun, F. Y., Hoffmann, J., Verma, V., & Tang, J. (2020). InfoGraph: unsupervised and semi-supervised graph-level representation learning via mutual information maximization. International Conference on Learning Representations. https://doi.org/10.48550/arXiv.1908.01000"
+    },
+    {
+      "ref_id": "R0006",
+      "number": 6,
+      "key": "rong2020grok",
+      "title": "Self-supervised graph transformer on large-scale molecular data",
+      "authors": [
+        "Rong, Yu",
+        "Bian, Yatao",
+        "Xu, Tingyang",
+        "Xie, Weiyang",
+        "Wei, Ying",
+        "Huang, Wenbing",
+        "Huang, Junzhou"
+      ],
+      "year": 2020,
+      "venue": "Advances in Neural Information Processing Systems",
+      "doi": "10.48550/arXiv.2007.02835",
+      "type": "conference",
+      "gbt7714": "[6] RONG Y, BIAN Y, XU T, et al. Self-supervised graph transformer on large-scale molecular data[C]. Advances in Neural Information Processing Systems, 2020, 33: 12559-12571. DOI: 10.48550/arXiv.2007.02835.",
+      "ieee": "[6] Y. Rong, Y. Bian, T. Xu, et al., “Self-supervised graph transformer on large-scale molecular data,” in Proc. Advances in Neural Information Processing Systems, vol. 33, pp. 12559-12571, 2020. doi: 10.48550/arXiv.2007.02835.",
+      "apa7": "Rong, Y., Bian, Y., Xu, T., Xie, W., Wei, Y., Huang, W., & Huang, J. (2020). Self-supervised graph transformer on large-scale molecular data. Advances in Neural Information Processing Systems, 33, 12559-12571. https://doi.org/10.48550/arXiv.2007.02835"
+    },
+    {
+      "ref_id": "R0007",
+      "number": 7,
+      "key": "sener2018coreset",
+      "title": "Active learning for convolutional neural networks: a core-set approach",
+      "authors": [
+        "Sener, Ozan",
+        "Savarese, Silvio"
+      ],
+      "year": 2018,
+      "venue": "International Conference on Learning Representations",
+      "doi": "10.48550/arXiv.1708.00489",
+      "type": "conference",
+      "gbt7714": "[7] SENER O, SAVARESE S. Active learning for convolutional neural networks: a core-set approach[C]. International Conference on Learning Representations, 2018. DOI: 10.48550/arXiv.1708.00489.",
+      "ieee": "[7] O. Sener and S. Savarese, “Active learning for convolutional neural networks: a core-set approach,” in Proc. International Conference on Learning Representations, 2018. doi: 10.48550/arXiv.1708.00489.",
+      "apa7": "Sener, O., & Savarese, S. (2018). Active learning for convolutional neural networks: a core-set approach. International Conference on Learning Representations. https://doi.org/10.48550/arXiv.1708.00489"
+    },
+    {
+      "ref_id": "R0008",
+      "number": 8,
+      "key": "schutt2017schnet",
+      "title": "SchNet: a continuous-filter convolutional neural network for modeling quantum interactions",
+      "authors": [
+        "Sch\\\"utt, Kristof T",
+        "Kindermans, Pieter-Jan",
+        "Sauceda, Huziel E",
+        "Chmiela, Stefan",
+        "Tkatchenko, Alexandre",
+        "M\\\"uller, Klaus-Robert"
+      ],
+      "year": 2017,
+      "venue": "Advances in Neural Information Processing Systems",
+      "doi": "10.48550/arXiv.1706.08566",
+      "type": "conference",
+      "gbt7714": "[8] SCH\\\"UTT KT, KINDERMANS PJ, SAUCEDA HE, et al. SchNet: a continuous-filter convolutional neural network for modeling quantum interactions[C]. Advances in Neural Information Processing Systems, 2017: 991-1001. DOI: 10.48550/arXiv.1706.08566.",
+      "ieee": "[8] K. T. Sch\\\"utt, P. J. Kindermans, H. E. Sauceda, et al., “SchNet: a continuous-filter convolutional neural network for modeling quantum interactions,” in Proc. Advances in Neural Information Processing Systems, pp. 991-1001, 2017. doi: 10.48550/arXiv.1706.08566.",
+      "apa7": "Sch\\\"Utt, K. T., Kindermans, P. J., Sauceda, H. E., Chmiela, S., Tkatchenko, A., & M\\\"Uller, K. R. (2017). SchNet: a continuous-filter convolutional neural network for modeling quantum interactions. Advances in Neural Information Processing Systems, 991-1001. https://doi.org/10.48550/arXiv.1706.08566"
+    },
+    {
+      "ref_id": "R0009",
+      "number": 9,
+      "key": "liu2024molcoreset",
+      "title": "Label-scarce coreset selection for molecular pretraining",
+      "authors": [
+        "Liu, Hongyu",
+        "Ma, Xue",
+        "Zhao, Yu"
+      ],
+      "year": 2024,
+      "venue": "Briefings in Bioinformatics",
+      "doi": "10.1093/bib/bbae051",
+      "type": "journal",
+      "gbt7714": "[9] LIU H, MA X, ZHAO Y. Label-scarce coreset selection for molecular pretraining[J]. Briefings in Bioinformatics, 2024, 25(2): bbae051. DOI: 10.1093/bib/bbae051.",
+      "ieee": "[9] H. Liu, X. Ma, and Y. Zhao, “Label-scarce coreset selection for molecular pretraining,” Briefings in Bioinformatics, vol. 25, no. 2, pp. bbae051, 2024. doi: 10.1093/bib/bbae051.",
+      "apa7": "Liu, H., Ma, X., & Zhao, Y. (2024). Label-scarce coreset selection for molecular pretraining. Briefings in Bioinformatics, 25(2), bbae051. https://doi.org/10.1093/bib/bbae051"
+    },
+    {
+      "ref_id": "R0010",
+      "number": 10,
+      "key": "chen2025scaling",
+      "title": "Scaling laws for unlabelled molecular pretraining corpora",
+      "authors": [
+        "Chen, Lei",
+        "Novak, Ana",
+        "Park, Jiho"
+      ],
+      "year": 2025,
+      "venue": "International Conference on Machine Learning",
+      "doi": "10.48550/arXiv.2501.01234",
+      "type": "conference",
+      "gbt7714": "[10] CHEN L, NOVAK A, PARK J. Scaling laws for unlabelled molecular pretraining corpora[C]. International Conference on Machine Learning, 2025. DOI: 10.48550/arXiv.2501.01234.",
+      "ieee": "[10] L. Chen, A. Novak, and J. Park, “Scaling laws for unlabelled molecular pretraining corpora,” in Proc. International Conference on Machine Learning, 2025. doi: 10.48550/arXiv.2501.01234.",
+      "apa7": "Chen, L., Novak, A., & Park, J. (2025). Scaling laws for unlabelled molecular pretraining corpora. International Conference on Machine Learning. https://doi.org/10.48550/arXiv.2501.01234"
+    }
+  ],
+  "evidence": {
+    "group_ledger": [
+      {
+        "group_id": "G1",
+        "dimension": "what is predicted during pretraining, and how much of the pool is touched",
+        "works": [
+          "R0003",
+          "R0004",
+          "R0005",
+          "R0006"
+        ]
+      },
+      {
+        "group_id": "G2",
+        "dimension": "what signal drives selection, and what it optimises",
+        "works": [
+          "R0007",
+          "R0009",
+          "R0010"
+        ]
+      },
+      {
+        "group_id": "G3",
+        "dimension": "what inductive bias the encoder supplies, and whether it is pretrained at all",
+        "works": [
+          "R0001",
+          "R0002",
+          "R0008"
+        ]
+      }
+    ],
+    "gap_provenance": [
+      {
+        "gap_id": "PG1",
+        "from": [
+          "R0009",
+          "R0004",
+          "R0007"
+        ],
+        "limitation_kinds": [
+          "shared_limitation",
+          "shared_limitation",
+          "method_gap"
+        ],
+        "evidence_kinds": [
+          "quote",
+          "quote",
+          "quote"
+        ]
+      },
+      {
+        "gap_id": "PG2",
+        "from": [
+          "R0010",
+          "R0006",
+          "R0005"
+        ],
+        "limitation_kinds": [
+          "uncovered_scenario",
+          "uncovered_scenario",
+          "shared_limitation"
+        ],
+        "evidence_kinds": [
+          "quote",
+          "quote",
+          "quote"
+        ]
+      }
+    ],
+    "manuscript_locators": {
+      "figures": [
+        "Fig. 1",
+        "Fig. 2"
+      ],
+      "tables": [
+        "Table 1",
+        "Table 2",
+        "Table 3"
+      ],
+      "sections": [
+        "Graph Coreset Pretraining for Low-Resource Molecular Property Prediction",
+        "Introduction",
+        "Related Work",
+        "Method",
+        "Experiments",
+        "Conclusion"
+      ],
+      "n_numbers_indexed": 10
+    }
+  },
+  "audit": {
+    "gate": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "report_file": "audit_report.md",
+    "summary_file": "audit_report.json",
+    "rules_failed": []
+  },
+  "uncertainty": {
+    "unresolved_citations": [],
+    "ambiguous_citations": [],
+    "unchecked_quotes": [],
+    "author_judgments": [],
+    "notes": [
+      "[01:02:41] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\examples\\input out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\clean_en work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_clean",
+      "[01:02:41] case_id=gcp-example-001 task='为这篇论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分。相关工作要按路线分组比较，不要逐篇摘要；研究空白必须从已引文献的局限推出；贡献要与正'",
+      "[01:02:41] audit gate=pass errors=0 warnings=0"
+    ],
+    "not_done": []
+  },
+  "changes": [
+    {
+      "step": "plan",
+      "what": "解析输入、建文献库与稿件索引、写脚手架与账本模板"
+    },
+    {
+      "step": "draft",
+      "what": "按账本写 background / related_work / gap / contributions 四部分"
+    },
+    {
+      "step": "audit",
+      "what": "运行 18 项确定性核对，逐条给出错误与警告"
+    },
+    {
+      "step": "finalize",
+      "what": "渲染成稿、比较表、贡献表、引用表与 result.json"
+    }
+  ],
+  "sources": [
+    {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\examples\\input\\manuscript.md",
+      "sha256": "9afa141e8c2d974c0e00211a4e6d436356881ad03eb4e74715db653e1602f8be",
+      "kind": "input"
+    },
+    {
+      "path": "D:\\DSH default\\writing08-skill\\submission\\examples\\input\\library.bib",
+      "sha256": "96e44d40691a0de822744ede6c27c8d85d7c641b134aa6e3ecb065eeca4ca024",
+      "kind": "input"
+    }
+  ],
+  "artifacts": {
+    "introduction_related_work": "introduction_related_work.md",
+    "related_work_table": "related_work_table.md",
+    "contribution_table": "contribution_table.md",
+    "audit_report_md": "audit_report.md",
+    "audit_report_json": "audit_report.json",
+    "citation_map": "citation_map.json",
+    "refs_cited_bib": "refs_cited.bib",
+    "refs_cited_txt": "refs_cited.txt",
+    "refs_cited_style": "ieee"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "skill_version": "1.0.0",
+    "now_year": 2026
+  },
+  "log": [
+    "[01:02:41] intrograph 1.0.0 stage=finalize input=D:\\DSH default\\writing08-skill\\submission\\examples\\input out=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\clean_en work=D:\\DSH default\\writing08-skill\\submission\\execution\\results\\_tmp\\w_clean",
+    "[01:02:41] case_id=gcp-example-001 task='为这篇论文写引言与相关工作：研究背景、相关工作（按方法路线分组比较）、研究空白、主要贡献四部分。相关工作要按路线分组比较，不要逐篇摘要；研究空白必须从已引文献的局限推出；贡献要与正'",
+    "[01:02:41] audit gate=pass errors=0 warnings=0"
+  ]
+}

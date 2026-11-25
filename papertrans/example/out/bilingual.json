@@ -1,0 +1,175 @@
+[
+ {
+  "id": "S001",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "bbox": [
+   211.5,
+   148.8,
+   399.9,
+   166.0
+  ],
+  "role": "title",
+  "source": "Attention Is All You Need",
+  "target": "注意力就是你所需要的一切",
+  "verdict": "pass",
+  "issues": [],
+  "marks": [],
+  "backfill": []
+ },
+ {
+  "id": "S002",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "bbox": [
+   283.8,
+   385.6,
+   328.2,
+   397.6
+  ],
+  "role": "heading",
+  "source": "Abstract",
+  "target": "摘要",
+  "verdict": "pass",
+  "issues": [],
+  "marks": [],
+  "backfill": []
+ },
+ {
+  "id": "S003",
+  "page": 1,
+  "pages": [
+   1
+  ],
+  "bbox": [
+   143.6,
+   413.3,
+   469.8,
+   576.1
+  ],
+  "role": "body",
+  "source": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+  "target": "主流的序列转换模型基于复杂的循环或卷积神经网络，包含一个编码器和一个解码器。表现最好的模型还通过注意力机制连接编码器和解码器。我们提出一种新的简单网络架构——Transformer，它仅基于注意力机制，完全摒弃了循环和卷积。在两项机器翻译任务上的实验表明，这些模型质量更优，同时更易并行化，训练时间显著减少。我们的模型在 WMT 2014 英德翻译任务上取得 28.4 BLEU，比包括集成模型在内的现有最佳结果高出 2 BLEU 以上。在 WMT 2014 英法翻译任务上，我们的模型在 8 块 GPU 上训练 3.5 days 后，取得了 41.8 的单模型最佳 BLEU 分数，仅相当于文献中最佳模型训练成本的一小部分。我们通过将 Transformer 成功应用于英语成分句法分析（在大规模和有限训练数据下均如此），证明它能很好地泛化到其他任务。[待确认: 模型名 Transformer 按原文保留]",
+  "verdict": "warn",
+  "issues": [
+   {
+    "type": "placeholder_order_changed",
+    "severity": "warn",
+    "n_inversions": 2,
+    "pairs": [
+     {
+      "a": "28.4",
+      "b": "2014"
+     },
+     {
+      "a": "41.8",
+      "b": "3.5 days"
+     }
+    ]
+   },
+   {
+    "type": "numbers_added",
+    "severity": "warn",
+    "values": [
+     "8"
+    ]
+   },
+   {
+    "type": "translator_unsure",
+    "severity": "info",
+    "marker": "[待确认: 模型名 Transformer 按原文保留]"
+   }
+  ],
+  "marks": [
+   {
+    "ph": "⟦TERM#0001⟧",
+    "kind": "TERM",
+    "src": "sequence transduction",
+    "tgt": "序列转换",
+    "action": "backfill"
+   },
+   {
+    "ph": "⟦TERM#0002⟧",
+    "kind": "TERM",
+    "src": "convolutional neural networks",
+    "tgt": "卷积神经网络",
+    "action": "backfill"
+   },
+   {
+    "ph": "⟦TERM#0003⟧",
+    "kind": "TERM",
+    "src": "attention mechanism",
+    "tgt": "注意力机制",
+    "action": "backfill"
+   },
+   {
+    "ph": "⟦TERM#0004⟧",
+    "kind": "TERM",
+    "src": "attention mechanisms",
+    "tgt": "注意力机制",
+    "action": "backfill"
+   },
+   {
+    "ph": "⟦TERM#0005⟧",
+    "kind": "TERM",
+    "src": "machine translation",
+    "tgt": "机器翻译",
+    "action": "backfill"
+   },
+   {
+    "ph": "⟦NUM#0007⟧",
+    "kind": "NUM",
+    "src": "2014",
+    "tgt": "2014",
+    "action": "restore"
+   },
+   {
+    "ph": "⟦NUM#0006⟧",
+    "kind": "NUM",
+    "src": "28.4",
+    "tgt": "28.4",
+    "action": "restore"
+   },
+   {
+    "ph": "⟦NUM#0008⟧",
+    "kind": "NUM",
+    "src": "2014",
+    "tgt": "2014",
+    "action": "restore"
+   },
+   {
+    "ph": "⟦NUM#0010⟧",
+    "kind": "NUM",
+    "src": "3.5 days",
+    "tgt": "3.5 days",
+    "action": "restore"
+   },
+   {
+    "ph": "⟦NUM#0009⟧",
+    "kind": "NUM",
+    "src": "41.8",
+    "tgt": "41.8",
+    "action": "restore"
+   },
+   {
+    "ph": "⟦TERM#0011⟧",
+    "kind": "TERM",
+    "src": "English constituency parsing",
+    "tgt": "英语成分句法分析",
+    "action": "backfill"
+   }
+  ],
+  "backfill": [
+   "序列转换",
+   "卷积神经网络",
+   "注意力机制",
+   "注意力机制",
+   "机器翻译",
+   "英语成分句法分析"
+  ]
+ }
+]

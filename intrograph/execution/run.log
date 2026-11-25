@@ -1,0 +1,11 @@
+[2026-11-26T01:02:41] === reproduce start (python 3.14.6, skill=D:\DSH default\writing08-skill\submission) ===
+[2026-11-26T01:02:41] --- run 1: clean English case ---
+[2026-11-26T01:02:41] run_case exit=0 [01:02:41] done in 0.1s
+[2026-11-26T01:02:41] clean_en: 9/9 checks passed; failed=[]
+[2026-11-26T01:02:41] --- run 2: planted-defect case ---
+[2026-11-26T01:02:41] defective: 21/21 defects caught; 4/4 checks passed; missed=[]
+[2026-11-26T01:02:42] --- run 3: Chinese case ---
+[2026-11-26T01:02:42] zh: 9/9 checks passed; failed=[]
+[2026-11-26T01:02:42] --- run 4: no reference library (honest degradation) ---
+[2026-11-26T01:02:42] no_library: state=partial gate=fail flagged=1 | 6/6 checks passed
+[2026-11-26T01:02:42] === reproduce done in 1.80s: 28/28 self-test checks passed, 21/21 planted defects caught ===
