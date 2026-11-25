@@ -1,0 +1,12 @@
+2026-03-02 09:14:02 INFO  python 3.10.13 | torch 2.1.2 | CUDA Version: 12.1 | cudnn 8.9.2
+2026-03-02 09:14:02 INFO  device NVIDIA A100-SXM4-40GB count=1
+2026-03-02 09:14:03 INFO  loaded config materials/config.yaml
+2026-03-02 09:14:03 INFO  run batch_size=64 learning_rate=0.0003 epochs=120 seed=42 optimizer=adamw
+2026-03-02 09:14:04 INFO  dataset PolymerSplit v1.2 rows=10000
+2026-03-02 09:14:04 INFO  split train=8000 val=1000 test=1000 split_seed=7
+2026-03-02 09:14:09 INFO  Epoch 1/120 loss=0.8421 val_mae=0.3184
+2026-03-02 09:16:41 INFO  Epoch 20/120 loss=0.2217 val_mae=0.0902
+2026-03-02 13:31:12 INFO  Epoch 97/120 loss=0.0873 val_mae=0.0412
+2026-03-02 13:41:55 INFO  best_epoch=97 val_mae=0.0412 elapsed 4h27m
+2026-03-02 13:41:55 WARN  weight_decay=0.1 read from command line, overriding config value 0.01
+2026-03-02 13:41:55 INFO  wrote runs/2026-03-02/best.pt

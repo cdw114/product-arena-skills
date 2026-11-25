@@ -1,0 +1,31 @@
+{
+  "_comment": "Optional. Drop this at <work>/output_plan.json when the case's output_contract field names do not match a deliverable by keyword. emit_outputs.py resolves each contract key: an entry here wins, otherwise the key is keyword-matched against a deliverable. A key that resolves to nothing is written as null and named in result.json uncertainty -- it is never filled with plausible text.",
+
+  "_deliverable_ids": [
+    "draft     - the section (methods_and_experiments.md)",
+    "params    - the parameter table (md + csv)",
+    "evidence  - the fact-to-source map",
+    "coverage  - the six-element report",
+    "questions - the author question list",
+    "repro     - the reproducibility checklist",
+    "changelog - the change log"
+  ],
+
+  "case_id": "OVERRIDE-ONLY-IF-case.json-has-none",
+
+  "draft": "/app/work/draft.md",
+
+  "fields": {
+    "methods_section": {"deliverable": "draft"},
+    "parameter_table": {"deliverable": "params"},
+    "evidence_map": {"deliverable": "evidence"},
+    "coverage_report": {"deliverable": "coverage"},
+    "open_questions": {"deliverable": "questions"},
+
+    "_example_inline_override": {
+      "_comment": "Use {\"deliverable\": ..., \"text\": ...} to replace a field's content with text you wrote for that field specifically. The deliverable still ships as a file.",
+      "deliverable": "coverage",
+      "text": "Custom coverage statement for this case."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "EXAMPLE-0001",
+  "deliverable_language": "en",
+  "audience": "peer reviewers of a machine-learning for materials paper",
+  "section": "Methods and Experiments",
+  "output_contract": {
+    "methods_section": "markdown text of the Methods and Experiments section, ready for the author to edit",
+    "parameter_table": "table of parameter name, value, unit, target and source",
+    "evidence_map": "per-fact source locator so a reviewer can re-open every number",
+    "coverage_report": "status of the six required elements (steps, setup, parameters, datasets, baselines, reproducibility and limitations)",
+    "open_questions": "items only the author can confirm, each naming the file to open"
+  },
+  "notes": "TOY CASE. Every file under materials/ is written for this example; no real experiment was run. The numbers are internally consistent on purpose so the audit can be exercised in both directions."
+}

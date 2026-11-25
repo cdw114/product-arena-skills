@@ -1,0 +1,30 @@
+# Toy fixture for the methods-experiments-writer self-test.
+# This file is not a real experiment configuration.
+
+experiment:
+  name: polymer_gnn_regression
+  seed: 42
+
+model:
+  arch: GINEConv
+  hidden_dim: 256
+  num_layers: 4
+  dropout: 0.1
+
+train:
+  optimizer: adamw
+  learning_rate: 3e-4
+  batch_size: 64
+  epochs: 120
+  weight_decay: 0.01
+  warmup_steps: 500
+  grad_accum: 2
+  precision: bf16
+
+data:
+  name: PolymerSplit
+  version: v1.2
+  split_seed: 7
+  train: 0.8
+  val: 0.1
+  test: 0.1

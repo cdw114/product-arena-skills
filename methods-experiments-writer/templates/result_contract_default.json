@@ -1,0 +1,8 @@
+{
+  "_comment": "Fallback output_contract, used only when case.json does not declare one. result.json.output_contract_source then reads 'default', so a reviewer can tell a real contract from this one. Keys are the field names result.json must carry; values describe what the field should contain.",
+  "methods_section": "markdown text of the Methods and Experiments section, ready for the author to edit",
+  "parameter_table": "table of parameter name, value, unit, target and source",
+  "evidence_map": "per-fact source locator so a reviewer can re-open every number",
+  "coverage_report": "status of the six required elements (procedure, setup, parameters, datasets, baselines, reproducibility and limitations)",
+  "open_questions": "items only the author can confirm, each naming the file to open"
+}

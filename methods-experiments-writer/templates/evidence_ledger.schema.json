@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/mew-evidence-ledger/v1",
+  "title": "Evidence ledger row",
+  "description": "One atomic fact recovered from one place in one material file. The locator is the point of the row: a row a reviewer cannot re-open is not evidence. `scripts/scan_case.py` writes rows in this shape; a row added by hand must satisfy it too.",
+  "type": "object",
+  "required": ["eid", "kind", "name", "value", "source_file", "source_locator", "method", "confidence", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "eid": {
+      "type": "string",
+      "pattern": "^E[0-9]{4}$",
+      "description": "Stable identifier, cited in the draft as [E0001]. Assigned in extraction order, so a re-scan of unchanged inputs reproduces it."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["config_value", "code_default", "code_fact", "log_value", "dataset_fact", "paper_statement", "table_fact", "raw_line"],
+      "description": "Where the fact came from, in terms of how far it can be trusted: config_value is the configured default, log_value is what a run recorded, paper_statement is prose."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The key as it appears in the source, not a normalised name: `train.learning_rate`, `--batch-size`, `split_seed`."
+    },
+    "value": {
+      "description": "The value as extracted. Keep the source's own type where possible (number, boolean, string). A string that carries a unit, such as `4h27m`, is acceptable.",
+      "type": ["string", "number", "boolean", "null"]
+    },
+    "display": {
+      "type": "string",
+      "description": "How the value is written in prose and in the parameter table."
+    },
+    "unit": {
+      "type": "string",
+      "description": "`1` for dimensionless, `name` for a symbol-valued setting, otherwise the unit: `samples`, `epochs`, `steps`, `GB`, `runs`, `ratio`, `version`."
+    },
+    "applies_to": {
+      "type": "string",
+      "description": "What the value acts on: optimiser, dataloader, model, training loop, learning-rate schedule. Not where it was found."
+    },
+    "source_file": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path relative to the case input root."
+    },
+    "source_locator": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Re-openable pointer. Text or log: `<path>:<line>` (1-based). JSON/YAML/TOML: `<path>#/<json-pointer>`."
+    },
+    "method": {
+      "type": "string",
+      "description": "The extraction rule that produced the row: `yaml`, `toml`, `argparse_default`, `module_constant`, `seed_call`, `log_kv`, `version_line`, `split_count_line`, `baseline_line`, `prose_sentence`, `raw_line`. Lets a reviewer tell a parsed value from a guessed one."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "high = parsed out of a structured file; medium = log line or heuristic key match; low = prose sentence, usable for wording only and never as a number."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ok", "conflict"],
+      "description": "conflict means another source records a different value for the same parameter. Both rows keep status conflict and neither is resolved by the skill."
+    },
+    "note": {
+      "type": "string",
+      "description": "Free text: the other side of a conflict, or why a row was kept despite low confidence."
+    },
+    "cited_in_draft": {
+      "type": "boolean",
+      "description": "Set by the audit when the eid appears in the draft."
+    }
+  }
+}

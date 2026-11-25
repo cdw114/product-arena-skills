@@ -5,17 +5,19 @@
 
 ## 作品索引
 
-| Skill | 中文名 | 做什么 |
-|-|-|-|
-| [`academic-polishing`](./academic-polishing) | 学术润色 | Polish academic text (Chinese or English; journal paper, thesis, grant application, reviewer response, abstrac |
-| [`latex-build-doctor`](./latex-build-doctor) | LaTeX 编译诊断 | LaTeX 编译诊断与修复闭环——把「编不过」拆成可验证的根因与最小补丁：递归识别主文件/子文件/宏包/参考文献后端，选对引擎（pdfLaTeX / XeLaTeX / LuaLaTeX / latexmk）与编译轮次， |
-| [`nanopublication`](./nanopublication) | 纳米出版物抽取 | Extract atomic scientific claims (nanopublications) from a paper passage. |
-| [`papertrans`](./papertrans) | 论文翻译 | Translate a scientific paper PDF into a paragraph-aligned bilingual document with enforced terminology, protec |
-| [`literature-kg`](./literature-kg) | 文献知识图谱 | Build an evidence-backed literature knowledge graph from one or more paper corpora (JATS paragraph text, JSON/ |
-| [`refmgr-citations`](./refmgr-citations) | 参考文献与引用管理 | 参考文献与引用管理 Skill——对一份真实稿件 + 一份真实文献库做"挂得对 / 编得顺 / 收得净 / 对得上"四件事：识别需来源支撑的论断句并给出引用插入位置； |
-| [`intrograph`](./intrograph) | 引言与相关工作写作 | 引言与相关工作写作——先建四本可核对的账（引用账、分组账、空白账、贡献-证据账），再据此写"研究背景 / 相关工作 / 研究空白 / 主要贡献"，最后用 18 项确定性核对逐条拦截"编造引用、无来源论断、逐篇摘要拼接、无 |
+| 题目 | Skill | 中文名 | 做什么 |
+|-|-|-|-|
+| `写作02` | [`academic-polishing`](./academic-polishing) | 学术语言润色 | Polish academic text (Chinese or English; journal paper, thesis, grant application, reviewer respons |
+| `阅读03` | [`papertrans`](./papertrans) | 文献翻译 | Translate a scientific paper PDF into a paragraph-aligned bilingual document with enforced terminolo |
+| `写作04` | [`refmgr-citations`](./refmgr-citations) | 参考文献与引用管理 | 参考文献与引用管理 Skill——对一份真实稿件 + 一份真实文献库做"挂得对 / 编得顺 / 收得净 / 对得上"四件事：识别需来源支撑的论断句并给出引用插入位置； |
+| `写作08` | [`intrograph`](./intrograph) | 引言与相关工作写作 | 引言与相关工作写作——先建四本可核对的账（引用账、分组账、空白账、贡献-证据账），再据此写"研究背景 / 相关工作 / 研究空白 / 主要贡献"，最后用 18 项确定性核对逐条拦截"编造引用、无来源论 |
+| `写作09` | [`methods-experiments-writer`](./methods-experiments-writer) | 方法与实验章节写作 | Turn scattered research materials (config files, training logs, code, dataset notes, README, paper)  |
+| `阅读10` | [`paper-structured-notes`](./paper-structured-notes) | 文献总结与结构化 | >- |
+| `写作13` | [`latex-build-doctor`](./latex-build-doctor) | LaTeX 写作与编译 | LaTeX 编译诊断与修复闭环——把「编不过」拆成可验证的根因与最小补丁：递归识别主文件/子文件/宏包/参考文献后端，选对引擎（pdfLaTeX / XeLaTeX / LuaLaTeX / late |
+| `阅读14` | [`nanopublication`](./nanopublication) | Nanopublication | Extract atomic scientific claims (nanopublications) from a paper passage. |
+| `阅读15` | [`literature-kg`](./literature-kg) | 文献知识图谱构建 | Build an evidence-backed literature knowledge graph from one or more paper corpora (JATS paragraph t |
 
-另有阅读类 PDF 解析 Skill 位于独立仓库：[`weekly-skill`](https://github.com/cdw114/weekly-skill)。
+另有一道题的 Skill 位于独立仓库：[`weekly-skill`](https://github.com/cdw114/weekly-skill)（阅读01 文献文档解析）。
 
 ## 怎么用这些 Skill
 
@@ -41,7 +43,7 @@ cp -r product-arena-skills/<skill> ~/.claude/skills/
 
 - `SKILL.md` —— Skill 入口，YAML frontmatter + 执行流程 + 输出契约 + 失败处理
 - `GITHUB_URL.txt` —— 指回本目录的公开链接
-- `scripts/` / `references/` / `examples/` / `tests/` —— 该 Skill 实际依赖的资源
+- `scripts/` / `references/` / `examples/` / `tests/` / `templates/` —— 该 Skill 实际依赖的资源
 
 ## 说明
 
