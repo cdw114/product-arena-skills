@@ -36,7 +36,7 @@ Every enum field must use exactly one value from this file. Unknown values fail 
 | `contradicts` | subject and object cannot both hold as stated | abstract vs body numbers |
 | `refines` | subject narrows object | A5 (subtype-specific effect) refines A2 (general effect) |
 | `qualifies` | subject states a condition under which object holds | A4 (only in p53-WT) qualifies A1 |
-| `depends_on` | object is computed from subject | A7 (IC50) depends_on A6 (assay) |
+| `depends_on` | subject depends on the method, input or result in object | A7 (IC50) depends_on A6 (assay) |
 | `same_as` | identical S-P-O and qualifiers | abstract vs body restatement |
 | `derived_from` | subject is calculated from object | A9 (fold change) derived_from A8 (raw values) |
 | `extends` | subject generalises object beyond its stated scope | A11 extends A10 |
@@ -64,6 +64,8 @@ Every enum field must use exactly one value from this file. Unknown values fail 
 | `out_of_scope` | Requested item lies outside the reading scope given in task.md |
 | `conflicting_evidence` | Two passages disagree and cannot be resolved from the text |
 | `source_unavailable` | Material missing or unreadable |
+| `quote_not_found` | A submitted quote could not be located in the extracted text |
+| `unsupported_inference` | A deduction lacks an acyclic chain of claims grounded in source evidence |
 
 ## Split triggers (when a sentence must be split)
 

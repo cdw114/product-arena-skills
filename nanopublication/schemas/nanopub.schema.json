@@ -44,7 +44,9 @@
         "page": {"type": ["integer", "null"]},
         "paragraph": {"type": ["integer", "null"]},
         "sentence": {"type": ["integer", "null"]},
-        "char_offset": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+        "char_offset": {"type": ["array", "null"], "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+        "prefix": {"type": "string"},
+        "suffix": {"type": "string"},
         "table": {"type": "object"},
         "figure": {"type": "string"}
       }
@@ -82,13 +84,15 @@
         "evidence": {"$ref": "#/definitions/evidence"},
         "controlling_quote": {"type": "string"},
         "controlling_quote_scope": {"enum": ["scope_of_whole_claim", "scope_of_part_of_claim"]},
+        "controlling_quote_locator": {"$ref": "#/definitions/locator"},
+        "controlling_quote_offset": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
         "claimed_by": {"type": ["string", "null"]},
         "hedge": {"type": ["string", "null"]},
         "confidence": {"enum": ["high", "medium", "low"]},
         "confidence_reason": {"type": "string"},
         "narrative_role": {"enum": ["background", "gap", "objective", "method", "result", "conclusion", "limitation", "future_work", "other"]},
         "inference_chain": {"type": "array", "items": {"$ref": "#/definitions/chain_step"}},
-        "supporting_evidence": {"type": "array", "items": {"type": "object"}}
+        "supporting_evidence": {"type": "array", "items": {"$ref": "#/definitions/relation_evidence"}}
       }
     },
     "chain_step": {
@@ -118,8 +122,13 @@
       "properties": {
         "assertion_id": {"type": "string"},
         "item": {"type": "string"},
-        "reason": {"enum": ["not_reported", "ambiguous", "out_of_scope", "conflicting_evidence", "source_unavailable"]},
-        "detail": {"type": "string"}
+        "reason": {"enum": ["not_reported", "ambiguous", "out_of_scope", "conflicting_evidence", "source_unavailable", "quote_not_found", "unsupported_inference"]},
+        "detail": {"type": "string"},
+        "evidence_id": {"type": "string"},
+        "review_required": {"type": "boolean"},
+        "quote": {"type": ["string", "null"]},
+        "locator_hint": {"type": "object"},
+        "candidates": {"type": "array", "items": {"$ref": "#/definitions/locator"}}
       }
     }
   }

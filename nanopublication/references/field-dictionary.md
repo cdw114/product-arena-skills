@@ -23,12 +23,13 @@ Types: `string`, `number`, `bool`, `enum`, `list`, `object`. "Req" = required un
 | `qualifiers.unit` | string | no | Unit exactly as printed | |
 | `qualifiers.negated` | bool | no | True when the source negates the predicate | |
 | `evidence` | object | yes | Evidence binding | |
-| `evidence.quote` | string | yes | Minimal sufficient, contiguous, verbatim source span | must satisfy `text[start:end] == quote` |
+| `evidence.quote` | string | yes | Minimal sufficient, contiguous source span | `text[start:end] == quote` for evidence-bearing claims. Empty for `not_reported`. |
 | `evidence.locator` | object | yes | Where the quote is | keys below |
-| `evidence.locator.page` | number | yes | Physical page, 1-based (PDF page, not printed number) | matches `=== page N ===` marker |
-| `evidence.locator.paragraph` | number | yes | Paragraph index within the page, 1-based | blank line separates paragraphs |
-| `evidence.locator.sentence` | number | yes | Sentence index within the paragraph, 1-based | `.!?` + space splits |
-| `evidence.locator.char_offset` | list | yes | `[start, end)` into the whole extracted text | half-open, UTF-8 code points (Python str index) |
+| `evidence.locator.page` | number | if located | Physical page, 1-based (PDF page index) | matches `=== page N ===` marker |
+| `evidence.locator.paragraph` | number | if located | Paragraph index within the page, 1-based | blank line separates paragraphs |
+| `evidence.locator.sentence` | number | if located | Sentence index within the paragraph, 1-based | derived from sentence punctuation |
+| `evidence.locator.char_offset` | list or null | yes | `[start, end)` into the whole extracted text | Half-open Unicode code point indices (Python string indices). Null for `not_reported`. |
+| `evidence.locator.prefix` / `suffix` | string | no | Adjacent source snippets used to select an occurrence | Matching collapses whitespace. Page, paragraph and sentence can also serve as hints. |
 | `evidence.locator.table` | object | no | `{id, row, column}` when the claim comes from a table cell | |
 | `evidence.locator.figure` | string | no | Figure id when the claim comes from a caption | |
 | `evidence.relation` | enum | yes | How the evidence relates to the claim | `direct`, `inferred`, `not_reported` |
@@ -36,12 +37,13 @@ Types: `string`, `number`, `bool`, `enum`, `list`, `object`. "Req" = required un
 | `evidence.normalization_note` | string | no | Any reversible normalisation applied (whitespace, ligatures, hyphenation) | |
 | `controlling_quote` | string | no | Sentence that limits the claim's scope | verbatim |
 | `controlling_quote_scope` | enum | if `controlling_quote` | Which part the controlling quote limits | `scope_of_whole_claim`, `scope_of_part_of_claim` |
+| `controlling_quote_locator` | object | if `controlling_quote` | Locator for the scope-setting sentence | Defaults to the main quote's page when drafting. Provide a page hint when it differs. |
 | `claimed_by` | string | no | Author of the claim when it reports someone else's work | e.g. `"Smith et al."`; `null` for this paper |
 | `hedge` | string | no | The hedging word used by the source | see `controlled-vocabulary.md` |
-| `confidence` | enum | yes | Confidence grade per SKILL.md §3.6 | `high`, `medium`, `low` |
+| `confidence` | enum | yes | Confidence grade per the [controlled vocabulary](controlled-vocabulary.md#confidence) | `high`, `medium`, `low` |
 | `confidence_reason` | string | no | One sentence explaining a non-obvious grade | |
 | `narrative_role` | enum | no | Role of the claim in the argument | see `controlled-vocabulary.md` |
-| `inference_chain` | list | if `inferred` | Steps from source facts to the claim | `[{from: [ids], to: "this", rationale}]` |
+| `inference_chain` | list | if `inferred` | Steps from source facts to the claim | `[{from: [ids], to: "this", rationale}]`. Every dependency must lead to a direct claim with a verified source span. |
 | `supporting_evidence` | list | no | Further quotes backing the same claim | `[{quote, locator}]` |
 
 ## Relation
@@ -61,8 +63,11 @@ Types: `string`, `number`, `bool`, `enum`, `list`, `object`. "Req" = required un
 |---|---|---|---|
 | `assertion_id` | string | if listed claim | The `not_reported` claim |
 | `item` | string | yes | What was expected but not obtained |
-| `reason` | enum | yes | `not_reported`, `ambiguous`, `out_of_scope`, `conflicting_evidence`, `source_unavailable` |
+| `reason` | enum | yes | `not_reported`, `ambiguous`, `out_of_scope`, `conflicting_evidence`, `source_unavailable`, `quote_not_found`, `unsupported_inference` |
 | `detail` | string | no | One sentence |
+| `evidence_id` | string | no | Original claim or relation ID and optional evidence role |
+| `review_required` | boolean | no | True when the issue needs resolution before completion |
+| `quote`, `locator_hint`, `candidates` | string, object, list | no | Submitted evidence and hints followed by candidate source locations, when available |
 
 ## Quality (`nanopub.quality`)
 

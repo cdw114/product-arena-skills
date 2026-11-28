@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""np_validate.py - quality checks Q1-Q13 for a nanopub assertion file.
+"""np_validate.py - quality checks for a nanopub assertion file.
 
 Usage:
     python3 np_validate.py assertions.json --text /app/work/text.txt [--json]
@@ -11,6 +11,9 @@ import argparse
 import json
 import re
 import sys
+from pathlib import Path
+
+from np_fidelity import claim_differences, compact, table_context
 
 CLAIM_TYPES = {"observation", "definition", "method", "result", "interpretation", "limitation",
                "hypothesis", "question", "other"}
@@ -19,12 +22,9 @@ RELATION_TYPES = {"supports", "contradicts", "refines", "qualifies", "depends_on
 EVIDENCE_RELATIONS = {"direct", "inferred", "not_reported"}
 CONFIDENCE = {"high", "medium", "low"}
 UNRESOLVED_REASONS = {"not_reported", "ambiguous", "out_of_scope", "conflicting_evidence",
-                      "source_unavailable"}
+                      "source_unavailable", "quote_not_found", "unsupported_inference"}
 NARRATIVE_ROLES = {"background", "gap", "objective", "method", "result", "conclusion",
                    "limitation", "future_work", "other"}
-HEDGES = {"may", "might", "could", "can", "suggest", "suggests", "suggested", "associated with",
-          "likely", "possibly", "appear", "appears", "tends", "relatively", "somewhat",
-          "putative", "potentially", "reportedly"}
 MARK_RE = re.compile(r"^=== page (\d+) ===$", re.M)
 # Two finite-verb coordination patterns used by Q2 (heuristic).
 COORD_RE = re.compile(
@@ -32,7 +32,7 @@ COORD_RE = re.compile(
     r"induced|caused|inhibited|promoted)\b[^.;]{0,80}?\b(and|but|while|whereas|which)\b"
     r"[^.;]{0,80}?\b(was|were|is|are|has|have|had|increased|decreased|reduced|showed|show|"
     r"induced|caused|inhibited|promoted)\b", re.I)
-NUM_RE = re.compile(r"(?<![\w.])-?\d+(?:\.\d+)?")
+SCHEMA = Path(__file__).resolve().parent.parent / "schemas" / "nanopub.schema.json"
 
 
 def load(path):
@@ -55,14 +55,54 @@ def page_offsets(text):
     return offs
 
 
-def page_of(offsets, pos):
-    page = None
+def page_para_sent(text, pos, offsets=None):
+    page, start_of_page = 1, 0
+    if offsets is None:
+        offsets = page_offsets(text)
     for p, start in offsets:
-        if start <= pos:
-            page = p if p is not None else page
-        else:
+        if p is None or start > pos:
             break
-    return page
+        page, start_of_page = p, start
+    segment = MARK_RE.sub("", text[start_of_page:pos], count=1).lstrip("\n")
+    paragraphs = re.split(r"\n\s*\n", segment)
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9(\"'])|(?<=[。！？])\s*(?=\S)",
+                         paragraphs[-1] + text[pos:pos + 1])
+    return page, len(paragraphs), len(sentences)
+
+
+def bound_quote(text, evidence, offsets=None):
+    locator = evidence.get("locator") or {}
+    span = locator.get("char_offset")
+    if not (isinstance(span, list) and len(span) == 2 and all(type(n) is int for n in span)):
+        return False
+    start, end = span
+    if not 0 <= start < end <= len(text) or text[start:end] != evidence.get("quote"):
+        return False
+    actual = page_para_sent(text, start, offsets)
+    return all(locator.get(key) in (None, value)
+               for key, value in zip(("page", "paragraph", "sentence"), actual))
+
+
+def unsupported_inferences(assertions, text):
+    """Resolve the dependency graph from verified direct evidence."""
+    grounded = {a.get("id") for a in assertions
+                if (a.get("evidence") or {}).get("relation") == "direct" and bound_quote(text, a["evidence"])}
+    pending = {a.get("id"): a for a in assertions if (a.get("evidence") or {}).get("relation") == "inferred"}
+    while pending:
+        ready = []
+        for aid, assertion in pending.items():
+            chain = assertion.get("inference_chain") or []
+            if chain and all(isinstance(step, dict) and isinstance(step.get("from"), list)
+                             and step["from"] and all(isinstance(ref, str) and ref in grounded for ref in step["from"])
+                             and isinstance(step.get("rationale"), str) and step["rationale"].strip()
+                             for step in chain) and bound_quote(text, assertion["evidence"]):
+                ready.append(aid)
+        if not ready:
+            break
+        for aid in ready:
+            grounded.add(aid)
+            del pending[aid]
+    return set(pending)
 
 
 def word_count(s):
@@ -83,13 +123,16 @@ def validate(data, text):
     results = []
 
     # Q1 unique ids
-    dup = sorted({i for i in ids if ids.count(i) > 1})
-    results.append(check("Q1_unique_ids", not dup and all(ids), f"{len(ids)} claims" + (f", duplicates: {dup}" if dup else "")))
+    all_ids = ids + [r.get("id") for r in R]
+    dup = sorted({i for i in all_ids if all_ids.count(i) > 1}, key=str)
+    results.append(check("Q1_unique_ids", not dup and all(all_ids), f"{len(ids)} claims, {len(R)} relations" + (f", duplicates: {dup}" if dup else "")))
+    results.append(check("Q19_extraction_outcome", bool(A or U),
+                         "documented reading outcome" if A or U else "no claims or explanation for the empty extraction"))
 
     # Q2 atomic text
     bad = []
     for a in A:
-        t = a.get("text", "")
+        t = str(a.get("text") or "")
         if COORD_RE.search(t) or t.count("; ") >= 1:
             bad.append(a.get("id"))
     results.append(check("Q2_atomic", not bad, f"{len(bad)} compound texts" + (f": {bad[:10]}" if bad else "")))
@@ -111,25 +154,26 @@ def validate(data, text):
         blob_words.append(wc)
         if wc > 60 and q.count(".") > 1:
             long_q.append(a.get("id"))
-        loc = ev.get("locator") or {}
-        co = loc.get("char_offset")
-        if co and len(co) == 2 and 0 <= co[0] <= co[1] <= len(text) and text[co[0]:co[1]] == q:
-            pg = loc.get("page")
-            real = page_of(offsets, co[0])
-            if pg is not None and real is not None and pg != real:
-                off_bad.append(a.get("id"))
-        elif q in text:
-            # quote exists but offset missing/wrong: report, finalise should fix
-            off_bad.append(a.get("id"))
-        else:
+        if q not in text:
             nf.append(a.get("id"))
+        elif not bound_quote(text, ev, offsets) or ev.get("quote_verbatim") is not True:
+            off_bad.append(a.get("id"))
+        extras = list(a.get("supporting_evidence") or [])
+        if a.get("controlling_quote"):
+            locator = a.get("controlling_quote_locator") or {"char_offset": a.get("controlling_quote_offset")}
+            extras.append({"quote": a["controlling_quote"], "locator": locator})
+        if any(not bound_quote(text, extra, offsets) for extra in extras):
+            off_bad.append(f"{a.get('id')} supplemental evidence")
     results.append(check("Q3_quote_found", not nf, f"{len(nf)} quotes not in source" + (f": {nf[:10]}" if nf else "")))
     # relation quotes must also exist in the source (Q3b)
     nf_r = []
     for r in R:
-        q = (r.get("evidence") or {}).get("quote")
+        ev = r.get("evidence") or {}
+        q = ev.get("quote")
         if q and q not in text:
             nf_r.append(r.get("id"))
+        elif q and not bound_quote(text, ev, offsets):
+            off_bad.append(r.get("id"))
     results.append(check("Q3b_relation_quote_found", not nf_r, f"{len(nf_r)} relation quotes not in source" + (f": {nf_r}" if nf_r else "")))
     results.append(check("Q4_offset_matches", not off_bad, f"{len(off_bad)} offsets wrong/missing" + (f": {off_bad[:10]}" if off_bad else "")))
     results.append(check("Q5_minimal", not long_q, f"{len(long_q)} quotes > 60 words" + (f": {long_q[:10]}" if long_q else "")))
@@ -145,7 +189,7 @@ def validate(data, text):
         ev = a.get("evidence") or {}
         if ev.get("relation") != "direct":
             continue
-        q = (ev.get("quote") or "").lower()
+        q = (table_context(ev.get("quote") or "", ev, text) or compact(ev.get("quote") or "")).lower()
         spo = [a.get("subject", ""), a.get("object", "")]
         missing = [w for w in spo if w and not _words_in(w, q)]
         if missing:
@@ -153,20 +197,8 @@ def validate(data, text):
     results.append(check("Q8_direct_has_spo", not bad8, f"{len(bad8)} direct claims lack S/O words in quote" + (f": {bad8[:10]}" if bad8 else "")))
 
     # Q9 inferred chain
-    bad9 = []
-    for a in A:
-        ev = a.get("evidence") or {}
-        if ev.get("relation") != "inferred":
-            continue
-        chain = a.get("inference_chain") or []
-        if not chain or not all(c.get("from") for c in chain):
-            bad9.append(a.get("id"))
-            continue
-        for c in chain:
-            for f in c.get("from", []):
-                if f not in idset and not f.startswith("Q:"):
-                    bad9.append(a.get("id"))
-    results.append(check("Q9_inferred_chain", not bad9, f"{len(bad9)} inferred claims with bad chain" + (f": {bad9[:10]}" if bad9 else "")))
+    bad9 = sorted(unsupported_inferences(A, text), key=str)
+    results.append(check("Q9_inferred_chain", not bad9, f"{len(bad9)} inferences lack a chain to verified direct evidence" + (f": {bad9[:10]}" if bad9 else "")))
 
     # Q10 not_reported listed
     nr = {a.get("id") for a in A if (a.get("evidence") or {}).get("relation") == "not_reported"}
@@ -176,7 +208,7 @@ def validate(data, text):
 
     # Q11 no blob
     avg = (sum(blob_words) / len(blob_words)) if blob_words else 0
-    results.append(check("Q11_no_blob", avg < 45 and len(blob_words) > 0, f"avg quote {avg:.1f} words over {len(blob_words)} quotes"))
+    results.append(check("Q11_no_blob", avg < 45, f"avg quote {avg:.1f} words over {len(blob_words)} quotes"))
 
     # Q12 confidence rule
     bad12 = []
@@ -195,21 +227,11 @@ def validate(data, text):
                 bad12.append(a.get("id"))
     results.append(check("Q12_confidence_rule", not bad12, f"{len(bad12)} confidence inconsistent" + (f": {bad12[:10]}" if bad12 else "")))
 
-    # Q13 numbers kept
-    bad13 = []
-    for a in A:
-        q = ((a.get("evidence") or {}).get("quote") or "")
-        nums = set(NUM_RE.findall(q))
-        if not nums:
-            continue
-        qual = a.get("qualifiers") or {}
-        parts = [a.get("text", "")] + [str(v) for v in qual.values() if v is not None]
-        hay = " ".join(parts)
-        # numbers in quote that are not in text or any qualifier -> possible dropped value
-        dropped = [n for n in nums if n not in hay]
-        if len(dropped) >= 2:
-            bad13.append(a.get("id"))
-    results.append(check("Q13_qualifiers_kept", not bad13, f"{len(bad13)} claims may drop numbers" + (f": {bad13[:10]}" if bad13 else "")))
+    differences = [f"{a.get('id')}: {'; '.join(issues)}" for a in A
+                   if (a.get("evidence") or {}).get("relation") == "direct"
+                   if (issues := claim_differences(a, text))]
+    results.append(check("Q13_qualifiers_kept", not differences,
+                         " | ".join(differences) or "no numeric, qualifier, negation or hedge mismatches detected"))
 
     # enum checks (not numbered in SKILL, but enforced by the schema)
     enum_bad = []
@@ -231,6 +253,12 @@ def validate(data, text):
     # relation evidence present
     bad_r_ev = [r.get("id") for r in R if not ((r.get("evidence") or {}).get("quote"))]
     results.append(check("Q15_relation_evidence", not bad_r_ev, f"{len(bad_r_ev)} relations without evidence" + (f": {bad_r_ev[:10]}" if bad_r_ev else "")))
+
+    pending = [u for u in U if u.get("review_required")
+               or u.get("reason") in {"quote_not_found", "unsupported_inference", "source_unavailable"}]
+    results.append(check("Q17_pending_evidence", not pending,
+                         " | ".join(str(u.get("detail") or u["item"]) for u in pending)
+                         or "no pending evidence issues"))
 
     stats = {
         "n_assertions": len(A),
@@ -274,9 +302,13 @@ def schema_errors(data, schema):
             errors.append(f"{path}: {node!r} != {sch['const']!r}")
         if "pattern" in sch and isinstance(node, str) and not re.search(sch["pattern"], node):
             errors.append(f"{path}: {node!r} fails {sch['pattern']}")
+        if isinstance(node, str) and len(node) < sch.get("minLength", 0):
+            errors.append(f"{path}: shorter than {sch['minLength']}")
         if isinstance(node, list):
             if "minItems" in sch and len(node) < sch["minItems"]:
                 errors.append(f"{path}: fewer than {sch['minItems']} items")
+            if len(node) > sch.get("maxItems", len(node)):
+                errors.append(f"{path}: more than {sch['maxItems']} items")
             if "items" in sch:
                 for i, x in enumerate(node):
                     check(x, sch["items"], f"{path}[{i}]")
@@ -290,6 +322,69 @@ def schema_errors(data, schema):
 
     check(data, schema, "$")
     return errors
+
+
+def contract_fields(case):
+    """Read required fields from a list, field map or object schema."""
+    contract = case.get("output_contract") or case.get("outputContract") or []
+    if isinstance(contract, list):
+        fields, required = contract, []
+    else:
+        meta = {"type", "title", "description", "required", "properties", "artifacts", "$schema"}
+        properties = contract.get("properties") or {}
+        fields = contract.get("fields", {key: value for key, value in contract.items() if key not in meta})
+        required = contract.get("required", list(properties))
+    specs = {}
+    if isinstance(contract, dict):
+        specs.update((name, properties.get(name, {})) for name in required)
+    if isinstance(fields, dict):
+        specs.update((name, spec) for name, spec in fields.items()
+                     if not isinstance(spec, dict) or spec.get("required") is not False)
+    else:
+        for entry in fields:
+            if isinstance(entry, str):
+                specs.setdefault(entry, {})
+            elif isinstance(entry, dict) and entry.get("name") and entry.get("required") is not False:
+                specs[entry["name"]] = entry
+    return specs
+
+
+def contract_check(result, case):
+    types = {"string", "array", "object", "number", "integer", "boolean", "null"}
+    issues = []
+    for name, spec in contract_fields(case).items():
+        value = result.get(name)
+        if isinstance(spec, str):
+            spec = {"type": spec} if spec in types else {}
+        spec = dict(spec or {}) if isinstance(spec, dict) else {}
+        if isinstance(spec.get("required"), bool):
+            del spec["required"]
+        declared_type = spec.get("type")
+        allows_null = declared_type == "null" or isinstance(declared_type, list) and "null" in declared_type
+        if name not in result or value is None and not allows_null or isinstance(value, str) and not value.strip():
+            issues.append(f"{name}: missing or empty")
+        elif spec:
+            for error in schema_errors(value, spec):
+                issues.append(name + error[1:])
+    answer = result.get("answer")
+    if isinstance(answer, str):
+        ids = {a.get("id") for a in result.get("nanopub", {}).get("assertions", [])}
+        groups = re.findall(r"\[\s*(A\d+(?:\s*[,，;；]\s*A\d+)*)\s*\]", answer)
+        cited = {aid for group in groups for aid in re.findall(r"A\d+", group)}
+        unknown = sorted(cited - ids)
+        if unknown:
+            issues.append(f"answer cites unavailable claims: {', '.join(unknown)}")
+    return check("Q18_output_contract", not issues, " | ".join(issues) or "required fields filled")
+
+
+def schema_check(result, path=SCHEMA):
+    try:
+        with open(path, encoding="utf-8-sig") as f:
+            errors = schema_errors(result, json.load(f))
+        return check("Q16_json_schema", not errors, f"{len(errors)} schema errors" +
+                     (f": {errors[:3]}" if errors else ""))
+    except (OSError, ValueError, KeyError) as exc:
+        return check("Q16_json_schema", False, f"schema check failed to run: {exc}")
 
 
 def _count_by(items, key):
@@ -321,6 +416,7 @@ def main():
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--out", help="write check results json here")
     ap.add_argument("--schema", help="JSON schema file; when given, validates result.json against it (Q16)")
+    ap.add_argument("--case", help="case descriptor for validating output_contract (Q18)")
     a = ap.parse_args()
     try:
         data = load(a.path)
@@ -330,18 +426,15 @@ def main():
         print(f"cannot read input: {e}", file=sys.stderr)
         return 2
     results, stats = validate(data, text)
-    if a.schema:
-        try:
-            with open(a.schema, "r", encoding="utf-8-sig") as f:
-                schema = json.load(f)
-            with open(a.path, "r", encoding="utf-8-sig") as f:
-                full = json.load(f)
-            errs = schema_errors(full, schema)
-            results.append(check("Q16_json_schema", not errs, f"{len(errs)} schema errors" + (f": {errs[:3]}" if errs else "")))
-        except Exception as e:
-            results.append(check("Q16_json_schema", False, f"schema check failed to run: {e}"))
+    if a.schema or a.case:
+        with open(a.path, "r", encoding="utf-8-sig") as f:
+            full = json.load(f)
+        results.append(schema_check(full, a.schema or SCHEMA))
+        if a.case:
+            with open(a.case, encoding="utf-8-sig") as f:
+                results.append(contract_check(full, json.load(f)))
     if a.json:
-        print(json.dumps({"checks": results, "stats": stats}, ensure_ascii=False, indent=2))
+        print(json.dumps({"checks": results, "stats": stats}, indent=2))
     else:
         print(f"{'check':24s} {'result':6s} detail")
         for r in results:
