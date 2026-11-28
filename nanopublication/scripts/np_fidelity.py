@@ -42,33 +42,47 @@ def inequalities(phrase):
 
 
 def table_context(quote, evidence, text):
-    """Resolve a Markdown row's column and header from its own source table."""
+    """Resolve a table cell. An empty string signals an unresolved structured table."""
     locator = evidence.get("locator") or {}
     table = locator.get("table") or {}
     offset = locator.get("char_offset")
     if not table.get("column") or not table.get("row") or not offset:
         return None
     start = text.rfind("\n", 0, offset[0]) + 1
-    end = text.find("\n", offset[1])
+    end = text.find("\n", offset[1] - 1)
     lines = text[start:end if end >= 0 else len(text)].splitlines()
-    prior = text[:start].splitlines()
-    while prior and prior[-1].strip().startswith("|"):
-        lines.insert(0, prior.pop())
-    rows = [[cell.strip() for cell in line.strip().strip("|").split("|")]
-            for line in lines if line.strip().startswith("|")]
-    if len(rows) < 2:
+    markdown = bool(lines and lines[0].lstrip().startswith("|"))
+
+    def cells(line):
+        line = line.strip()
+        if markdown:
+            return [v.strip() for v in line.strip("|").split("|")] if line.startswith("|") else []
+        return re.split(r"(?: {2,}|\t+)", line)
+
+    rows = [cells(line) for line in lines]
+    while start > 0:
+        previous = text.rfind("\n", 0, start - 1) + 1
+        row = cells(text[previous:start - 1])
+        if len(row) < 2:
+            break
+        rows.insert(0, row)
+        start = previous
+    if not rows or not (markdown or any(len(row) >= 2 for row in rows)):
         return None
+    if len(rows) < 2 or any(len(row) < 2 for row in rows):
+        return ""
     header, *body = rows
     columns = [i for i, cell in enumerate(header) if compact(cell) == compact(table["column"])]
-    matches = [row for row in body if row[0] == table["row"] and contains(compact(quote), row[0])]
-    if len(columns) == 1 and len(matches) == 1 and columns[0] < len(matches[0]):
+    matches = [row for row in body if compact(row[0]) == compact(table["row"])
+               and contains(compact(quote), row[0])]
+    if len(columns) == 1 and len(matches) == 1 and len(matches[0]) == len(header):
         row = matches[0]
         cell = row[columns[0]]
         if contains(compact(quote), cell):
             heading = header[columns[0]]
             unit = re.search(r"\(([^()]+)\)\s*$", heading)
             return compact(f"{row[0]} {cell} {unit[1] if unit else ''} {heading}")
-    return None
+    return ""
 
 
 def claim_differences(assertion, source_text):
@@ -79,6 +93,8 @@ def claim_differences(assertion, source_text):
     qualifiers = assertion.get("qualifiers") or {}
     statement = compact(assertion.get("text") or "")
     table = table_context(quote, ev, source_text)
+    if table == "":
+        return ["table row and column could not be uniquely verified against the source header"]
     main = table or compact(quote)
     controlling = compact(assertion.get("controlling_quote") or "")
     source = " ".join(filter(None, (main, controlling)))

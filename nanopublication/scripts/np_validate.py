@@ -43,7 +43,8 @@ def load(path):
     if "nanopub" in data:
         np_ = data["nanopub"]
         return {"assertions": np_.get("assertions", []), "relations": np_.get("relations", []),
-                "unresolved": np_.get("unresolved", []), "quality": np_.get("quality")}
+                "unresolved": np_.get("unresolved", []), "quality": np_.get("quality"),
+                "ocr_pages": [p for source in data.get("sources", []) for p in source.get("ocr_pages", [])]}
     return {"assertions": data.get("assertions", []), "relations": data.get("relations", []),
             "unresolved": data.get("unresolved", []), "quality": data.get("quality")}
 
@@ -85,9 +86,14 @@ def bound_quote(text, evidence, offsets=None):
 
 def unsupported_inferences(assertions, text):
     """Resolve the dependency graph from verified direct evidence."""
-    grounded = {a.get("id") for a in assertions
-                if (a.get("evidence") or {}).get("relation") == "direct" and bound_quote(text, a["evidence"])}
     pending = {a.get("id"): a for a in assertions if (a.get("evidence") or {}).get("relation") == "inferred"}
+    if not pending:
+        return set()
+    grounded = {a.get("id") for a in assertions
+                if (a.get("evidence") or {}).get("relation") == "direct"
+                and a["evidence"].get("quote_verbatim") is True
+                and bound_quote(text, a["evidence"])
+                and not claim_differences(a, text)}
     while pending:
         ready = []
         for aid, assertion in pending.items():
@@ -103,6 +109,13 @@ def unsupported_inferences(assertions, text):
             grounded.add(aid)
             del pending[aid]
     return set(pending)
+
+
+def evidence_pages(record):
+    locators = [(record.get("evidence") or {}).get("locator") or {},
+                record.get("controlling_quote_locator") or {}]
+    locators.extend((item.get("locator") or {}) for item in record.get("supporting_evidence") or [])
+    return {loc["page"] for loc in locators if loc.get("page") is not None}
 
 
 def word_count(s):
@@ -260,6 +273,14 @@ def validate(data, text):
                          " | ".join(str(u.get("detail") or u["item"]) for u in pending)
                          or "no pending evidence issues"))
 
+    ocr_pages = set(data.get("ocr_pages", []))
+    if ocr_pages:
+        overconfident = [record.get("id") for record in A + R
+                         if record.get("confidence") == "high" and evidence_pages(record) & ocr_pages]
+        results.append(check("Q20_ocr_confidence", not overconfident,
+                             f"OCR evidence requires medium or low confidence: {overconfident}"
+                             if overconfident else "confidence capped for OCR evidence"))
+
     stats = {
         "n_assertions": len(A),
         "n_relations": len(R),
@@ -273,14 +294,38 @@ def validate(data, text):
     return results, stats
 
 
-def schema_errors(data, schema):
+def resolve_schema(spec, root):
+    seen = set()
+    while isinstance(spec, dict) and "$ref" in spec:
+        reference = spec["$ref"]
+        try:
+            if reference in seen or not reference.startswith("#/"):
+                raise ValueError
+            seen.add(reference)
+            spec = root
+            for key in reference[2:].split("/"):
+                spec = spec[key.replace("~1", "/").replace("~0", "~")]
+        except (AttributeError, KeyError, TypeError, ValueError):
+            raise ValueError(f"unsupported or unresolved schema reference {reference!r}") from None
+    return spec
+
+
+def schema_errors(data, schema, root=None):
     """Minimal draft-07 validator (type/enum/const/pattern/required/items/minItems/$ref).
     No dependency on jsonschema; enough for schemas/nanopub.schema.json."""
     errors = []
+    root = schema if root is None else root
 
     def check(node, sch, path):
-        if "$ref" in sch:
-            return check(node, schema["definitions"][sch["$ref"].split("/")[-1]], path)
+        try:
+            sch = resolve_schema(sch, root)
+        except ValueError as exc:
+            errors.append(f"{path}: {exc}")
+            return
+        if sch is False:
+            errors.append(f"{path}: value prohibited by schema")
+        if not isinstance(sch, dict):
+            return
         t = sch.get("type")
         if t:
             types = t if isinstance(t, list) else [t]
@@ -330,7 +375,8 @@ def contract_fields(case):
     if isinstance(contract, list):
         fields, required = contract, []
     else:
-        meta = {"type", "title", "description", "required", "properties", "artifacts", "$schema"}
+        meta = {"type", "title", "description", "required", "properties", "artifacts", "$schema",
+                "$defs", "definitions", "$id", "additionalProperties"}
         properties = contract.get("properties") or {}
         fields = contract.get("fields", {key: value for key, value in contract.items() if key not in meta})
         required = contract.get("required", list(properties))
@@ -349,9 +395,26 @@ def contract_fields(case):
     return specs
 
 
+def answer_references(value):
+    if isinstance(value, str):
+        groups = re.findall(r"\[\s*(A\d+(?:\s*[,，;；]\s*A\d+)*)\s*\]", value)
+        for group in groups:
+            yield from re.findall(r"A\d+", group)
+    elif isinstance(value, list):
+        for item in value:
+            yield from answer_references(item)
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            if key in {"claim_ids", "assertion_ids"} and isinstance(item, list):
+                yield from (v for v in item if isinstance(v, str))
+            else:
+                yield from answer_references(item)
+
+
 def contract_check(result, case):
     types = {"string", "array", "object", "number", "integer", "boolean", "null"}
     issues = []
+    root = case.get("output_contract") or case.get("outputContract") or {}
     for name, spec in contract_fields(case).items():
         value = result.get(name)
         if isinstance(spec, str):
@@ -359,21 +422,23 @@ def contract_check(result, case):
         spec = dict(spec or {}) if isinstance(spec, dict) else {}
         if isinstance(spec.get("required"), bool):
             del spec["required"]
-        declared_type = spec.get("type")
+        try:
+            resolved = resolve_schema(spec, root)
+        except ValueError as exc:
+            issues.append(f"{name}: {exc}")
+            continue
+        declared_type = resolved.get("type") if isinstance(resolved, dict) else None
         allows_null = declared_type == "null" or isinstance(declared_type, list) and "null" in declared_type
         if name not in result or value is None and not allows_null or isinstance(value, str) and not value.strip():
             issues.append(f"{name}: missing or empty")
         elif spec:
-            for error in schema_errors(value, spec):
+            for error in schema_errors(value, spec, root=root):
                 issues.append(name + error[1:])
-    answer = result.get("answer")
-    if isinstance(answer, str):
-        ids = {a.get("id") for a in result.get("nanopub", {}).get("assertions", [])}
-        groups = re.findall(r"\[\s*(A\d+(?:\s*[,，;；]\s*A\d+)*)\s*\]", answer)
-        cited = {aid for group in groups for aid in re.findall(r"A\d+", group)}
-        unknown = sorted(cited - ids)
+    ids = {a.get("id") for a in result.get("nanopub", {}).get("assertions", [])}
+    for field in ("answer", "answers", "result"):
+        unknown = sorted(set(answer_references(result.get(field))) - ids)
         if unknown:
-            issues.append(f"answer cites unavailable claims: {', '.join(unknown)}")
+            issues.append(f"{field} cites unavailable claims: {', '.join(unknown)}")
     return check("Q18_output_contract", not issues, " | ".join(issues) or "required fields filled")
 
 

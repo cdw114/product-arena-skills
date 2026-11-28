@@ -7,7 +7,6 @@
   "properties": {
     "case_id": {"type": ["string", "null"]},
     "status": {"enum": ["success", "partial", "failed"]},
-    "answer": {"type": ["string", "null"]},
     "sources": {"type": "array", "items": {"type": "object"}},
     "nanopub": {"$ref": "#/definitions/nanopub"}
   },

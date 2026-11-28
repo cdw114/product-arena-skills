@@ -397,10 +397,18 @@ def cmd_finalise(a):
     rels = (load_yaml_or_json(a.relations) or []) if a.relations else []
     doc = (load_yaml_or_json(a.doc) or {}) if a.doc else {}
     case = load_case(a.case)
+    meta = load_case(a.text_meta)
     unresolved = (load_yaml_or_json(a.unresolved) or []) if a.unresolved else []
     for label, records in (("assertions", raw), ("relations", rels), ("unresolved", unresolved)):
         if not isinstance(records, list) or any(not isinstance(record, dict) for record in records):
             raise ValueError(f"{label} must contain a list of objects")
+    extraction_failed = meta.get("status") == "failed"
+    missing_pages = meta.get("pages_without_text", [])
+    if extraction_failed or missing_pages:
+        details = [meta.get("reason"), meta.get("note"),
+                   f"no text on in-scope pages {missing_pages}" if missing_pages else None]
+        unresolved.append({"item": "Source text could not be read in full", "reason": "source_unavailable",
+                           "detail": " | ".join(filter(None, details))})
     assertions = []
     for i, x in enumerate(raw, 1):
         normalise_assertion(x)
@@ -432,21 +440,17 @@ def cmd_finalise(a):
                         "identifier_type": "doi" if doc.get("doi") else None,
                         "identifier_value": doc.get("doi")},
            "assertions": assertions, "relations": relations, "unresolved": unresolved}
-    checks, stats = np_validate.validate(np_, text)
+    checks, stats = np_validate.validate({**np_, "ocr_pages": meta.get("ocr_pages", [])}, text)
     np_["quality"] = {**stats, "coverage": coverage(text, assertions), "checks": checks}
-    meta = load_case(a.text_meta)
-    cited_locations = [x["evidence"]["locator"] for x in assertions + relations]
-    for x in assertions:
-        cited_locations.extend(e["locator"] for e in x.get("supporting_evidence", []))
-        if x.get("controlling_quote_locator"):
-            cited_locations.append(x["controlling_quote_locator"])
-    cited_pages = {locator["page"] for locator in cited_locations if locator.get("page") is not None}
+    cited_pages = {page for record in assertions + relations for page in np_validate.evidence_pages(record)}
     reviewed = meta.get("pages_read", [])
     if not isinstance(reviewed, list) or any(type(page) is not int or page < 1 for page in reviewed):
         raise ValueError("pages_read must list reviewed physical page numbers")
+    page_keys = ("pages_requested", "pages_without_text", "pages_with_native_text", "ocr_pages")
     sources = [{"path": meta.get("path") or a.text, "kind": meta.get("backend") or "text",
                 "pages_read": sorted(set(reviewed) | cited_pages),
-                "pages_with_text": meta.get("pages_with_text") or [], "sha256": meta.get("sha256"), "out": a.text}]
+                "pages_with_text": meta.get("pages_with_text") or [], "sha256": meta.get("sha256"), "out": a.text,
+                **{key: meta[key] for key in page_keys if key in meta}}]
     result = dict.fromkeys(np_validate.contract_fields(case))
     if a.fields:
         with open(a.fields, encoding="utf-8-sig") as f:
@@ -455,14 +459,14 @@ def cmd_finalise(a):
             raise ValueError("--fields must be a JSON object")
         result.update(fields)
     result["case_id"] = case.get("case_id")
-    result["status"] = a.status
+    result["status"] = "failed" if extraction_failed else a.status
     result["sources"] = sources
     result["nanopub"] = np_
     checks.append(np_validate.schema_check(result))
     checks.append(np_validate.contract_check(result, case))
     checks.sort(key=lambda entry: (int(re.match(r"Q(\d+)", entry["id"])[1]), entry["id"]))
     passed = all(c["passed"] for c in checks)
-    status = "partial" if a.status == "success" and not passed else a.status
+    status = "partial" if result["status"] == "success" and not passed else result["status"]
     result["status"] = status
     os.makedirs(a.out, exist_ok=True)
     with open(os.path.join(a.out, "result.json"), "w", encoding="utf-8") as f:
